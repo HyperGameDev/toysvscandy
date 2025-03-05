@@ -1,8 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=22 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Gradient" uid="uid://8gk1ghe5j20s" path="res://Colors/pastels.tres" id="2_gyfs4"]
-[ext_resource type="Texture2D" uid="uid://d218llygyugu7" path="res://Ref_images/2025-03-05 14_48_14-Bloons Tower Defense 🎈 Play on CrazyGames.png" id="3_gyfs4"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="4_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://c7bfhfltjy6av" path="res://Assets/path/table_01_00.tscn" id="5_8mm7a"]
 [ext_resource type="Gradient" uid="uid://dj72fx45gaaji" path="res://Colors/ui_colors/hud_01.tres" id="6_hq1ik"]
@@ -54,18 +53,15 @@ albedo_texture = SubResource("NoiseTexture2D_8mm7a")
 material = SubResource("StandardMaterial3D_hq1ik")
 size = Vector2(200, 200)
 
-[sub_resource type="BoxMesh" id="BoxMesh_wr18j"]
-size = Vector3(9.965, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5x1h"]
-albedo_texture = ExtResource("3_gyfs4")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_8mm7a"]
-material = SubResource("StandardMaterial3D_d5x1h")
-size = Vector2(4.035, 4.21)
-
 [sub_resource type="BoxMesh" id="BoxMesh_8mm7a"]
 size = Vector3(2.245, 5.015, 2.215)
+
+[sub_resource type="Curve3D" id="Curve3D_hq1ik"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2.075, 0, 0, 12.63, 0, 0, 0, 0, 0, 0, 3.52, 0, 14.635, 0, 0, 0, 3.19, 0, 0, 9.43, 0, 14.635, 0, 0, 0, 0, 0, 0, 12.63, 0, 16.635, 0, 0, 0, 0, 0, 2.42, 12.63, 0, 20.59, 0, 0, 0, 0, 0, 0, 9.89, 0, 23.29, 0, 0, 0, -1.81, 0, 0, 6.28, 0, 23.29, 0, 0, 0, 0, 0, 0, 4.555, 0, 25.62, 0, 0, 0, 0, 0, 1.33, 4.555, 0, 29.62, 0, 0, 0, 0, 0, 0, 7.075, 0, 30.965, 0, 0, 0, 2.15, 0, 0, 9.76, 0, 30.965, 0, 0, 0, 0, 0, 0, 12.22, 0, 33.38, 0, 0, 0, 0, 0, 2.92, 12.22, 0, 40.71, 0, 0, 0, 0, 0, 0, 10.095, 0, 44.025, 0, 0, 0, -3.24, 0, 0, -13.74, 0, 44.025, 0, 0, 0, 0, 0, 0, -17.73, 0, 41.24, 0, 0, 0, 0, 0, -2.67, -17.73, 0, 37.36, 0, 0, 0, 0, 0, 0, -14.47, 0, 34.625, 0, 0, 0, 3.765, 0, 0, -8.495, 0, 34.625, 0, 0, 0, 0, 0, 0, -5.25, 0, 31.505, 0, 0, 0, 0, 0, -1.715, -5.25, 0, 20.645, 0, 0, 0, 0, 0, 0, -8.11, 0, 17.445, 0, 0, 0, -2.29, 0, 0, -10.805, 0, 17.445, 0, 0, 0, 0, 0, 0, -13.805, 0, 20.59, 0, 0, 0, 0, 0, 2.955, -13.805, 0, 23.285, 0, 0, 0, 0, 0, 0, -16.44, 0, 26.14, 0, 0, 0, 0, 0, 0, -21.005, 0, 26.14),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 28
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nfk4m"]
 gradient = ExtResource("6_hq1ik")
@@ -111,17 +107,8 @@ transform = Transform3D(0.224407, 0.638954, -0.735784, -1.26642e-07, 0.755041, 0
 projection = 1
 size = 36.635
 
-[node name="Cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5036, 0.540962, -6.57983)
-visible = false
-mesh = SubResource("BoxMesh_wr18j")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(10.59, 0, 0, 0, 10.59, 0, 0, 0, 10.59, 1.86, 0.08, -5.335)
-visible = false
-mesh = SubResource("PlaneMesh_8mm7a")
-
 [node name="Tower" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -23)
 script = ExtResource("4_d5x1h")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Tower"]
@@ -130,10 +117,14 @@ mesh = SubResource("BoxMesh_8mm7a")
 [node name="Path" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04397, -3.95, -5.37823)
 
-[node name="Table" type="Node3D" parent="Path"]
+[node name="Path3D" type="Path3D" parent="Path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4.8, -30)
+curve = SubResource("Curve3D_hq1ik")
+
+[node name="Table_Mesh" type="Node3D" parent="Path"]
 transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, 0, 0)
 
-[node name="table_01_00" parent="Path/Table" instance=ExtResource("5_8mm7a")]
+[node name="table_01_00" parent="Path/Table_Mesh" instance=ExtResource("5_8mm7a")]
 transform = Transform3D(8.23, 0, 0, 0, 8, 0, 0, 0, 5.655, 0.844696, 0, -2.54291)
 
 [node name="HUD" type="CanvasLayer" parent="."]
