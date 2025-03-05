@@ -1,10 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=25 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Gradient" uid="uid://8gk1ghe5j20s" path="res://Colors/pastels.tres" id="2_gyfs4"]
 [ext_resource type="Texture2D" uid="uid://d218llygyugu7" path="res://Ref_images/2025-03-05 14_48_14-Bloons Tower Defense 🎈 Play on CrazyGames.png" id="3_gyfs4"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="4_d5x1h"]
 [ext_resource type="PackedScene" uid="uid://c7bfhfltjy6av" path="res://Assets/path/table_01_00.tscn" id="5_8mm7a"]
+[ext_resource type="Gradient" uid="uid://dj72fx45gaaji" path="res://Colors/ui_colors/hud_01.tres" id="6_hq1ik"]
+[ext_resource type="Theme" uid="uid://xwraynlxvb7d" path="res://Themes/ui_01.tres" id="7_nfk4m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c62f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -65,10 +67,11 @@ size = Vector2(4.035, 4.21)
 [sub_resource type="BoxMesh" id="BoxMesh_8mm7a"]
 size = Vector3(2.245, 5.015, 2.215)
 
-[sub_resource type="Gradient" id="Gradient_hq1ik"]
-
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nfk4m"]
-gradient = SubResource("Gradient_hq1ik")
+gradient = ExtResource("6_hq1ik")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+repeat = 2
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66tet"]
 texture = SubResource("GradientTexture2D_nfk4m")
@@ -103,9 +106,9 @@ texture = SubResource("GradientTexture2D_8mm7a")
 mesh = SubResource("PlaneMesh_nfk4m")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.967709, -0.165276, 0.190323, 5.07166e-09, 0.755042, 0.655677, -0.252069, -0.634505, 0.730661, 4.0861, 14.8455, 10.2753)
+transform = Transform3D(0.224407, 0.638954, -0.735784, -1.26642e-07, 0.755041, 0.655677, 0.974496, -0.147138, 0.169437, -27.0851, 20.3967, -2.13846)
 projection = 1
-size = 38.096
+size = 36.635
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5036, 0.540962, -6.57983)
@@ -126,22 +129,104 @@ mesh = SubResource("BoxMesh_8mm7a")
 [node name="Path" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04397, -3.95, -5.37823)
 
-[node name="table_01_00" parent="Path" instance=ExtResource("5_8mm7a")]
-transform = Transform3D(6.5, 0, 0, 0, 8, 0, 0, 0, 9, 0, 0, -2.66002)
+[node name="Table" type="Node3D" parent="Path"]
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, 0, 0)
 
-[node name="Node3D" type="Node3D" parent="Path"]
+[node name="table_01_00" parent="Path/Table" instance=ExtResource("5_8mm7a")]
+transform = Transform3D(8.23, 0, 0, 0, 8, 0, 0, 0, 5.655, 0.844696, 0, -2.54291)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+[node name="Bottom_UI" type="MarginContainer" parent="HUD"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -172.0
+offset_top = -120.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Panel" type="Panel" parent="HUD/MarginContainer"]
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_66tet")
+
+[node name="Side_UI" type="MarginContainer" parent="HUD"]
+visible = false
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -253.0
+offset_top = 69.0
+offset_bottom = -190.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HUD/Side_UI"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_66tet")
+
+[node name="Top_UI" type="MarginContainer" parent="HUD"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 61.0
+grow_horizontal = 2
+
+[node name="HSplit" type="HSplitContainer" parent="HUD/Top_UI"]
+layout_mode = 2
+theme_override_constants/separation = 15
+split_offset = 1225
+
+[node name="HBox_Top_Left" type="HBoxContainer" parent="HUD/Top_UI/HSplit"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Icon_Lives" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Label_Lives" type="Label" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+text = "40"
+
+[node name="VSeparator" type="VSeparator" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Icon_Money" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Label_Money" type="Label" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+text = "100"
+
+[node name="HBox_Top_Right" type="HBoxContainer" parent="HUD/Top_UI/HSplit"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Icon_Lives" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Right"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Label_Lives" type="Label" parent="HUD/Top_UI/HSplit/HBox_Top_Right"]
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+text = "12"
+
+[node name="VSeparator" type="VSeparator" parent="HUD/Top_UI/HSplit/HBox_Top_Right"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Icon_Money" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Right"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="VSeparator2" type="VSeparator" parent="HUD/Top_UI/HSplit/HBox_Top_Right"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
