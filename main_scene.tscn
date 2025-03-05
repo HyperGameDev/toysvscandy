@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=24 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Gradient" uid="uid://8gk1ghe5j20s" path="res://Colors/pastels.tres" id="2_gyfs4"]
 [ext_resource type="Texture2D" uid="uid://d218llygyugu7" path="res://Ref_images/2025-03-05 14_48_14-Bloons Tower Defense 🎈 Play on CrazyGames.png" id="3_gyfs4"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="4_d5x1h"]
+[ext_resource type="PackedScene" uid="uid://c7bfhfltjy6av" path="res://Assets/path/table_01_00.tscn" id="5_8mm7a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c62f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -39,7 +40,12 @@ cellular_jitter = 0.0
 color_ramp = ExtResource("1_2c62f")
 noise = SubResource("FastNoiseLite_d5x1h")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8mm7a"]
+blend_mode = 1
+albedo_color = Color(0.0383972, 0.0383972, 0.0383972, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hq1ik"]
+next_pass = SubResource("StandardMaterial3D_8mm7a")
 albedo_texture = SubResource("NoiseTexture2D_8mm7a")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nfk4m"]
@@ -56,6 +62,17 @@ albedo_texture = ExtResource("3_gyfs4")
 material = SubResource("StandardMaterial3D_d5x1h")
 size = Vector2(4.035, 4.21)
 
+[sub_resource type="BoxMesh" id="BoxMesh_8mm7a"]
+size = Vector3(2.245, 5.015, 2.215)
+
+[sub_resource type="Gradient" id="Gradient_hq1ik"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nfk4m"]
+gradient = SubResource("Gradient_hq1ik")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66tet"]
+texture = SubResource("GradientTexture2D_nfk4m")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -65,16 +82,17 @@ environment = SubResource("Environment_d5x1h")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Palettes" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="Palette_1" type="TextureRect" parent="CanvasLayer"]
+[node name="Palette_1" type="TextureRect" parent="Palettes"]
 offset_left = 26.0
 offset_top = 25.0
 offset_right = 669.0
 offset_bottom = 89.0
 texture = SubResource("GradientTexture2D_66tet")
 
-[node name="Palette_2" type="TextureRect" parent="CanvasLayer"]
+[node name="Palette_2" type="TextureRect" parent="Palettes"]
 offset_left = 26.0
 offset_top = 89.0
 offset_right = 669.0
@@ -85,17 +103,45 @@ texture = SubResource("GradientTexture2D_8mm7a")
 mesh = SubResource("PlaneMesh_nfk4m")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.691866, 0.722026, 0, -0.722026, 0.691866, 1.75193, 14.7669, 8.74404)
+transform = Transform3D(0.967709, -0.165276, 0.190323, 5.07166e-09, 0.755042, 0.655677, -0.252069, -0.634505, 0.730661, 4.0861, 14.8455, 10.2753)
 projection = 1
-size = 31.644
+size = 38.096
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5036, 0.540962, -6.57983)
+visible = false
 mesh = SubResource("BoxMesh_wr18j")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(10.59, 0, 0, 0, 10.59, 0, 0, 0, 10.59, 1.86, 0.08, -5.335)
+visible = false
 mesh = SubResource("PlaneMesh_8mm7a")
 
 [node name="Tower" type="Node3D" parent="."]
 script = ExtResource("4_d5x1h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tower"]
+mesh = SubResource("BoxMesh_8mm7a")
+
+[node name="Path" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04397, -3.95, -5.37823)
+
+[node name="table_01_00" parent="Path" instance=ExtResource("5_8mm7a")]
+transform = Transform3D(6.5, 0, 0, 0, 8, 0, 0, 0, 9, 0, 0, -2.66002)
+
+[node name="Node3D" type="Node3D" parent="Path"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -172.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="HUD/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_66tet")
