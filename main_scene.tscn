@@ -1,0 +1,101 @@
+[gd_scene load_steps=18 format=3 uid="uid://8f32qtkrf2hr"]
+
+[ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
+[ext_resource type="Gradient" uid="uid://8gk1ghe5j20s" path="res://Colors/pastels.tres" id="2_gyfs4"]
+[ext_resource type="Texture2D" uid="uid://d218llygyugu7" path="res://Ref_images/2025-03-05 14_48_14-Bloons Tower Defense 🎈 Play on CrazyGames.png" id="3_gyfs4"]
+[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="4_d5x1h"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c62f"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_gyfs4"]
+sky_material = SubResource("ProceduralSkyMaterial_2c62f")
+
+[sub_resource type="Environment" id="Environment_d5x1h"]
+background_mode = 2
+sky = SubResource("Sky_gyfs4")
+tonemap_mode = 2
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_66tet"]
+gradient = ExtResource("2_gyfs4")
+
+[sub_resource type="Gradient" id="Gradient_d5x1h"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.0070922, 0.0585106, 0.102837, 0.152482, 0.219858, 0.342199, 0.391844, 0.445035, 0.537234, 0.595745, 0.636525, 0.691489, 0.742908, 0.778369, 0.852837, 0.920213, 0.973404)
+colors = PackedColorArray(0.243137, 0.168627, 0.0901961, 1, 0.317647, 0.152941, 0.227451, 1, 0.317647, 0.180392, 0.337255, 1, 0.196078, 0.309804, 0.552941, 1, 0.0313726, 0.529412, 0.831373, 1, 0.211765, 0.764706, 0.784314, 1, 0.266667, 0.54902, 0.321569, 1, 0.298039, 0.470588, 0.105882, 1, 0.45098, 0.670588, 0.160784, 1, 0.529412, 0.505882, 0.341176, 1, 0.421684, 0.232404, 0.396339, 1, 0.635294, 0.235294, 0.509804, 1, 0.675087, 0.27845, 0.377538, 1, 0.882353, 0.486275, 0.243137, 1, 0.898039, 0.588235, 0.160784, 1, 0.929412, 0.8, 0.454902, 1, 0.952941, 0.941176, 0.901961, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8mm7a"]
+gradient = SubResource("Gradient_d5x1h")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d5x1h"]
+noise_type = 2
+frequency = 0.0495
+fractal_octaves = 1
+cellular_distance_function = 2
+cellular_jitter = 0.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8mm7a"]
+color_ramp = ExtResource("1_2c62f")
+noise = SubResource("FastNoiseLite_d5x1h")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hq1ik"]
+albedo_texture = SubResource("NoiseTexture2D_8mm7a")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nfk4m"]
+material = SubResource("StandardMaterial3D_hq1ik")
+size = Vector2(200, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wr18j"]
+size = Vector3(9.965, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5x1h"]
+albedo_texture = ExtResource("3_gyfs4")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8mm7a"]
+material = SubResource("StandardMaterial3D_d5x1h")
+size = Vector2(4.035, 4.21)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_d5x1h")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Palette_1" type="TextureRect" parent="CanvasLayer"]
+offset_left = 26.0
+offset_top = 25.0
+offset_right = 669.0
+offset_bottom = 89.0
+texture = SubResource("GradientTexture2D_66tet")
+
+[node name="Palette_2" type="TextureRect" parent="CanvasLayer"]
+offset_left = 26.0
+offset_top = 89.0
+offset_right = 669.0
+offset_bottom = 153.0
+texture = SubResource("GradientTexture2D_8mm7a")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_nfk4m")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.691866, 0.722026, 0, -0.722026, 0.691866, 1.75193, 14.7669, 8.74404)
+projection = 1
+size = 31.644
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5036, 0.540962, -6.57983)
+mesh = SubResource("BoxMesh_wr18j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10.59, 0, 0, 0, 10.59, 0, 0, 0, 10.59, 1.86, 0.08, -5.335)
+mesh = SubResource("PlaneMesh_8mm7a")
+
+[node name="Tower" type="Node3D" parent="."]
+script = ExtResource("4_d5x1h")
