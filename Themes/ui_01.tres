@@ -1,8 +1,12 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://xwraynlxvb7d"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://xwraynlxvb7d"]
+
+[sub_resource type="FontVariation" id="FontVariation_ymboa"]
 
 [sub_resource type="FontVariation" id="FontVariation_hq1ik"]
 
 [resource]
+Button/font_sizes/font_size = 32
+Button/fonts/font = SubResource("FontVariation_ymboa")
 Label/constants/outline_size = 30
 Label/font_sizes/font_size = 44
 Label/fonts/font = SubResource("FontVariation_hq1ik")

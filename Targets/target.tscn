@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://duatv3h4iqr6u"]
+
+[ext_resource type="Script" uid="uid://bfe2h034n5lxy" path="res://Targets/target_itself.gd" id="1_wbg1h"]
+
+[node name="Target" type="PathFollow3D"]
+process_mode = 4
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+cubic_interp = false
+script = ExtResource("1_wbg1h")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-0.665, 0, 5.81361e-08, 0, 0.665, 0, -5.81361e-08, 0, -0.665, 0, 1.415, 0)
+billboard = 1
+no_depth_test = true
