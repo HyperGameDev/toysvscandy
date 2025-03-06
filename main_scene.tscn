@@ -1,8 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=24 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Gradient" uid="uid://8gk1ghe5j20s" path="res://Colors/pastels.tres" id="2_gyfs4"]
+[ext_resource type="Script" uid="uid://d1lffi08jnj4i" path="res://follower_1_brownie.gd" id="4_66tet"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="4_d5x1h"]
+[ext_resource type="Texture2D" uid="uid://defidxivhsikt" path="res://Assets/targets/temp/temp_target_1_brownie.png" id="5_7ycvg"]
 [ext_resource type="PackedScene" uid="uid://c7bfhfltjy6av" path="res://Assets/path/table_01_00.tscn" id="5_8mm7a"]
 [ext_resource type="Gradient" uid="uid://dj72fx45gaaji" path="res://Colors/ui_colors/hud_01.tres" id="6_hq1ik"]
 [ext_resource type="Theme" uid="uid://xwraynlxvb7d" path="res://Themes/ui_01.tres" id="7_nfk4m"]
@@ -53,8 +55,10 @@ albedo_texture = SubResource("NoiseTexture2D_8mm7a")
 material = SubResource("StandardMaterial3D_hq1ik")
 size = Vector2(200, 200)
 
-[sub_resource type="BoxMesh" id="BoxMesh_8mm7a"]
-size = Vector3(2.245, 5.015, 2.215)
+[sub_resource type="CylinderMesh" id="CylinderMesh_wr18j"]
+top_radius = 2.0
+bottom_radius = 2.0
+height = 4.105
 
 [sub_resource type="Curve3D" id="Curve3D_hq1ik"]
 _data = {
@@ -112,7 +116,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -23)
 script = ExtResource("4_d5x1h")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Tower"]
-mesh = SubResource("BoxMesh_8mm7a")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("CylinderMesh_wr18j")
 
 [node name="Path" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04397, -3.95, -5.37823)
@@ -120,6 +125,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04397, -3.95, -5.37823)
 [node name="Path3D" type="Path3D" parent="Path"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4.8, -30)
 curve = SubResource("Curve3D_hq1ik")
+
+[node name="Target_1_Brownie" type="PathFollow3D" parent="Path/Path3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+cubic_interp = false
+script = ExtResource("4_66tet")
+speed = 8.0
+
+[node name="Sprite3D" type="Sprite3D" parent="Path/Path3D/Target_1_Brownie"]
+transform = Transform3D(-0.665, 0, 5.81361e-08, 0, 0.665, 0, -5.81361e-08, 0, -0.665, 0, 1.415, 0)
+billboard = 1
+alpha_cut = 1
+texture = ExtResource("5_7ycvg")
 
 [node name="Table_Mesh" type="Node3D" parent="Path"]
 transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, 0, 0)
