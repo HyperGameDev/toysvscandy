@@ -106,7 +106,12 @@ func reparent_target_to_path() -> void:
 	
 	target_to_reparent.process_mode = PROCESS_MODE_INHERIT
 	target_to_reparent.target_level = level_to_assign
+	
 	target_to_reparent.sprite.render_priority = (targets_in_current_wave - 1) % 127 + 1
+	
+	#opposite numbering
+	#target_to_reparent.sprite.render_priority = 127 - ((targets_in_current_wave - 1) % 127)
+
 	
 	#print("Target's level: ",target_to_reparent.target_level)
 	

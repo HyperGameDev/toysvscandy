@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://duatv3h4iqr6u"]
+[gd_scene load_steps=3 format=3 uid="uid://duatv3h4iqr6u"]
 
 [ext_resource type="Script" uid="uid://bfe2h034n5lxy" path="res://Targets/target_itself.gd" id="1_wbg1h"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wbg1h"]
+radius = 0.746
+height = 0.001
 
 [node name="Target" type="PathFollow3D"]
 process_mode = 4
@@ -13,3 +17,8 @@ unique_name_in_owner = true
 transform = Transform3D(-0.665, 0, 5.81361e-08, 0, 0.665, 0, -5.81361e-08, 0, -0.665, 0, 1.415, 0)
 billboard = 1
 no_depth_test = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00714385, 0.448434, 0.00861764)
+visible = false
+mesh = SubResource("SphereMesh_wbg1h")

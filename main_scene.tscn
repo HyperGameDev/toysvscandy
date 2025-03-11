@@ -1,7 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=29 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Gradient" uid="uid://8gk1ghe5j20s" path="res://Colors/pastels.tres" id="2_gyfs4"]
+[ext_resource type="Texture2D" uid="uid://hpx5d1cjhq3u" path="res://Ref_images/refim_01.png" id="2_qwutr"]
+[ext_resource type="Texture2D" uid="uid://df1nyqnc7pv3a" path="res://Ref_images/refimg_02.png" id="2_wr18j"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="4_d5x1h"]
 [ext_resource type="Script" uid="uid://63xd0wwpp1el" path="res://hud.gd" id="5_7ycvg"]
 [ext_resource type="PackedScene" uid="uid://c7bfhfltjy6av" path="res://Assets/path/table_01_00.tscn" id="5_8mm7a"]
@@ -27,8 +29,8 @@ gradient = ExtResource("2_gyfs4")
 
 [sub_resource type="Gradient" id="Gradient_d5x1h"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0.0070922, 0.0585106, 0.102837, 0.152482, 0.219858, 0.342199, 0.391844, 0.445035, 0.537234, 0.595745, 0.636525, 0.691489, 0.742908, 0.778369, 0.852837, 0.920213, 0.973404)
-colors = PackedColorArray(0.243137, 0.168627, 0.0901961, 1, 0.317647, 0.152941, 0.227451, 1, 0.317647, 0.180392, 0.337255, 1, 0.196078, 0.309804, 0.552941, 1, 0.0313726, 0.529412, 0.831373, 1, 0.211765, 0.764706, 0.784314, 1, 0.266667, 0.54902, 0.321569, 1, 0.298039, 0.470588, 0.105882, 1, 0.45098, 0.670588, 0.160784, 1, 0.529412, 0.505882, 0.341176, 1, 0.421684, 0.232404, 0.396339, 1, 0.635294, 0.235294, 0.509804, 1, 0.675087, 0.27845, 0.377538, 1, 0.882353, 0.486275, 0.243137, 1, 0.898039, 0.588235, 0.160784, 1, 0.929412, 0.8, 0.454902, 1, 0.952941, 0.941176, 0.901961, 1)
+offsets = PackedFloat32Array(0.0070922, 0.0585106, 0.102837, 0.152482, 0.219858, 0.342199, 0.391844, 0.445035, 0.502242, 0.556054, 0.605381, 0.641256, 0.691489, 0.730942, 0.760837, 0.796712, 0.852018, 0.88216, 0.920213, 0.973404)
+colors = PackedColorArray(0.243137, 0.168627, 0.0901961, 1, 0.317647, 0.152941, 0.227451, 1, 0.317647, 0.180392, 0.337255, 1, 0.196078, 0.309804, 0.552941, 1, 0.0313726, 0.529412, 0.831373, 1, 0.211765, 0.764706, 0.784314, 1, 0.266667, 0.54902, 0.321569, 1, 0.298039, 0.470588, 0.105882, 1, 0.45098, 0.670588, 0.160784, 1, 0.529412, 0.505882, 0.341176, 1, 0.421684, 0.232404, 0.396339, 1, 0.580392, 0.247059, 0.560784, 1, 0.635294, 0.235294, 0.509804, 1, 0.675087, 0.27845, 0.377538, 1, 0.59, 0.1062, 0.138453, 1, 0.733333, 0.145098, 0.223529, 1, 0.882353, 0.486275, 0.243137, 1, 0.898039, 0.588235, 0.160784, 1, 0.929412, 0.8, 0.454902, 1, 0.952941, 0.941176, 0.901961, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8mm7a"]
 gradient = SubResource("Gradient_d5x1h")
@@ -102,12 +104,28 @@ offset_right = 669.0
 offset_bottom = 89.0
 texture = SubResource("GradientTexture2D_66tet")
 
+[node name="TextureRect2" type="TextureRect" parent="Palettes"]
+offset_left = -36.0
+offset_top = 253.0
+offset_right = 1407.0
+offset_bottom = 1153.0
+scale = Vector2(0.43525, 0.373685)
+texture = ExtResource("2_qwutr")
+
 [node name="Palette_2" type="TextureRect" parent="Palettes"]
 offset_left = 26.0
 offset_top = 89.0
 offset_right = 669.0
 offset_bottom = 153.0
 texture = SubResource("GradientTexture2D_8mm7a")
+
+[node name="TextureRect" type="TextureRect" parent="Palettes"]
+offset_left = 617.0
+offset_top = 295.0
+offset_right = 2060.0
+offset_bottom = 1195.0
+scale = Vector2(0.371976, 0.377874)
+texture = ExtResource("2_wr18j")
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)

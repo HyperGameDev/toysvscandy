@@ -3,12 +3,12 @@ class_name Target extends PathFollow3D
 var performance: bool = false
 
 const sprite_array: Array[CompressedTexture2D] = [
-	preload("res://Assets/targets/temp/temp_target_1_brownie.png"),
-	preload("res://Assets/targets/temp/temp_target_2.png"),
-	preload("res://Assets/targets/temp/temp_target_3.png"),
-	preload("res://Assets/targets/temp/temp_target_4.png"),
-	preload("res://Assets/targets/temp/temp_target_5.png"),
-	preload("res://Assets/targets/temp/temp_target_6_cake.png")
+	preload("res://Assets/targets/target_1_brownie.png"),
+	preload("res://Assets/targets/target_2_donut.png"),
+	preload("res://Assets/targets/target_3_cupcake.png"),
+	preload("res://Assets/targets/target_4_cookie.png"),
+	preload("res://Assets/targets/target_5_cake.png"),
+	preload("res://Assets/targets/target_6_icecream.png")
 ]
 
 const speed_array: Array[float] = [

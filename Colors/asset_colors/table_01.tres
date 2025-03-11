@@ -2,4 +2,4 @@
 
 [resource]
 offsets = PackedFloat32Array(0, 0.909774)
-colors = PackedColorArray(0.243137, 0.180392, 0.0784314, 1, 0.47, 0.30456, 0.0564, 1)
+colors = PackedColorArray(0.250756, 0.134402, 0.0920776, 1, 0.438726, 0.244245, 0.173477, 1)

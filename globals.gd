@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = false
+var debug: bool = true
 
 var wave_number: int = 0
 
@@ -70,11 +70,12 @@ func _on_start_next_wave():
 
 func add_debug_wave_data():
 	wave_data = {
-		wave_0 = [0, 0, 0, 0, 0, 0],
-		wave_1 = [25, 0, 0, 0, 0, 0],
-		wave_2 = [0, 25, 0, 0, 0, 0],
-		wave_3 = [0, 0, 25, 0, 0, 0],
-		wave_4 = [0, 0, 0, 25, 0, 0],
-		wave_5 = [0, 0, 0, 0, 25, 0],
-		wave_6 = [0, 0, 0, 0, 0, 25],
+		wave_0 = [0,  0,  0,  0,  0,  0],
+		wave_1 = [25, 25, 25, 25, 25, 25],
+		wave_2 = [25, 0, 0,  0,  0,  0],
+		wave_3 = [0,  25,  0,  0,  0,  0],
+		wave_4 = [0,   0, 25,  0,  0,  0],
+		wave_5 = [0,   0,  0, 25,  0,  0],
+		wave_6 = [0,   0,  0,  0, 25,  0],
+		wave_7 = [0,   0,  0,  0,  0, 25],
 	}
