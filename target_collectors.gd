@@ -49,6 +49,7 @@ func _process(delta: float) -> void:
 			targets_in_current_wave += 1
 			reparent_target_to_path()
 			start_reparent_timer()
+			Messenger.target_added_to_path.emit()
 	
 func spawn_targets() -> void:
 	var target_to_spawn: PathFollow3D = target.instantiate()
@@ -106,6 +107,8 @@ func reparent_target_to_path() -> void:
 	
 	target_to_reparent.process_mode = PROCESS_MODE_INHERIT
 	target_to_reparent.target_level = level_to_assign
+	
+	
 	
 	target_to_reparent.sprite.render_priority = (targets_in_current_wave - 1) % 127 + 1
 	
