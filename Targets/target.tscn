@@ -16,7 +16,6 @@ script = ExtResource("1_wbg1h")
 unique_name_in_owner = true
 transform = Transform3D(-0.665, 0, 5.81361e-08, 0, 0.665, 0, -5.81361e-08, 0, -0.665, 0, 1.415, 0)
 billboard = 1
-no_depth_test = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00714385, 0.448434, 0.00861764)

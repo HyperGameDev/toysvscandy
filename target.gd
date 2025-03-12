@@ -24,11 +24,15 @@ const speed_array: Array[float] = [
 
 
 @onready var sprite: Sprite3D = %Sprite3D
+
 @export_range(0,5,1) var target_level: int:
 	set(new_level):
 		target_level = new_level
-		sprite.texture = sprite_array[target_level]
-		speed = speed_array[target_level]
+		if target_level > -1:
+			sprite.texture = sprite_array[target_level]
+			speed = speed_array[target_level]
+		else: reparent_to_collector()
+			
 		
 var dont_skip_frame: int #bool 0=false, 1=true
 		
@@ -45,5 +49,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 		progress += speed * delta
 		if progress_ratio >= 1.0:
-			reparent(Target_Collector.ref)
-			process_mode = PROCESS_MODE_DISABLED
+			reparent_to_collector()
+
+func reparent_to_collector():
+	reparent(Target_Collector.ref)
+	process_mode = PROCESS_MODE_DISABLED

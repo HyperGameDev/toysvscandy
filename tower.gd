@@ -1,13 +1,14 @@
 class_name Tower extends Node3D
 
 var detection_radius: float = 8.
-var detected_targets: Array[PathFollow3D] = []
 
 var targets_on_path: Variant = []
 var target_positions: Array[Vector2] = []
 var targets_pos_on_path: Vector2
 
 var tower_xy: Vector2
+
+var target_hit_for_interval: bool = false
 
 
 var attack_timer: float
@@ -33,6 +34,7 @@ func _process(delta: float) -> void:
 func start_attack_timer	() -> void:
 	attack_timer = attack_timer_length
 	attack_timer_running = true
+	target_hit_for_interval = false
 			
 func stop_attack_timer() -> void:
 	pass
@@ -57,7 +59,13 @@ func update_target_distances(_target,target_xy) -> void:
 
 func check_distance_from_target(target,distance) -> void:
 	if distance <= detection_radius:
-		print(target)
+		var detected_targets: Array[PathFollow3D] = []
+		detected_targets.append(target)
+		var target_to_attack: PathFollow3D = detected_targets.min()
+		if not target_hit_for_interval:
+			target_to_attack.target_level -= 1
+			target_hit_for_interval = true
+			print("Just hit ", target_to_attack)
 
 func _upgrade_radius(radius: float) -> void:
 	visible_radius.mesh.radius = radius
