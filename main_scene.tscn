@@ -132,9 +132,16 @@ mesh = SubResource("PlaneMesh_nfk4m")
 transform = Transform3D(0.224407, 0.638954, -0.735784, -1.26642e-07, 0.755041, 0.655677, 0.974496, -0.147138, 0.169437, -27.0851, 20.3967, -2.13846)
 projection = 1
 size = 36.635
+far = 414.87
 
 [node name="tower_1_toysoldier" parent="." instance=ExtResource("5_mo76n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 3)
+
+[node name="base_002 Remeshed Remeshed" parent="tower_1_toysoldier" index="0"]
+lod_bias = 128.0
+
+[node name="Visible_Radius" parent="tower_1_toysoldier" index="1"]
+visible = false
 
 [node name="Path" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04397, -3.95, -5.37823)

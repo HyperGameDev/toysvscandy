@@ -6,6 +6,7 @@
 size = Vector3(0.5, 7.68, 0.5)
 
 [node name="Projectile" type="MeshInstance3D"]
+visible = false
 mesh = SubResource("BoxMesh_671wp")
 skeleton = NodePath("../..")
 script = ExtResource("1_a85iw")

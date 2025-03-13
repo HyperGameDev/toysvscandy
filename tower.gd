@@ -2,10 +2,11 @@ class_name Tower extends Node3D
 
 @onready var shoot_point: Marker3D = %Shoot_Point
 @onready var visible_radius: MeshInstance3D = %Visible_Radius
+@onready var animation: AnimationTree = %AnimationTree
 
 const projectile: PackedScene = preload("res://projectile.tscn")
 
-var detection_radius: float = 8.
+var detection_radius: float = 7.
 
 var attack_timer: float
 @export var attack_timer_length: float = 1
@@ -50,6 +51,8 @@ func emit_projectile(target_to_attack):
 	
 	Projectile_Collector.ref.add_child(shot_bullet)
 	shot_bullet.global_position = target_to_attack.global_position
+	
+	animation.set("parameters/attack/request", 1)
 	attacking = false
 
 func _on_target_added_to_path() -> void:
@@ -103,7 +106,7 @@ func attack_target(target_to_attack) -> void:
 
 func aim_at_target(target_to_attack):
 	var target_direction = (target_to_attack.global_position - global_position).normalized()
-	var target_angle = atan2(target_direction.x, target_direction.z)
+	var target_angle = atan2(-target_direction.x, -target_direction.z)
 	rotation.y = target_angle
 	aiming = false
 	
@@ -113,5 +116,5 @@ func aim_at_target(target_to_attack):
 	#var distance_to_target
 
 func _upgrade_radius(radius: float) -> void:
-	visible_radius.mesh.radius = radius + 2
+	visible_radius.mesh.radius = radius
 	
