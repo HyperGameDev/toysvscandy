@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct1k05v5lr35q"]
+
+[ext_resource type="PackedScene" uid="uid://dtpwvoj8qwfm0" path="res://Assets/towers/tower_1_toysoldier.blend" id="1_l3icw"]
+[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_a31ub"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwutr"]
+transparency = 1
+albedo_color = Color(0.08, 0.08, 0.08, 0.67451)
+
+[sub_resource type="SphereMesh" id="SphereMesh_l3icw"]
+material = SubResource("StandardMaterial3D_qwutr")
+radius = 0.001
+height = 0.001
+
+[node name="tower_1_toysoldier" instance=ExtResource("1_l3icw")]
+script = ExtResource("2_a31ub")
+
+[node name="base_002 Remeshed Remeshed" parent="." index="0"]
+transform = Transform3D(-1.87959e-08, 0, -0.43, 0, 0.43, 0, 0.43, 0, -1.87959e-08, 0, 1.25954, 0)
+
+[node name="Visible_Radius" type="MeshInstance3D" parent="." index="1"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("SphereMesh_l3icw")
+
+[node name="Shoot_Point" type="Marker3D" parent="." index="2"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 8.2, 0.200001)

@@ -1,5 +1,6 @@
 extends Target
 
+signal attack_target_detected
 
 var bool_check: bool = true
 

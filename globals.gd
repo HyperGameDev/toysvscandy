@@ -1,7 +1,8 @@
 extends Node
 var debug: bool = true
-
 var wave_number: int = 0
+
+var targets_on_path: Variant = []
 
 var wave_data = {
 	wave_0 = [0, 0, 0, 0, 0, 0],
@@ -61,21 +62,25 @@ func _ready() -> void:
 	#TODO:remove
 	print("Change wave_data to a constant and remove debug stuff!")
 	Messenger.start_next_wave.connect(_on_start_next_wave)
+	Messenger.target_added_to_path.connect(_on_target_added_to_path)
 	
 	if debug:
 		add_debug_wave_data()
 	
 func _on_start_next_wave():
 	wave_number += 1
+	
+func _on_target_added_to_path() -> void:
+	targets_on_path = Path.ref.get_children() as Array[PathFollow3D]
 
 func add_debug_wave_data():
 	wave_data = {
 		wave_0 = [0,  0,  0,  0,  0,  0],
-		wave_1 = [0, 0, 0, 3, 0, 0],
-		wave_2 = [0, 0, 0, 3, 0, 0],
-		wave_3 = [0, 0, 0, 3, 0, 0],
-		wave_4 = [0, 0, 0, 3, 0, 0],
-		wave_5 = [0, 0, 0, 3, 0, 0],
-		wave_6 = [0, 0, 0, 3, 0, 0],
-		wave_7 = [0, 0, 0, 3, 0, 0],
+		wave_1 = [10, 0, 0, 0, 0, 0],
+		wave_2 = [0, 10, 0, 0, 0, 0],
+		wave_3 = [0, 0, 10, 0, 0, 0],
+		wave_4 = [0, 0, 10, 0, 0, 0],
+		wave_5 = [0, 0, 10, 0, 0, 0],
+		wave_6 = [0, 0, 10, 0, 0, 0],
+		wave_7 = [0, 0, 10, 0, 0, 0],
 	}

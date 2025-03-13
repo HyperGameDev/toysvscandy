@@ -1,17 +1,18 @@
-[gd_scene load_steps=33 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=30 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Gradient" uid="uid://8gk1ghe5j20s" path="res://Colors/pastels.tres" id="2_gyfs4"]
 [ext_resource type="Texture2D" uid="uid://hpx5d1cjhq3u" path="res://Ref_images/refim_01.png" id="2_qwutr"]
 [ext_resource type="Texture2D" uid="uid://df1nyqnc7pv3a" path="res://Ref_images/refimg_02.png" id="2_wr18j"]
-[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="4_d5x1h"]
 [ext_resource type="Script" uid="uid://63xd0wwpp1el" path="res://hud.gd" id="5_7ycvg"]
 [ext_resource type="PackedScene" uid="uid://c7bfhfltjy6av" path="res://Assets/path/table_01_00.tscn" id="5_8mm7a"]
+[ext_resource type="PackedScene" uid="uid://ct1k05v5lr35q" path="res://Assets/towers/tower_1_toysoldier.tscn" id="5_mo76n"]
 [ext_resource type="Gradient" uid="uid://bh63ak8hbh4r6" path="res://Colors/ui_colors/buttons_01.tres" id="6_66tet"]
 [ext_resource type="Script" uid="uid://ccynmoag5ppbq" path="res://path.gd" id="6_671wp"]
 [ext_resource type="Gradient" uid="uid://dj72fx45gaaji" path="res://Colors/ui_colors/hud_01.tres" id="6_hq1ik"]
 [ext_resource type="Script" uid="uid://dberpdrjbjji6" path="res://target_collectors.gd" id="7_66tet"]
 [ext_resource type="Theme" uid="uid://xwraynlxvb7d" path="res://Themes/ui_01.tres" id="7_nfk4m"]
+[ext_resource type="Script" uid="uid://d0l008crncmg6" path="res://projctile_collector.gd" id="13_mo76n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c62f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -58,25 +59,6 @@ albedo_texture = SubResource("NoiseTexture2D_8mm7a")
 [sub_resource type="PlaneMesh" id="PlaneMesh_nfk4m"]
 material = SubResource("StandardMaterial3D_hq1ik")
 size = Vector2(200, 200)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_671wp"]
-no_depth_test = true
-albedo_color = Color(0.0461668, 0.318274, 1.20327e-06, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_wr18j"]
-material = SubResource("StandardMaterial3D_671wp")
-top_radius = 2.0
-bottom_radius = 2.0
-height = 4.105
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwutr"]
-transparency = 1
-albedo_color = Color(0.08, 0.08, 0.08, 0.67451)
-
-[sub_resource type="SphereMesh" id="SphereMesh_671wp"]
-material = SubResource("StandardMaterial3D_qwutr")
-radius = 0.001
-height = 0.001
 
 [sub_resource type="Curve3D" id="Curve3D_hq1ik"]
 _data = {
@@ -151,18 +133,8 @@ transform = Transform3D(0.224407, 0.638954, -0.735784, -1.26642e-07, 0.755041, 0
 projection = 1
 size = 36.635
 
-[node name="Tower" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -17)
-script = ExtResource("4_d5x1h")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Tower"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-mesh = SubResource("CylinderMesh_wr18j")
-
-[node name="Visible_Radius" type="MeshInstance3D" parent="Tower"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-mesh = SubResource("SphereMesh_671wp")
+[node name="tower_1_toysoldier" parent="." instance=ExtResource("5_mo76n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
 
 [node name="Path" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04397, -3.95, -5.37823)
@@ -343,3 +315,8 @@ layout_mode = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, -43)
 script = ExtResource("7_66tet")
 reparent_timer_length_divisor = 0.3
+
+[node name="Projctile_Collector" type="Node3D" parent="."]
+script = ExtResource("13_mo76n")
+
+[editable path="tower_1_toysoldier"]

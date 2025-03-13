@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3dsup68w6dbf"]
+
+[ext_resource type="Script" uid="uid://dhk7k5asq7bqh" path="res://projectile.gd" id="1_a85iw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_671wp"]
+size = Vector3(0.5, 7.68, 0.5)
+
+[node name="Projectile" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_671wp")
+skeleton = NodePath("../..")
+script = ExtResource("1_a85iw")
