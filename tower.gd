@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		update_targets_to_track()
 		
 	if aiming:
-		aim_at_target(target_to_attack,delta)
+		aim_at_target(target_to_attack)
 		
 		if attacking:
 			emit_projectile(target_to_attack)
@@ -62,8 +62,6 @@ func start_attack_timer	() -> void:
 			
 func stop_attack_timer() -> void:
 	aiming = false
-	tower_idle()
-	pass
 	
 func tower_placed() -> void:
 	tower_xy = Vector2(global_position.x,global_position.z)
@@ -73,12 +71,6 @@ func update_targets_to_track() -> void:
 		var target_xy: Vector2 = Vector2(target.global_position.x,target.global_position.z)
 		target_positions.append(target_xy)
 		update_target_distances(target,target_xy)
-	
-func tower_idle():
-	var target_direction = (aiming_target_pos - global_position).normalized()
-	var target_angle = atan2(target_direction.x, target_direction.z)
-	rotation.y = target_angle
-	print("tower_idle-ing")
 		
 func update_target_distances(target,target_xy) -> void:		
 	var distance: float = tower_xy.distance_to(target_xy)
@@ -93,7 +85,6 @@ func check_distance_from_target(target,distance) -> void:
 		var detected_target_index: int = detected_targets_positions.find(detected_targets_positions.min())
 		target_to_attack = detected_targets[detected_target_index]
 		
-		
 		start_attack_timer()
 		aiming = true
 		aiming_target_pos = target_to_attack.global_position
@@ -101,23 +92,16 @@ func check_distance_from_target(target,distance) -> void:
 		if not target_to_attack.attack_target_detected.is_connected(_on_attack_target_detected):
 			target_to_attack.attack_target_detected.connect(_on_attack_target_detected)
 			target_to_attack.attack_target_detected.emit(target_to_attack)
-	#else:
-		#tower_idle(aiming_target_pos)
-		
 		
 func _on_attack_target_detected(target_to_attack) -> void:
 	attacking = true
-
-
+	
 func attack_target(target_to_attack) -> void:
 	if not target_hit_during_interval:
 		target_to_attack.target_level -= 1
 		target_hit_during_interval = true
 
-func aim_at_target(target_to_attack,delta):
-	print("aim_at_target-ing")
-	#var target_look_at_pos: Vector3 = Vector3(target_to_attack.global_position.x,global_position.y,target_to_attack.global_position.z)
-	
+func aim_at_target(target_to_attack):
 	var target_direction = (target_to_attack.global_position - global_position).normalized()
 	var target_angle = atan2(target_direction.x, target_direction.z)
 	rotation.y = target_angle
