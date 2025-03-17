@@ -4,13 +4,26 @@ class_name Tower extends Node3D
 @onready var visible_radius: MeshInstance3D = %Visible_Radius
 @onready var animation: AnimationTree = %AnimationTree
 
+var one_shot: bool = false
+
 const projectile: PackedScene = preload("res://projectile.tscn")
+
+@export var tower_type: tower_types
+enum tower_types {DART,TACK,FREEZE,BOMB,SUPER}
+
+@export var aim_type: aim_types
+enum aim_types {AIMING,AREA}
 
 var detection_radius: float = 7.
 
 var attack_timer: float
 @export var attack_timer_length: float = 1
 var attack_timer_running: bool = false
+
+var attack_speed_1: float = 1.
+var attack_speed_2: float = .6667
+var attack_speed_3: float = .3333
+var attack_speed_4: float = .1
 
 var aiming: bool = false
 var aiming_target_pos: Vector3
@@ -32,6 +45,8 @@ func _ready() -> void:
 	
 	tower_placed()
 	
+	set_tower_speed()
+	
 func _process(delta: float) -> void:
 	if attack_timer_running:
 		attack_timer = move_toward(attack_timer,0,delta)
@@ -39,12 +54,39 @@ func _process(delta: float) -> void:
 		stop_attack_timer()
 		update_targets_to_track()
 		
-	if aiming:
-		aim_at_target(target_to_attack)
+	set_tower_aiming()
+			
+			
+func set_tower_speed():
+	match tower_type:
+		tower_types.DART:
+			attack_timer_length = attack_speed_1
+		tower_types.TACK:
+			attack_timer_length = attack_speed_2
+		tower_types.FREEZE:
+			attack_timer_length = attack_speed_3
+		tower_types.BOMB:
+			attack_timer_length = attack_speed_2
+		tower_types.SUPER:
+			attack_timer_length = attack_speed_4
 		
-		if attacking:
-			emit_projectile(target_to_attack)
-		
+func set_tower_aiming():
+	match aim_type:
+		aim_types.AIMING:
+			if aiming:
+				aim_at_target(target_to_attack)
+				
+				if attacking:
+					emit_projectile(target_to_attack)
+		aim_types.AREA:
+			if attack_timer_running:
+				if not one_shot:
+					print("one shot attempted")
+					animation.set("parameters/attack/request", 1)
+					one_shot = true
+			else:
+				animation.set("parameters/attack/request", 3)
+				one_shot = false
 		
 func emit_projectile(target_to_attack):
 	var shot_bullet: MeshInstance3D = projectile.instantiate()
@@ -58,13 +100,14 @@ func emit_projectile(target_to_attack):
 func _on_target_added_to_path() -> void:
 	targets_on_path = Globals.targets_on_path
 
-func start_attack_timer	() -> void:
+func start_attack_timer() -> void:
 	attack_timer = attack_timer_length
 	attack_timer_running = true
 	target_hit_during_interval = false
-			
+
 func stop_attack_timer() -> void:
 	aiming = false
+	attack_timer_running = false
 	
 func tower_placed() -> void:
 	tower_xy = Vector2(global_position.x,global_position.z)
@@ -89,12 +132,19 @@ func check_distance_from_target(target,distance) -> void:
 		target_to_attack = detected_targets[detected_target_index]
 		
 		start_attack_timer()
-		aiming = true
-		aiming_target_pos = target_to_attack.global_position
+		
+		do_aiming(target_to_attack)
 		
 		if not target_to_attack.attack_target_detected.is_connected(_on_attack_target_detected):
 			target_to_attack.attack_target_detected.connect(_on_attack_target_detected)
 			target_to_attack.attack_target_detected.emit(target_to_attack)
+			
+func do_aiming(target_to_attack):
+	match aim_type:
+		aim_types.AIMING:
+			aiming = true
+			aiming_target_pos = target_to_attack.global_position
+	
 		
 func _on_attack_target_detected(target_to_attack) -> void:
 	attacking = true
@@ -102,6 +152,7 @@ func _on_attack_target_detected(target_to_attack) -> void:
 func attack_target(target_to_attack) -> void:
 	if not target_hit_during_interval:
 		target_to_attack.target_level -= 1
+		#target_to_attack.speed = 0 # Freeze
 		target_hit_during_interval = true
 
 func aim_at_target(target_to_attack):

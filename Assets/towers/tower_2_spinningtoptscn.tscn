@@ -1,0 +1,154 @@
+[gd_scene load_steps=21 format=3 uid="uid://w2ffngwoj7g6"]
+
+[ext_resource type="PackedScene" uid="uid://ccvnnfkx3ckng" path="res://Assets/towers/tower_2_spinningtop.blend" id="1_scsal"]
+[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_kw80a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scsal"]
+albedo_color = Color(0.767025, 2.52686e-06, 9.62615e-07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kw80a"]
+albedo_color = Color(1, 0.278431, 0.0941176, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5nkns"]
+albedo_color = Color(0.491874, 0.491874, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqg5y"]
+albedo_color = Color(0, 0.360784, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3gx5"]
+albedo_color = Color(0.0196078, 0.415686, 0.498039, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5tyf"]
+albedo_color = Color(0, 0.239216, 0.992157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2p0c"]
+albedo_color = Color(0.520528, 0.00276906, 0.824341, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mlbhg"]
+albedo_color = Color(1, 0.529412, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwutr"]
+transparency = 1
+albedo_color = Color(0.76662, 0.76662, 0.766619, 0.67451)
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_5nkns"]
+material = SubResource("StandardMaterial3D_qwutr")
+radius = 0.001
+height = 0.001
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_scsal"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kw80a"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_scsal"]
+fadein_time = 0.5
+fadeout_time = 0.5
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yqg5y"]
+graph_offset = Vector2(-678.745, 107.364)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_kw80a")
+nodes/Animation/position = Vector2(-100, 140)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_scsal")
+"nodes/Animation 2/position" = Vector2(-100, 320)
+nodes/attack/node = SubResource("AnimationNodeOneShot_scsal")
+nodes/attack/position = Vector2(120, 260)
+nodes/output/position = Vector2(380, 140)
+node_connections = [&"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"attack"]
+
+[sub_resource type="Animation" id="Animation_k3gx5"]
+resource_name = "attack"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.722566, 0.523599, 0), Vector3(0.289725, 1.29154, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yqg5y"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.722566, 0.523599, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_scsal"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.722566, 0.523599, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5tyf"]
+_data = {
+&"RESET": SubResource("Animation_scsal"),
+&"attack": SubResource("Animation_k3gx5"),
+&"idle": SubResource("Animation_yqg5y")
+}
+
+[node name="tower_2_spinningtop" instance=ExtResource("1_scsal")]
+script = ExtResource("2_kw80a")
+tower_type = 1
+aim_type = 1
+
+[node name="Top" parent="." index="0"]
+transform = Transform3D(0.866025, 0.330656, 0.375055, 0, 0.750111, -0.661312, -0.5, 0.572713, 0.649615, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_scsal")
+surface_material_override/1 = SubResource("StandardMaterial3D_kw80a")
+surface_material_override/2 = SubResource("StandardMaterial3D_5nkns")
+surface_material_override/3 = SubResource("StandardMaterial3D_yqg5y")
+surface_material_override/4 = SubResource("StandardMaterial3D_k3gx5")
+surface_material_override/5 = SubResource("StandardMaterial3D_u5tyf")
+surface_material_override/6 = SubResource("StandardMaterial3D_a2p0c")
+surface_material_override/7 = SubResource("StandardMaterial3D_mlbhg")
+
+[node name="Visible_Radius" type="MeshInstance3D" parent="." index="1"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+visible = false
+mesh = SubResource("SphereMesh_5nkns")
+
+[node name="Shoot_Point" type="Marker3D" parent="." index="2"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 8.2, 0.200001)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
+tree_root = SubResource("AnimationNodeBlendTree_yqg5y")
+anim_player = NodePath("../AnimationPlayer")
+parameters/attack/active = false
+parameters/attack/internal_active = false
+parameters/attack/request = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+&"": SubResource("AnimationLibrary_u5tyf")
+}

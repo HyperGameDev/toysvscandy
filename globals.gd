@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = false
+var debug: bool = true
 var wave_number: int = 0
 
 var targets_on_path: Variant = []
@@ -76,7 +76,7 @@ func _on_target_added_to_path() -> void:
 func add_debug_wave_data():
 	wave_data = {
 		wave_0 = [0,  0,  0,  0,  0,  0],
-		wave_1 = [10, 0, 0, 0, 0, 0],
+		wave_1 = [10, 10, 10, 10, 10, 10],
 		wave_2 = [0, 10, 0, 0, 0, 0],
 		wave_3 = [0, 0, 10, 0, 0, 0],
 		wave_4 = [0, 0, 10, 0, 0, 0],
