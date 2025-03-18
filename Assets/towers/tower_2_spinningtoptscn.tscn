@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://w2ffngwoj7g6"]
+[gd_scene load_steps=23 format=3 uid="uid://w2ffngwoj7g6"]
 
 [ext_resource type="PackedScene" uid="uid://ccvnnfkx3ckng" path="res://Assets/towers/tower_2_spinningtop.blend" id="1_scsal"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_kw80a"]
@@ -9,14 +9,29 @@ albedo_color = Color(0.767025, 2.52686e-06, 9.62615e-07, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kw80a"]
 albedo_color = Color(1, 0.278431, 0.0941176, 1)
 
+[sub_resource type="Gradient" id="Gradient_scsal"]
+interpolation_mode = 1
+colors = PackedColorArray(0, 0.4, 0, 1, 0.645875, 0.645176, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kw80a"]
+gradient = SubResource("Gradient_scsal")
+width = 300
+height = 300
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.22, 0.635)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5nkns"]
-albedo_color = Color(0.491874, 0.491874, 0, 1)
+albedo_texture = SubResource("GradientTexture2D_kw80a")
+uv1_scale = Vector3(0.573, 0.69, 0.611)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 15.2297
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqg5y"]
-albedo_color = Color(0, 0.360784, 0, 1)
+albedo_color = Color(0, 0.400108, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3gx5"]
-albedo_color = Color(0.0196078, 0.415686, 0.498039, 1)
+albedo_color = Color(0.135123, 0.4934, 0.592179, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5tyf"]
 albedo_color = Color(0, 0.239216, 0.992157, 1)
@@ -58,26 +73,8 @@ nodes/attack/position = Vector2(120, 260)
 nodes/output/position = Vector2(380, 140)
 node_connections = [&"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"attack"]
 
-[sub_resource type="Animation" id="Animation_k3gx5"]
-resource_name = "attack"
-length = 3.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Top:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.12),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.722566, 0.523599, 0), Vector3(0.289725, 1.29154, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_yqg5y"]
-resource_name = "idle"
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_scsal"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -91,8 +88,26 @@ tracks/0/keys = {
 "values": [Vector3(0.722566, 0.523599, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_scsal"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_k3gx5"]
+resource_name = "attack"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.566667, 0.96, 1.41, 1.79, 2.16667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.722566, 0.523599, 0), Vector3(0.289725, 1.29154, 0), Vector3(0.359538, 2.67734, 0), Vector3(0.439823, 4.08058, 0), Vector3(0.507891, 5.59553, 0), Vector3(0.575959, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yqg5y"]
+resource_name = "idle"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -119,7 +134,7 @@ tower_type = 1
 aim_type = 1
 
 [node name="Top" parent="." index="0"]
-transform = Transform3D(0.866025, 0.330656, 0.375055, 0, 0.750111, -0.661312, -0.5, 0.572713, 0.649615, 0, 0, 0)
+transform = Transform3D(0.866025, 0.330656, 0.375056, 0, 0.750111, -0.661312, -0.5, 0.572713, 0.649615, 0, 0, 0)
 surface_material_override/0 = SubResource("StandardMaterial3D_scsal")
 surface_material_override/1 = SubResource("StandardMaterial3D_kw80a")
 surface_material_override/2 = SubResource("StandardMaterial3D_5nkns")
@@ -132,7 +147,6 @@ surface_material_override/7 = SubResource("StandardMaterial3D_mlbhg")
 [node name="Visible_Radius" type="MeshInstance3D" parent="." index="1"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-visible = false
 mesh = SubResource("SphereMesh_5nkns")
 
 [node name="Shoot_Point" type="Marker3D" parent="." index="2"]
@@ -148,7 +162,7 @@ parameters/attack/active = false
 parameters/attack/internal_active = false
 parameters/attack/request = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer_old" type="AnimationPlayer" parent="." index="4"]
 libraries = {
 &"": SubResource("AnimationLibrary_u5tyf")
 }
