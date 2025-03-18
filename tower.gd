@@ -15,6 +15,12 @@ enum tower_types {DART,TACK,FREEZE,BOMB,SUPER}
 enum aim_types {AIMING,AREA}
 
 var detection_radius: float = 7.
+var radius_1: float = 4.85
+var radius_2: float = 5.5
+var radius_3: float = 7.
+var radius_4: float = 8.54
+var radius_5: float = 9.9
+var radius_6: float = 16.83
 
 var attack_timer: float
 @export var attack_timer_length: float = 1
@@ -45,7 +51,7 @@ func _ready() -> void:
 	
 	tower_placed()
 	
-	set_tower_speed()
+	set_tower_stats()
 	
 func _process(delta: float) -> void:
 	if attack_timer_running:
@@ -57,18 +63,23 @@ func _process(delta: float) -> void:
 	set_tower_aiming()
 			
 			
-func set_tower_speed():
+func set_tower_stats():
 	match tower_type:
 		tower_types.DART:
-			attack_timer_length = attack_speed_1
+			attack_timer_length = attack_speed_3
+			detection_radius = radius_3
 		tower_types.TACK:
 			attack_timer_length = attack_speed_2
+			detection_radius = radius_1
 		tower_types.FREEZE:
-			attack_timer_length = attack_speed_3
+			attack_timer_length = attack_speed_1
+			detection_radius = radius_1
 		tower_types.BOMB:
 			attack_timer_length = attack_speed_2
+			detection_radius = radius_4
 		tower_types.SUPER:
 			attack_timer_length = attack_speed_4
+			detection_radius = radius_5
 		
 func set_tower_aiming():
 	match aim_type:
@@ -81,11 +92,14 @@ func set_tower_aiming():
 		aim_types.AREA:
 			if attack_timer_running:
 				if not one_shot:
-					print("one shot attempted")
 					animation.set("parameters/attack/request", 1)
 					one_shot = true
 			else:
-				animation.set("parameters/attack/request", 3)
+				match tower_type:
+					tower_types.TACK:
+						animation.set("parameters/attack/request", 3)
+					tower_types.FREEZE:
+						animation.set("parameters/attack/request", 2)
 				one_shot = false
 		
 func emit_projectile(target_to_attack):
@@ -153,6 +167,7 @@ func attack_target(target_to_attack) -> void:
 	if not target_hit_during_interval:
 		target_to_attack.target_level -= 1
 		#target_to_attack.speed = 0 # Freeze
+		#Messenger.frozen_target.emit(target_to_attack)
 		target_hit_during_interval = true
 
 func aim_at_target(target_to_attack):

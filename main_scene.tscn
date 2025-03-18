@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=32 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Gradient" uid="uid://8gk1ghe5j20s" path="res://Colors/pastels.tres" id="2_gyfs4"]
@@ -14,6 +14,7 @@
 [ext_resource type="Theme" uid="uid://xwraynlxvb7d" path="res://Themes/ui_01.tres" id="7_nfk4m"]
 [ext_resource type="Script" uid="uid://d0l008crncmg6" path="res://projctile_collector.gd" id="13_mo76n"]
 [ext_resource type="PackedScene" uid="uid://w2ffngwoj7g6" path="res://Assets/towers/tower_2_spinningtoptscn.tscn" id="14_42l1d"]
+[ext_resource type="PackedScene" uid="uid://bhcvbk8530le5" path="res://Assets/towers/tower_3_snowglobe.tscn" id="15_2jcla"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c62f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -329,5 +330,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -1)
 
 [node name="tower_2_spinningtop3" parent="." instance=ExtResource("14_42l1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -17)
+
+[node name="tower_3_snowglobe" parent="." instance=ExtResource("15_2jcla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.4, 0, -14)
+
+[node name="tower_3_snowglobe2" parent="." instance=ExtResource("15_2jcla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 0, -24.1)
 
 [editable path="tower_1_toysoldier"]

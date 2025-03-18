@@ -1,0 +1,258 @@
+[gd_scene load_steps=25 format=3 uid="uid://bhcvbk8530le5"]
+
+[ext_resource type="PackedScene" uid="uid://bvwntpbl6cq1i" path="res://Assets/towers/tower_3_snowglobe.blend" id="1_6r33o"]
+[ext_resource type="Shader" uid="uid://bbvni87enteg7" path="res://Shaders/freeze_aura.gdshader" id="2_7wr5a"]
+[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_ckecl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wr5a"]
+albedo_color = Color(0.374139, 0.374139, 0.374139, 1)
+metallic = 0.47
+roughness = 0.36
+
+[sub_resource type="Gradient" id="Gradient_6r33o"]
+offsets = PackedFloat32Array(0, 0.641791)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7wr5a"]
+noise_type = 2
+frequency = 0.061
+fractal_lacunarity = -0.84
+fractal_gain = -0.075
+cellular_jitter = 0.52
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ckecl"]
+in_3d_space = true
+seamless = true
+color_ramp = SubResource("Gradient_6r33o")
+noise = SubResource("FastNoiseLite_7wr5a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if0uw"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("NoiseTexture2D_ckecl")
+uv1_triplanar_sharpness = 11.3137
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckecl"]
+next_pass = SubResource("StandardMaterial3D_if0uw")
+transparency = 1
+albedo_color = Color(0.099, 0.3245, 0.55, 0.521569)
+roughness = 0.46
+uv1_triplanar_sharpness = 150.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ei48"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_inykd"]
+albedo_color = Color(0.31, 0.112737, 0.0527, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hp6av"]
+albedo_color = Color(1, 0.95, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hbij"]
+transparency = 1
+albedo_color = Color(0.76662, 0.76662, 0.766619, 0.67451)
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_6r33o"]
+material = SubResource("StandardMaterial3D_3hbij")
+radius = 4.85
+height = 0.001
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_if0uw"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ckecl"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_if0uw"]
+fadeout_time = 0.4
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ckecl"]
+graph_offset = Vector2(-605.636, -2)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_ckecl")
+nodes/Animation/position = Vector2(-300, 40)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_if0uw")
+"nodes/Animation 2/position" = Vector2(-215.2, 314.6)
+nodes/attack/node = SubResource("AnimationNodeOneShot_if0uw")
+nodes/attack/position = Vector2(0, 180)
+node_connections = [&"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"attack"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_7wr5a"]
+size = Vector2(11, 11)
+orientation = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if0uw"]
+render_priority = 0
+shader = ExtResource("2_7wr5a")
+shader_parameter/size = 0.0
+shader_parameter/width = 0.355
+shader_parameter/inner_color = Color(0.3312, 0.51658, 0.69, 1)
+shader_parameter/outer_color = Color(0.2145, 0.357825, 0.39, 0)
+
+[sub_resource type="Animation" id="Animation_7wr5a"]
+resource_name = "attack"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/outer_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.2145, 0.357825, 0.39, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/inner_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.861037, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.3312, 0.51658, 0.69, 1), Color(0.3312, 0.51658, 0.69, 1), Color(0.3312, 0.51658, 0.69, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_if0uw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/outer_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.2145, 0.357825, 0.39, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/inner_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.3312, 0.51658, 0.69, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ckecl"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/outer_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.2145, 0.357825, 0.39, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/inner_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.3312, 0.51658, 0.69, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_if0uw"]
+_data = {
+&"RESET": SubResource("Animation_if0uw"),
+&"attack": SubResource("Animation_7wr5a"),
+&"idle": SubResource("Animation_ckecl")
+}
+
+[node name="tower_3_snowglobe" instance=ExtResource("1_6r33o")]
+script = ExtResource("2_ckecl")
+tower_type = 2
+aim_type = 1
+
+[node name="Snowglobe" parent="." index="0"]
+lod_bias = 128.0
+surface_material_override/0 = SubResource("StandardMaterial3D_7wr5a")
+surface_material_override/1 = SubResource("StandardMaterial3D_ckecl")
+surface_material_override/2 = SubResource("StandardMaterial3D_4ei48")
+surface_material_override/3 = SubResource("StandardMaterial3D_inykd")
+surface_material_override/4 = SubResource("StandardMaterial3D_hp6av")
+
+[node name="Visible_Radius" type="MeshInstance3D" parent="." index="1"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+visible = false
+mesh = SubResource("SphereMesh_6r33o")
+
+[node name="Shoot_Point" type="Marker3D" parent="." index="2"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 8.2, 0.200001)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
+tree_root = SubResource("AnimationNodeBlendTree_ckecl")
+anim_player = NodePath("../AnimationPlayer")
+parameters/attack/active = false
+parameters/attack/internal_active = false
+parameters/attack/request = 0
+
+[node name="Freeze_Attack" type="MeshInstance3D" parent="." index="4"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("QuadMesh_7wr5a")
+surface_material_override/0 = SubResource("ShaderMaterial_if0uw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+&"": SubResource("AnimationLibrary_if0uw")
+}
