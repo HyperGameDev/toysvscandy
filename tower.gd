@@ -3,6 +3,7 @@ class_name Tower extends Node3D
 @onready var shoot_point: Marker3D = %Shoot_Point
 @onready var visible_radius: MeshInstance3D = %Visible_Radius
 @onready var animation: AnimationTree = %AnimationTree
+var is_attack_animating: bool = false
 
 var one_shot: bool = false
 
@@ -27,14 +28,14 @@ var attack_timer: float
 var attack_timer_running: bool = false
 
 var attack_speed_1: float = 1.
-var attack_speed_2: float = .6667
-var attack_speed_3: float = .3333
+var attack_speed_2: float = .7
+var attack_speed_3: float = .5
 var attack_speed_4: float = .1
 
 var aiming: bool = false
 var aiming_target_pos: Vector3
 
-var targets_on_path: Array  = []
+var targets_on_path: Variant  = []
 var targets_pos_on_path: Vector2
 var target_to_attack: PathFollow3D
 var target_hit_during_interval: bool = false
@@ -46,11 +47,14 @@ var attacking: bool = false
 
 func _ready() -> void:
 	Messenger.target_added_to_path.connect(_on_target_added_to_path)
-	_upgrade_radius(detection_radius)
+	animation.animation_finished.connect(_on_animation_finished)
+	animation.animation_started.connect(_on_animation_started)
+	
 	
 	tower_placed()
 	
 	set_tower_stats()
+	_upgrade_radius(detection_radius)
 	
 func _process(delta: float) -> void:
 	if attack_timer_running:
@@ -83,6 +87,7 @@ func set_tower_stats():
 		_:
 			print("null case tower type")
 			return
+			
 func set_tower_aiming():
 	match aim_type:
 		aim_types.AIMING:
@@ -91,9 +96,10 @@ func set_tower_aiming():
 				
 				if attacking:
 					emit_projectile(target_to_attack)
+					
 		aim_types.AREA:
 			if attack_timer_running:
-				if not one_shot:
+				if not one_shot and not is_attack_animating:
 					animation.set("parameters/attack/request", 1)
 					one_shot = true
 			else:
@@ -106,14 +112,21 @@ func set_tower_aiming():
 		_:
 			print("null case aim")
 			return
-		
+			
+func _on_animation_started(anim_name) -> void:
+	if anim_name == "attack":
+		is_attack_animating = true
+			
+func _on_animation_finished(anim_name) -> void:
+	if anim_name == "attack":
+		is_attack_animating = false
+	
 func emit_projectile(target_to_attack : Node3D):
 	var shot_bullet: MeshInstance3D = projectile.instantiate()
 	
 	Projectile_Collector.ref.add_child(shot_bullet)
 	shot_bullet.global_position = target_to_attack.global_position
 	
-	animation.set("parameters/attack/request", 1)
 	attacking = false
 
 func _on_target_added_to_path() -> void:
@@ -162,6 +175,8 @@ func do_aiming(target_to_attack : Node3D) -> void:
 		aim_types.AIMING:
 			aiming = true
 			aiming_target_pos = target_to_attack.global_position
+		aim_types.AREA:
+			pass
 		_:
 			print("null case aiming ")
 			return
@@ -172,6 +187,9 @@ func _on_attack_target_detected(target_to_attack : Node3D) -> void:
 	
 func attack_target(target_to_attack : Node3D) -> void:
 	if not target_hit_during_interval:
+		animation.set("parameters/attack/request", 1)
+		#TODO untemporary this await with a projectile emission collision
+		await animation.animation_finished
 		target_to_attack.target_level -= 1
 		#target_to_attack.speed = 0 # Freeze
 		#Messenger.frozen_target.emit(target_to_attack)

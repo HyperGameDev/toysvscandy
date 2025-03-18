@@ -139,6 +139,9 @@ far = 414.87
 [node name="tower_1_toysoldier" parent="." instance=ExtResource("5_mo76n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 3)
 
+[node name="tower_1_toysoldier2" parent="." instance=ExtResource("5_mo76n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -25)
+
 [node name="Path" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04397, -3.95, -5.37823)
 
@@ -322,19 +325,17 @@ reparent_timer_length_divisor = 0.3
 [node name="Projctile_Collector" type="Node3D" parent="."]
 script = ExtResource("13_mo76n")
 
-[node name="tower_2_spinningtop" parent="." instance=ExtResource("14_42l1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 4)
-
-[node name="tower_2_spinningtop2" parent="." instance=ExtResource("14_42l1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -1)
-
 [node name="tower_2_spinningtop3" parent="." instance=ExtResource("14_42l1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -17)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -16.1)
+
+[node name="tower_2_spinningtop4" parent="." instance=ExtResource("14_42l1d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4, 0, 3.96238)
+
+[node name="tower_2_spinningtop5" parent="." instance=ExtResource("14_42l1d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0, 4.39743)
 
 [node name="tower_3_snowglobe" parent="." instance=ExtResource("15_2jcla")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.4, 0, -14)
 
 [node name="tower_3_snowglobe2" parent="." instance=ExtResource("15_2jcla")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 0, -24.1)
-
-[editable path="tower_1_toysoldier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 0, -24.1)

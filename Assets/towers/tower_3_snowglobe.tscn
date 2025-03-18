@@ -1,13 +1,24 @@
-[gd_scene load_steps=25 format=3 uid="uid://bhcvbk8530le5"]
+[gd_scene load_steps=28 format=3 uid="uid://bhcvbk8530le5"]
 
 [ext_resource type="PackedScene" uid="uid://bvwntpbl6cq1i" path="res://Assets/towers/tower_3_snowglobe.blend" id="1_6r33o"]
 [ext_resource type="Shader" uid="uid://bbvni87enteg7" path="res://Shaders/freeze_aura.gdshader" id="2_7wr5a"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_ckecl"]
+[ext_resource type="Shader" uid="uid://cjudevm07c2ov" path="res://Shaders/outline2.gdshader" id="3_if0uw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ei48"]
+render_priority = 1
+shader = ExtResource("3_if0uw")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 2.812
+shader_parameter/fade_start = 100.0
+shader_parameter/fade_end = 100.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wr5a"]
-albedo_color = Color(0.374139, 0.374139, 0.374139, 1)
+next_pass = SubResource("ShaderMaterial_4ei48")
+albedo_color = Color(0.509804, 0.560784, 0.560784, 1)
 metallic = 0.47
-roughness = 0.36
+metallic_specular = 1.0
+roughness = 0.41
 
 [sub_resource type="Gradient" id="Gradient_6r33o"]
 offsets = PackedFloat32Array(0, 0.641791)
@@ -26,13 +37,24 @@ seamless = true
 color_ramp = SubResource("Gradient_6r33o")
 noise = SubResource("FastNoiseLite_7wr5a")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_inykd"]
+render_priority = 0
+shader = ExtResource("3_if0uw")
+shader_parameter/outline_color = Color(0, 0.0866667, 0.26, 1)
+shader_parameter/outline_width = 2.812
+shader_parameter/fade_start = 44.946
+shader_parameter/fade_end = 18.325
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_if0uw"]
+render_priority = 1
+next_pass = SubResource("ShaderMaterial_inykd")
 transparency = 1
 cull_mode = 2
 albedo_texture = SubResource("NoiseTexture2D_ckecl")
 uv1_triplanar_sharpness = 11.3137
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckecl"]
+render_priority = 3
 next_pass = SubResource("StandardMaterial3D_if0uw")
 transparency = 1
 albedo_color = Color(0.099, 0.3245, 0.55, 0.521569)
@@ -67,11 +89,11 @@ animation = &"idle"
 fadeout_time = 0.4
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ckecl"]
-graph_offset = Vector2(-605.636, -2)
+graph_offset = Vector2(-546.448, -15.4215)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ckecl")
 nodes/Animation/position = Vector2(-300, 40)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_if0uw")
-"nodes/Animation 2/position" = Vector2(-215.2, 314.6)
+"nodes/Animation 2/position" = Vector2(-220, 320)
 nodes/attack/node = SubResource("AnimationNodeOneShot_if0uw")
 nodes/attack/position = Vector2(0, 180)
 node_connections = [&"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"attack"]
@@ -81,12 +103,64 @@ size = Vector2(11, 11)
 orientation = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_if0uw"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_7wr5a")
 shader_parameter/size = 0.0
-shader_parameter/width = 0.355
-shader_parameter/inner_color = Color(0.3312, 0.51658, 0.69, 1)
+shader_parameter/width = 0.38
+shader_parameter/inner_color = Color(0.490196, 0.639216, 0.878431, 1)
 shader_parameter/outer_color = Color(0.2145, 0.357825, 0.39, 0)
+
+[sub_resource type="Animation" id="Animation_if0uw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/outer_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.2145, 0.357825, 0.39, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/inner_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.490196, 0.639216, 0.878431, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Snowglobe:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.720257, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_7wr5a"]
 resource_name = "attack"
@@ -125,51 +199,25 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.861037, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(0.3312, 0.51658, 0.69, 1), Color(0.3312, 0.51658, 0.69, 1), Color(0.3312, 0.51658, 0.69, 0)]
+"values": [Color(0.490196, 0.639216, 0.878431, 1), Color(0.490196, 0.639216, 0.878431, 1), Color(0.3312, 0.51658, 0.69, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_if0uw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Snowglobe:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.24, 0.433333, 0.6, 0.766667, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/outer_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.2145, 0.357825, 0.39, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Freeze_Attack:surface_material_override/0:shader_parameter/inner_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.3312, 0.51658, 0.69, 1)]
+"values": [Vector3(0, 0.720257, 0), Vector3(0, 0.720257, 0), Vector3(0, 0.72, -0.185), Vector3(0, 0.72, 0.314), Vector3(0, 0.72, -0.185), Vector3(0, 0.72, 0.314), Vector3(0, 0.720257, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_ckecl"]
 resource_name = "idle"
 length = 0.001
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -204,7 +252,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0.3312, 0.51658, 0.69, 1)]
+"values": [Color(0.490196, 0.639216, 0.878431, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_if0uw"]
@@ -242,8 +290,8 @@ unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_ckecl")
 anim_player = NodePath("../AnimationPlayer")
-parameters/attack/active = false
-parameters/attack/internal_active = false
+parameters/attack/active = true
+parameters/attack/internal_active = true
 parameters/attack/request = 0
 
 [node name="Freeze_Attack" type="MeshInstance3D" parent="." index="4"]

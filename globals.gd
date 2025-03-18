@@ -1,8 +1,8 @@
 extends Node
-var debug: bool = true
+var debug: bool = false
 var wave_number: int = 0
 
-var targets_on_path: Array = []
+var targets_on_path: Variant = []
 
 var wave_data = {
 	wave_0 = [0, 0, 0, 0, 0, 0],
@@ -71,7 +71,7 @@ func _on_start_next_wave():
 	wave_number += 1
 	
 func _on_target_added_to_path() -> void:
-	targets_on_path = Path.ref.get_children() 
+	targets_on_path = Path.ref.get_children()
 
 func add_debug_wave_data():
 	wave_data = {
