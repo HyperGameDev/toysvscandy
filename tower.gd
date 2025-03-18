@@ -23,7 +23,7 @@ var radius_5: float = 9.9
 var radius_6: float = 16.83
 
 var attack_timer: float
-@export var attack_timer_length: float = 1
+@export var attack_timer_length: float = 1.
 var attack_timer_running: bool = false
 
 var attack_speed_1: float = 1.
@@ -34,8 +34,7 @@ var attack_speed_4: float = .1
 var aiming: bool = false
 var aiming_target_pos: Vector3
 
-var targets_on_path: Variant = []
-var target_positions: Array[Vector2] = []
+var targets_on_path: Array  = []
 var targets_pos_on_path: Vector2
 var target_to_attack: PathFollow3D
 var target_hit_during_interval: bool = false
@@ -56,6 +55,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if attack_timer_running:
 		attack_timer = move_toward(attack_timer,0,delta)
+		
 	if attack_timer == 0:
 		stop_attack_timer()
 		update_targets_to_track()
@@ -80,7 +80,9 @@ func set_tower_stats():
 		tower_types.SUPER:
 			attack_timer_length = attack_speed_4
 			detection_radius = radius_5
-		
+		_:
+			print("null case tower type")
+			return
 func set_tower_aiming():
 	match aim_type:
 		aim_types.AIMING:
@@ -101,8 +103,11 @@ func set_tower_aiming():
 					tower_types.FREEZE:
 						animation.set("parameters/attack/request", 2)
 				one_shot = false
+		_:
+			print("null case aim")
+			return
 		
-func emit_projectile(target_to_attack):
+func emit_projectile(target_to_attack : Node3D):
 	var shot_bullet: MeshInstance3D = projectile.instantiate()
 	
 	Projectile_Collector.ref.add_child(shot_bullet)
@@ -127,16 +132,15 @@ func tower_placed() -> void:
 	tower_xy = Vector2(global_position.x,global_position.z)
 		
 func update_targets_to_track() -> void:
-	for target in targets_on_path:
+	for target: Node3D in targets_on_path:
 		var target_xy: Vector2 = Vector2(target.global_position.x,target.global_position.z)
-		target_positions.append(target_xy)
 		update_target_distances(target,target_xy)
 		
-func update_target_distances(target,target_xy) -> void:		
+func update_target_distances(target : Node3D,target_xy: Vector2) -> void:
 	var distance: float = tower_xy.distance_to(target_xy)
 	check_distance_from_target(target,distance)
 
-func check_distance_from_target(target,distance) -> void:
+func check_distance_from_target(target: Node3D ,distance: float) -> void:
 	if distance <= detection_radius:
 		var detected_targets: Array[PathFollow3D] = []
 		detected_targets.append(target)
@@ -153,26 +157,29 @@ func check_distance_from_target(target,distance) -> void:
 			target_to_attack.attack_target_detected.connect(_on_attack_target_detected)
 			target_to_attack.attack_target_detected.emit(target_to_attack)
 			
-func do_aiming(target_to_attack):
+func do_aiming(target_to_attack : Node3D) -> void:
 	match aim_type:
 		aim_types.AIMING:
 			aiming = true
 			aiming_target_pos = target_to_attack.global_position
+		_:
+			print("null case aiming ")
+			return
 	
 		
-func _on_attack_target_detected(target_to_attack) -> void:
+func _on_attack_target_detected(target_to_attack : Node3D) -> void:
 	attacking = true
 	
-func attack_target(target_to_attack) -> void:
+func attack_target(target_to_attack : Node3D) -> void:
 	if not target_hit_during_interval:
 		target_to_attack.target_level -= 1
 		#target_to_attack.speed = 0 # Freeze
 		#Messenger.frozen_target.emit(target_to_attack)
 		target_hit_during_interval = true
 
-func aim_at_target(target_to_attack):
-	var target_direction = (target_to_attack.global_position - global_position).normalized()
-	var target_angle = atan2(-target_direction.x, -target_direction.z)
+func aim_at_target(target_to_attack : Node3D) -> void:
+	var target_direction : Vector3 = (target_to_attack.global_position - global_position).normalized()
+	var target_angle : float = atan2(-target_direction.x, -target_direction.z)
 	rotation.y = target_angle
 	aiming = false
 	
