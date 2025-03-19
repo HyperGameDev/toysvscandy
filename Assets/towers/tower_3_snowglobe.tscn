@@ -89,9 +89,9 @@ animation = &"idle"
 fadeout_time = 0.4
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ckecl"]
-graph_offset = Vector2(-546.448, -15.4215)
+graph_offset = Vector2(-546.448, 103.138)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ckecl")
-nodes/Animation/position = Vector2(-300, 40)
+nodes/Animation/position = Vector2(-220, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_if0uw")
 "nodes/Animation 2/position" = Vector2(-220, 320)
 nodes/attack/node = SubResource("AnimationNodeOneShot_if0uw")
@@ -268,6 +268,7 @@ tower_type = 2
 aim_type = 1
 
 [node name="Snowglobe" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.720257, 0)
 lod_bias = 128.0
 surface_material_override/0 = SubResource("StandardMaterial3D_7wr5a")
 surface_material_override/1 = SubResource("StandardMaterial3D_ckecl")
@@ -290,8 +291,8 @@ unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_ckecl")
 anim_player = NodePath("../AnimationPlayer")
-parameters/attack/active = true
-parameters/attack/internal_active = true
+parameters/attack/active = false
+parameters/attack/internal_active = false
 parameters/attack/request = 0
 
 [node name="Freeze_Attack" type="MeshInstance3D" parent="." index="4"]

@@ -3,10 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://lmn6cx45wt3i" path="res://Assets/path/table_01_00.blend" id="1_mb55m"]
 [ext_resource type="Texture2D" uid="uid://fkuqc53ht4d0" path="res://Textures/table_01_00.tres" id="2_a0fx7"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8f1h"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0fx7"]
+albedo_color = Color(0.907942, 0.907942, 0.907942, 1)
 albedo_texture = ExtResource("2_a0fx7")
 
 [node name="table_01_00" instance=ExtResource("1_mb55m")]
 
 [node name="Cube" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_t8f1h")
+surface_material_override/0 = SubResource("StandardMaterial3D_a0fx7")

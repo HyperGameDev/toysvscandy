@@ -1,13 +1,21 @@
 class_name Tower extends Node3D
 
-@onready var shoot_point: Marker3D = %Shoot_Point
-@onready var visible_radius: MeshInstance3D = %Visible_Radius
-@onready var animation: AnimationTree = %AnimationTree
+#WARNING DON'T DO @ONREADYS
+var hold_target: Node3D
+var shoot_point: Marker3D
+var visible_radius: MeshInstance3D
+var animation: AnimationTree
+
+var is_held: bool = true
+var is_placed: bool = false
+
 var is_attack_animating: bool = false
 
 var one_shot: bool = false
 
 const projectile: PackedScene = preload("res://projectile.tscn")
+
+@export var mesh_only: bool = false
 
 @export var tower_type: tower_types
 enum tower_types {DART,TACK,FREEZE,BOMB,SUPER}
@@ -46,25 +54,40 @@ var attacking: bool = false
 
 
 func _ready() -> void:
-	Messenger.target_added_to_path.connect(_on_target_added_to_path)
-	animation.animation_finished.connect(_on_animation_finished)
-	animation.animation_started.connect(_on_animation_started)
-	
-	
-	tower_placed()
-	
-	set_tower_stats()
-	_upgrade_radius(detection_radius)
+	if not mesh_only:
+		Messenger.tower_spawned.emit()
+		
+		hold_target = get_tree().get_current_scene().get_node("%Hold_Target")
+		shoot_point = %Shoot_Point
+		visible_radius = %Visible_Radius
+		animation = %AnimationTree
+		
+		Messenger.tower_placed.connect(_on_tower_placed)
+		Messenger.target_added_to_path.connect(_on_target_added_to_path)
+		animation.animation_finished.connect(_on_animation_finished)
+		animation.animation_started.connect(_on_animation_started)
+		
+		set_tower_stats()
+		_upgrade_radius(detection_radius)
 	
 func _process(delta: float) -> void:
-	if attack_timer_running:
-		attack_timer = move_toward(attack_timer,0,delta)
+	if not mesh_only:
 		
-	if attack_timer == 0:
-		stop_attack_timer()
-		update_targets_to_track()
+		if is_held:
+			global_position = hold_target.global_position
+			if Input.is_action_just_released("Action"):
+				is_held = false
+				Messenger.tower_placed.emit(self)
 		
-	set_tower_aiming()
+		else:
+			if attack_timer_running:
+				attack_timer = move_toward(attack_timer,0,delta)
+				
+			if attack_timer == 0:
+				stop_attack_timer()
+				update_targets_to_track()
+				
+			set_tower_aiming()
 			
 			
 func set_tower_stats():
@@ -141,8 +164,10 @@ func stop_attack_timer() -> void:
 	aiming = false
 	attack_timer_running = false
 	
-func tower_placed() -> void:
-	tower_xy = Vector2(global_position.x,global_position.z)
+func _on_tower_placed(tower) -> void:
+	if tower == self:
+		is_placed = true
+		tower_xy = Vector2(global_position.x,global_position.z)
 		
 func update_targets_to_track() -> void:
 	for target: Node3D in targets_on_path:

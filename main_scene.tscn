@@ -1,6 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=47 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
+[ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://hold_target.gd" id="1_m35m6"]
 [ext_resource type="Gradient" uid="uid://8gk1ghe5j20s" path="res://Colors/pastels.tres" id="2_gyfs4"]
 [ext_resource type="Texture2D" uid="uid://hpx5d1cjhq3u" path="res://Ref_images/refim_01.png" id="2_qwutr"]
 [ext_resource type="Texture2D" uid="uid://df1nyqnc7pv3a" path="res://Ref_images/refimg_02.png" id="2_wr18j"]
@@ -13,7 +14,7 @@
 [ext_resource type="Script" uid="uid://dberpdrjbjji6" path="res://target_collectors.gd" id="7_66tet"]
 [ext_resource type="Theme" uid="uid://xwraynlxvb7d" path="res://Themes/ui_01.tres" id="7_nfk4m"]
 [ext_resource type="Script" uid="uid://d0l008crncmg6" path="res://projctile_collector.gd" id="13_mo76n"]
-[ext_resource type="PackedScene" uid="uid://w2ffngwoj7g6" path="res://Assets/towers/tower_2_spinningtoptscn.tscn" id="14_42l1d"]
+[ext_resource type="PackedScene" uid="uid://w2ffngwoj7g6" path="res://Assets/towers/tower_2_spinningtop.tscn" id="14_42l1d"]
 [ext_resource type="PackedScene" uid="uid://bhcvbk8530le5" path="res://Assets/towers/tower_3_snowglobe.tscn" id="15_2jcla"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c62f"]
@@ -27,6 +28,16 @@ sky_material = SubResource("ProceduralSkyMaterial_2c62f")
 background_mode = 2
 sky = SubResource("Sky_gyfs4")
 tonemap_mode = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_m35m6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m35m6"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_m35m6"]
+material = SubResource("StandardMaterial3D_m35m6")
+radius = 1.636
+height = 3.841
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_66tet"]
 gradient = ExtResource("2_gyfs4")
@@ -69,6 +80,58 @@ _data = {
 }
 point_count = 28
 
+[sub_resource type="Animation" id="Animation_m35m6"]
+resource_name = "hide_bottom_ui"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bottom_UI:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(0.574349, 1),
+"update": 0,
+"values": [Vector2(0, 635), Vector2(0, 768)]
+}
+
+[sub_resource type="Animation" id="Animation_u0ygc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bottom_UI:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 635)]
+}
+
+[sub_resource type="Animation" id="Animation_7th4q"]
+resource_name = "show_bottom_ui"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bottom_UI:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(0.535887, 1),
+"update": 0,
+"values": [Vector2(0, 768), Vector2(0, 635)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6jybn"]
+_data = {
+&"RESET": SubResource("Animation_u0ygc"),
+&"hide_bottom_ui": SubResource("Animation_m35m6"),
+&"show_bottom_ui": SubResource("Animation_7th4q")
+}
+
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nfk4m"]
 gradient = ExtResource("6_hq1ik")
 fill_from = Vector2(0.512821, 1)
@@ -77,12 +140,36 @@ fill_to = Vector2(0.525641, 0)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66tet"]
 texture = SubResource("GradientTexture2D_nfk4m")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_2jcla"]
+viewport_path = NodePath("HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1/SubViewport")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jcla"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wr18j"]
+
+[sub_resource type="Gradient" id="Gradient_2jcla"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.0621469, 0.844633, 0.878531, 0.920213, 0.973404)
+colors = PackedColorArray(1, 0.792157, 1, 1, 0.313726, 0.176471, 0.337255, 1, 0.1536, 0.1536, 0.32, 1, 0.82, 0.3936, 0.58548, 1, 0.52696, 0.4032, 0.84, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m35m6"]
+gradient = SubResource("Gradient_2jcla")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2jcla"]
+texture = SubResource("GradientTexture2D_m35m6")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_m35m6"]
+viewport_path = NodePath("HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_u0ygc"]
+viewport_path = NodePath("HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3/SubViewport")
+
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7ycvg"]
 gradient = ExtResource("6_66tet")
 fill = 2
 fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wr18j"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -92,6 +179,33 @@ environment = SubResource("Environment_d5x1h")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
+
+[node name="Target_Collector" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, -43)
+script = ExtResource("7_66tet")
+reparent_timer_length_divisor = 0.3
+
+[node name="Projctile_Collector" type="Node3D" parent="."]
+script = ExtResource("13_mo76n")
+
+[node name="Tower_Collector" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Hold_Target" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+script = ExtResource("1_m35m6")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="Hold_Target"]
+unique_name_in_owner = true
+enabled = false
+shape = SubResource("SphereShape3D_m35m6")
+target_position = Vector3(0, 0, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hold_Target"]
+mesh = SubResource("SphereMesh_m35m6")
 
 [node name="Palettes" type="CanvasLayer" parent="."]
 visible = false
@@ -127,20 +241,16 @@ scale = Vector2(0.371976, 0.377874)
 texture = ExtResource("2_wr18j")
 
 [node name="Ground" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0)
 mesh = SubResource("PlaneMesh_nfk4m")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(0.224407, 0.638954, -0.735784, -1.26642e-07, 0.755041, 0.655677, 0.974496, -0.147138, 0.169437, -27.0851, 20.3967, -2.13846)
 projection = 1
 size = 36.635
 far = 414.87
-
-[node name="tower_1_toysoldier" parent="." instance=ExtResource("5_mo76n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 3)
-
-[node name="tower_1_toysoldier2" parent="." instance=ExtResource("5_mo76n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -25)
 
 [node name="Path" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04397, -3.95, -5.37823)
@@ -165,9 +275,16 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -120.0
+offset_top = -133.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Animation_Bottom_UI" type="AnimationPlayer" parent="HUD/Bottom_UI"]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_6jybn")
+}
 
 [node name="Panel" type="Panel" parent="HUD/Bottom_UI"]
 layout_mode = 2
@@ -178,33 +295,136 @@ layout_mode = 2
 split_offset = 1235
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Bottom_UI/HSplitContainer"]
+z_index = 1
 layout_mode = 2
 theme_override_constants/separation = 65
 alignment = 1
 
-[node name="Panel" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+[node name="Button_Tower_1" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_icons/icon = SubResource("GradientTexture2D_7ycvg")
+theme_override_icons/icon = SubResource("ViewportTexture_2jcla")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
+action_mode = 0
 icon_alignment = 1
 expand_icon = true
 
-[node name="Panel2" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+[node name="tower_1_toysoldier5" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1" instance=ExtResource("5_mo76n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 117)
+mesh_only = true
+
+[node name="SubViewport" type="SubViewport" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1"]
+transparent_bg = true
+
+[node name="Camera" type="Camera3D" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1/SubViewport"]
+transform = Transform3D(0.224407, 0.638954, -0.735785, -1.26642e-07, 0.755042, 0.655677, 0.974496, -0.147138, 0.169437, -84.605, 20.397, 121.175)
+projection = 1
+size = 5.64
+far = 414.87
+
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1"]
+z_index = -1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2jcla")
+
+[node name="Button_Tower_2" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_icons/icon = SubResource("GradientTexture2D_7ycvg")
+theme_override_icons/icon = SubResource("ViewportTexture_m35m6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
+action_mode = 0
 icon_alignment = 1
 expand_icon = true
 
-[node name="Panel3" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+[node name="tower_2_spinningtop" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2" instance=ExtResource("14_42l1d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 126)
+mesh_only = true
+
+[node name="SubViewport" type="SubViewport" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2"]
+transparent_bg = true
+
+[node name="Camera" type="Camera3D" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2/SubViewport"]
+transform = Transform3D(0.224407, 0.638954, -0.735785, -1.26642e-07, 0.755042, 0.655677, 0.974496, -0.147138, 0.169437, -84.705, 20.397, 131.755)
+projection = 1
+size = 3.786
+far = 414.87
+
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2"]
+z_index = -1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2jcla")
+
+[node name="Button_Tower_3" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_icons/icon = SubResource("GradientTexture2D_7ycvg")
+theme_override_icons/icon = SubResource("ViewportTexture_u0ygc")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
+action_mode = 0
 icon_alignment = 1
 expand_icon = true
+
+[node name="tower_3_snowglobe" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3" instance=ExtResource("15_2jcla")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 137)
+mesh_only = true
+
+[node name="SubViewport" type="SubViewport" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3"]
+transparent_bg = true
+
+[node name="Camera" type="Camera3D" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3/SubViewport"]
+transform = Transform3D(0.224407, 0.638954, -0.735785, -1.26642e-07, 0.755042, 0.655677, 0.974496, -0.147138, 0.169437, -84.93, 20.397, 141.79)
+projection = 1
+size = 4.446
+far = 414.87
+
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3"]
+z_index = -1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2jcla")
 
 [node name="Panel4" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
@@ -316,26 +536,3 @@ layout_mode = 2
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-
-[node name="Target_Collector" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, -43)
-script = ExtResource("7_66tet")
-reparent_timer_length_divisor = 0.3
-
-[node name="Projctile_Collector" type="Node3D" parent="."]
-script = ExtResource("13_mo76n")
-
-[node name="tower_2_spinningtop3" parent="." instance=ExtResource("14_42l1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -16.1)
-
-[node name="tower_2_spinningtop4" parent="." instance=ExtResource("14_42l1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4, 0, 3.96238)
-
-[node name="tower_2_spinningtop5" parent="." instance=ExtResource("14_42l1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 0, 4.39743)
-
-[node name="tower_3_snowglobe" parent="." instance=ExtResource("15_2jcla")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.4, 0, -14)
-
-[node name="tower_3_snowglobe2" parent="." instance=ExtResource("15_2jcla")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 0, -24.1)
