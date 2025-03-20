@@ -6,6 +6,6 @@ signal start_next_wave
 
 signal target_added_to_path
 
-signal tower_spawned
+signal tower_spawned ##arg1: Node3D = tower self
 
-signal tower_placed #arg1: Node3D = tower name
+signal tower_placed ##arg1: Node3D = tower self

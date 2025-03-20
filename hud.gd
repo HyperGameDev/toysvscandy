@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @onready var tower_collector: Node3D = %Tower_Collector
-@onready var hold_target: Node3D = %Hold_Target
+@onready var cursor_target: Node3D = %Cursor_Target
 
 @onready var animation_bottom_ui: AnimationPlayer = %Animation_Bottom_UI
 
@@ -28,7 +28,7 @@ func _ready() -> void:
 	button_tower_2.pressed.connect(_on_tower_2_pressed)
 	button_tower_3.pressed.connect(_on_tower_3_pressed)
 	
-func _on_tower_spawned():
+func _on_tower_spawned(_tower):
 	animation_bottom_ui.play("hide_bottom_ui")
 	
 func _on_tower_placed(_tower):
@@ -39,17 +39,17 @@ func _on_button_start_wave_pressed():
 	label_wave.text = str(Globals.wave_number)
 
 func _on_tower_1_pressed():
-	if hold_target.cursor_available:
+	if cursor_target.cursor_available:
 		var tower_1_spawn: Node3D = tower_1_scene.instantiate()
 		tower_collector.add_child(tower_1_spawn)
 	
 func _on_tower_2_pressed():
-	if hold_target.cursor_available:
+	if cursor_target.cursor_available:
 		var tower_2_spawn: Node3D = tower_2_scene.instantiate()
 		tower_collector.add_child(tower_2_spawn)
 	
 func _on_tower_3_pressed():
-	if hold_target.cursor_available:
+	if cursor_target.cursor_available:
 		var tower_3_spawn: Node3D = tower_3_scene.instantiate()
 		tower_collector.add_child(tower_3_spawn)
 	

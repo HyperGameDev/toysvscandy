@@ -1,10 +1,15 @@
 class_name Tower extends Node3D
 
 #WARNING DON'T DO @ONREADYS
-var hold_target: Node3D
+var cursor_target: Node3D
 var shoot_point: Marker3D
-var visible_radius: MeshInstance3D
 var animation: AnimationTree
+var visible_radius: MeshInstance3D
+
+var radius_color_state: radius_color_states
+enum radius_color_states {VALID,INVALID}
+var radius_color_valid: Color = Color(0.7666, 0.7666, 0.7666, 0.6745)
+var radius_color_invalid: Color = Color(0.77, 0.0, 0.0, 0.675)
 
 var is_held: bool = true
 var is_placed: bool = false
@@ -55,9 +60,9 @@ var attacking: bool = false
 
 func _ready() -> void:
 	if not mesh_only:
-		Messenger.tower_spawned.emit()
+		Messenger.tower_spawned.emit(self)
 		
-		hold_target = get_tree().get_current_scene().get_node("%Hold_Target")
+		cursor_target = get_tree().get_current_scene().get_node("%Cursor_Target")
 		shoot_point = %Shoot_Point
 		visible_radius = %Visible_Radius
 		animation = %AnimationTree
@@ -72,13 +77,16 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	if not mesh_only:
-		
 		if is_held:
-			global_position = hold_target.global_position
-			if Input.is_action_just_released("Action"):
-				is_held = false
-				Messenger.tower_placed.emit(self)
-		
+			follow_cursor_pos()
+			
+			#print("Cursor target says placment is ",Cursor_Target.ref.can_place)
+			if i_am_placeable():
+				radius_color_red(false)
+				check_for_placement()
+			else: #Can't place the tower
+				radius_color_red(true)
+				pass
 		else:
 			if attack_timer_running:
 				attack_timer = move_toward(attack_timer,0,delta)
@@ -88,7 +96,31 @@ func _process(delta: float) -> void:
 				update_targets_to_track()
 				
 			set_tower_aiming()
+func i_am_placeable() -> bool:
+	var cursor_tower_currently_held: Node3D = Cursor_Target.ref.tower_currently_held
+	var cursor_can_place: bool = Cursor_Target.ref.can_place
+	
+	if cursor_can_place:
+		return cursor_tower_currently_held == self
+	else:
+		return false
 			
+func follow_cursor_pos() -> void:
+	global_position = cursor_target.global_position
+	
+func check_for_placement() -> void:
+	if Input.is_action_just_released("Action"):
+		is_held = false
+		Messenger.tower_placed.emit(self)
+	
+func radius_color_red(make_red) -> void:
+	if make_red:
+		if radius_color_state == radius_color_states.VALID:
+			radius_color_state = radius_color_states.INVALID
+			visible_radius.mesh.material.albedo_color = radius_color_invalid
+	else:
+		radius_color_state = radius_color_states.VALID
+		visible_radius.mesh.material.albedo_color = radius_color_valid
 			
 func set_tower_stats():
 	match tower_type:

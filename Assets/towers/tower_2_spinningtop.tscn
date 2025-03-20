@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://w2ffngwoj7g6"]
+[gd_scene load_steps=32 format=3 uid="uid://w2ffngwoj7g6"]
 
 [ext_resource type="PackedScene" uid="uid://ccvnnfkx3ckng" path="res://Assets/towers/tower_2_spinningtop.blend" id="1_scsal"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_kw80a"]
@@ -107,11 +107,13 @@ next_pass = SubResource("ShaderMaterial_71cfi")
 albedo_color = Color(1, 0.529412, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwutr"]
+resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.76662, 0.76662, 0.766619, 0.67451)
 disable_receive_shadows = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_5nkns"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_qwutr")
 radius = 0.001
 height = 0.001
@@ -192,6 +194,9 @@ _data = {
 &"idle": SubResource("Animation_yqg5y")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_syw3k"]
+radius = 2.562
+
 [node name="tower_2_spinningtop" instance=ExtResource("1_scsal")]
 script = ExtResource("2_kw80a")
 tower_type = 1
@@ -212,7 +217,6 @@ surface_material_override/7 = SubResource("StandardMaterial3D_mlbhg")
 [node name="Visible_Radius" type="MeshInstance3D" parent="." index="1"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-visible = false
 mesh = SubResource("SphereMesh_5nkns")
 
 [node name="Shoot_Point" type="Marker3D" parent="." index="2"]
@@ -232,3 +236,10 @@ parameters/attack/request = 0
 libraries = {
 &"": SubResource("AnimationLibrary_u5tyf")
 }
+
+[node name="Area3D" type="Area3D" parent="." index="6"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("SphereShape3D_syw3k")

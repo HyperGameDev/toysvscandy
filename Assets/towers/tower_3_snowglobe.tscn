@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bhcvbk8530le5"]
+[gd_scene load_steps=29 format=3 uid="uid://bhcvbk8530le5"]
 
 [ext_resource type="PackedScene" uid="uid://bvwntpbl6cq1i" path="res://Assets/towers/tower_3_snowglobe.blend" id="1_6r33o"]
 [ext_resource type="Shader" uid="uid://bbvni87enteg7" path="res://Shaders/freeze_aura.gdshader" id="2_7wr5a"]
@@ -70,13 +70,15 @@ albedo_color = Color(0.31, 0.112737, 0.0527, 1)
 albedo_color = Color(1, 0.95, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hbij"]
+resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.76662, 0.76662, 0.766619, 0.67451)
 disable_receive_shadows = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_6r33o"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_3hbij")
-radius = 4.85
+radius = 0.001
 height = 0.001
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_if0uw"]
@@ -262,6 +264,9 @@ _data = {
 &"idle": SubResource("Animation_ckecl")
 }
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_if0uw"]
+radius = 1.545
+
 [node name="tower_3_snowglobe" instance=ExtResource("1_6r33o")]
 script = ExtResource("2_ckecl")
 tower_type = 2
@@ -279,7 +284,6 @@ surface_material_override/4 = SubResource("StandardMaterial3D_hp6av")
 [node name="Visible_Radius" type="MeshInstance3D" parent="." index="1"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-visible = false
 mesh = SubResource("SphereMesh_6r33o")
 
 [node name="Shoot_Point" type="Marker3D" parent="." index="2"]
@@ -305,3 +309,10 @@ surface_material_override/0 = SubResource("ShaderMaterial_if0uw")
 libraries = {
 &"": SubResource("AnimationLibrary_if0uw")
 }
+
+[node name="Area3D" type="Area3D" parent="." index="6"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("SphereShape3D_if0uw")

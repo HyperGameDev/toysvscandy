@@ -11,3 +11,6 @@ albedo_texture = ExtResource("2_a0fx7")
 
 [node name="Cube" parent="." index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_a0fx7")
+
+[node name="Cube " parent="." index="1"]
+collision_mask = 0
