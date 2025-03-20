@@ -5,6 +5,11 @@ static var ref
 @onready var tower_collector: Node3D = %Tower_Collector
 @onready var cursor_target: Node3D = %Cursor_Target
 
+@onready var tower_preview: TextureRect = %"TextureRect_Tower-Preview"
+
+var tower_last_selected: Node3D
+
+
 var menu_state: menu_states
 enum menu_states {DEFAULT,HOLDING,SELECTED}
 
@@ -58,6 +63,8 @@ func _ready() -> void:
 	Messenger.tower_selected.connect(_on_tower_selected)
 	
 	button_start_wave.pressed.connect(_on_button_start_wave_pressed)
+	
+	button_sell.pressed.connect(_on_button_sell_pressed)
 	
 	button_tower_1.pressed.connect(_on_tower_1_pressed)
 	button_tower_2.pressed.connect(_on_tower_2_pressed)
@@ -120,6 +127,8 @@ func _on_tower_selected(tower):
 			hide_side_ui()
 			update_menu_state(menu_states.DEFAULT)
 	else:  # An actual tower is selected
+		tower_last_selected = tower
+		setup_tower_ui(tower)
 		var selected_tower_on_right: bool = tower.global_position.z <= 0  # Determine if the tower is on the right side
 
 		if menu_state != menu_states.SELECTED and side_ui_hovered == false:
@@ -144,7 +153,9 @@ func _on_tower_selected(tower):
 				update_side_menu_state(side_menu_sides.LEFT)
 				animation_side_ui.play("show_side_ui_left")
 
-				
+func setup_tower_ui(tower) -> void:
+	var tower_dictionary: Dictionary = Globals.tower_data[str(tower.tower_types.keys()[tower.tower_type])]
+	tower_preview.texture.viewport_path = tower_dictionary["icon"]
 
 func hide_side_ui():
 	if side_menu_side == side_menu_sides.LEFT:
@@ -155,6 +166,11 @@ func hide_side_ui():
 func _on_button_start_wave_pressed():
 	Messenger.start_next_wave.emit()
 	label_wave.text = str(Globals.wave_number)
+	
+func _on_button_sell_pressed():
+	tower_last_selected.queue_free()
+	hide_side_ui()
+	update_menu_state(menu_states.DEFAULT)
 
 func _on_tower_1_pressed():
 	if cursor_target.cursor_available:

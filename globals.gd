@@ -58,6 +58,17 @@ var wave_data = {
 	wave_50 = [0, 0, 0, 0, 99, 100],
 }
 
+const tower_data = {
+	DART = {
+		icon = "%SubViewport_Tower_1"
+	},
+	TACK = {
+		icon = "%SubViewport_Tower_2"
+	},
+	FREEZE = {
+		icon = "%SubViewport_Tower_3"
+	}
+}
 func _ready() -> void:
 	#TODO:remove
 	print("Change wave_data to a constant and remove debug stuff!")

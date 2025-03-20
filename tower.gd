@@ -5,6 +5,7 @@ var cursor_target: Node3D
 var shoot_point: Marker3D
 var animation: AnimationTree
 var visible_radius: MeshInstance3D
+var tower_area: Area3D
 
 var radius_color_state: radius_color_states
 enum radius_color_states {VALID,INVALID}
@@ -73,6 +74,7 @@ func _ready() -> void:
 		cursor_target = get_tree().get_current_scene().get_node("%Cursor_Target")
 		shoot_point = %Shoot_Point
 		visible_radius = %Visible_Radius
+		tower_area = $Area3D
 		
 		Messenger.tower_placed.connect(_on_tower_placed)
 		Messenger.tower_hovered.connect(_on_tower_hovered)
@@ -219,9 +221,10 @@ func stop_attack_timer() -> void:
 	
 func _on_tower_placed(tower) -> void:
 	if tower == self:
+		tower_area.set_collision_layer_value(3,true)
 		visible_radius.visible = false
 		is_placed = true
-		tower_xy = Vector2(global_position.x,global_position.z)
+		tower_xy = Vector2(global_position.x,global_position.z)	
 		
 func side_ui_hover() -> bool:
 	return HUD.ref.side_ui_hovered

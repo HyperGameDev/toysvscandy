@@ -42,7 +42,7 @@ fadein_time = 0.1
 fadeout_time = 0.1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_3hbij"]
-graph_offset = Vector2(-571.017, 74.3609)
+graph_offset = Vector2(-312.883, 50.8735)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_a31ub")
 nodes/Animation/position = Vector2(-20, 160)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_tm0xo")
@@ -59,7 +59,7 @@ radius = 2.749
 script = ExtResource("2_a31ub")
 
 [node name="base_002 Remeshed Remeshed" parent="." index="0"]
-transform = Transform3D(-4.08428e-08, 0, -0.926562, 0, 0.978125, 0, 0.934375, 0, -4.05013e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.0021, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 lod_bias = 128.0
 surface_material_override/0 = SubResource("StandardMaterial3D_a31ub")
 

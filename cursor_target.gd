@@ -63,11 +63,13 @@ func _on_tower_spawned(tower) -> void:
 	cursor_state = cursor_states.HOLD
 	collision.set_collision_mask_value(1,true)
 	collision.set_collision_mask_value(2,false)
+	collision.set_collision_mask_value(3,true)
 	
 func _on_tower_placed(_tower) -> void:
 	cursor_state = cursor_states.SELECT
 	collision.set_collision_mask_value(2,true)
 	collision.set_collision_mask_value(1,false)
+	collision.set_collision_mask_value(3,false)
 
 func is_cursor_available(cursor_pos) -> bool:
 	if cursor_pos == null:
