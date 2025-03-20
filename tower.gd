@@ -72,12 +72,24 @@ func _ready() -> void:
 		
 		Messenger.tower_placed.connect(_on_tower_placed)
 		Messenger.tower_hovered.connect(_on_tower_hovered)
+		Messenger.tower_selected.connect(_on_tower_selected)
+		
 		Messenger.target_added_to_path.connect(_on_target_added_to_path)
 		animation.animation_finished.connect(_on_animation_finished)
 		animation.animation_started.connect(_on_animation_started)
 		
 		set_tower_stats()
 		_upgrade_radius(detection_radius)
+		
+func _input(event: InputEvent) -> void:
+	match interact_state:
+		interact_states.HOVERED:
+			if Input.is_action_just_pressed("Action"):
+				Messenger.tower_selected.emit(self)
+		interact_states.SELECTED:
+			pass
+		interact_states.NONE:
+			pass
 	
 func _process(delta: float) -> void:
 	if not mesh_only:
@@ -100,6 +112,7 @@ func _process(delta: float) -> void:
 				update_targets_to_track()
 				
 			set_tower_aiming()
+			
 func i_am_placeable() -> bool:
 	var cursor_tower_currently_held: Node3D = Cursor_Target.ref.tower_currently_held
 	var cursor_can_place: bool = Cursor_Target.ref.can_place
@@ -207,13 +220,22 @@ func _on_tower_placed(tower) -> void:
 		tower_xy = Vector2(global_position.x,global_position.z)
 
 func _on_tower_hovered(tower) -> void:
-	print(tower)
+	if not interact_state == interact_states.SELECTED:
+		if tower == self:
+			interact_state = interact_states.HOVERED
+			visible_radius.visible = true
+		else:
+			interact_state = interact_states.NONE
+			visible_radius.visible = false	
+		
+func _on_tower_selected(tower) -> void:
 	if tower == self:
-		interact_state = interact_states.HOVERED
+		interact_state = interact_states.SELECTED
 		visible_radius.visible = true
 	else:
 		interact_state = interact_states.NONE
 		visible_radius.visible = false
+		
 		
 func update_targets_to_track() -> void:
 	for target: Node3D in targets_on_path:

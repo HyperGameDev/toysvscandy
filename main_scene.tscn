@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=54 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -105,7 +105,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.366667),
-"transitions": PackedFloat32Array(0.574349, 1),
+"transitions": PackedFloat32Array(0.575, 1),
 "update": 0,
 "values": [Vector2(0, 635), Vector2(0, 768)]
 }
@@ -120,7 +120,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.366667),
-"transitions": PackedFloat32Array(0.535887, 1),
+"transitions": PackedFloat32Array(0.536494, 1),
 "update": 0,
 "values": [Vector2(0, 768), Vector2(0, 635)]
 }
@@ -170,6 +170,97 @@ viewport_path = NodePath("HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tow
 gradient = ExtResource("6_66tet")
 fill = 2
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_6jybn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.575),
+"update": 0,
+"values": [Vector2(1024, 69)]
+}
+
+[sub_resource type="Animation" id="Animation_84odl"]
+resource_name = "hide_side_ui"
+length = 0.2017
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.575, 1),
+"update": 0,
+"values": [Vector2(771, 69), Vector2(1024, 69)]
+}
+
+[sub_resource type="Animation" id="Animation_ak604"]
+resource_name = "show_side_ui"
+length = 0.0925
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0916667),
+"transitions": PackedFloat32Array(0.575, 1),
+"update": 0,
+"values": [Vector2(1024, 69), Vector2(771, 69)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vimvf"]
+_data = {
+&"RESET": SubResource("Animation_6jybn"),
+&"hide_side_ui": SubResource("Animation_84odl"),
+&"show_side_ui": SubResource("Animation_ak604")
+}
+
+[sub_resource type="Animation" id="Animation_vimvf"]
+resource_name = "menu_state_change"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Label_Menu-States:theme_override_colors/font_outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0.633333, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ghshe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Label_Menu-States:theme_override_colors/font_outline_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fv2he"]
+_data = {
+&"RESET": SubResource("Animation_ghshe"),
+&"menu_state_change": SubResource("Animation_vimvf")
+}
 
 [node name="Node3D" type="Node3D"]
 
@@ -452,16 +543,21 @@ theme = ExtResource("7_nfk4m")
 text = "Start Wave"
 
 [node name="Side_UI" type="MarginContainer" parent="HUD"]
-visible = false
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -253.0
 offset_top = 69.0
+offset_right = 253.0
 offset_bottom = -190.0
 grow_horizontal = 0
 grow_vertical = 2
+
+[node name="Animation_Side_UI" type="AnimationPlayer" parent="HUD/Side_UI"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_vimvf")
+}
 
 [node name="Panel" type="Panel" parent="HUD/Side_UI"]
 layout_mode = 2
@@ -536,3 +632,31 @@ layout_mode = 2
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+
+[node name="Debug" type="MarginContainer" parent="HUD"]
+visible = false
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 194.0
+offset_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Debug"]
+layout_mode = 2
+
+[node name="Label_Menu-States" type="Label" parent="HUD/Debug/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 37
+text = "Menu State:"
+
+[node name="Animation_Menu-States" type="AnimationPlayer" parent="HUD/Debug/HBoxContainer"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_fv2he")
+}

@@ -9,4 +9,5 @@ signal target_added_to_path
 signal tower_spawned ##arg1: Node3D = tower self
 signal tower_placed ##arg1: Node3D = tower self
 
-signal tower_hovered ##arg1: Area3D = tower area else null
+signal tower_hovered ##arg1: Node3D = tower self, else null
+signal tower_selected ##arg1: Node3D = tower self, else null

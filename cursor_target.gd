@@ -48,6 +48,9 @@ func check_for_tower_collision() -> void:
 		if tower_hovered != null:
 			Messenger.tower_hovered.emit(null)
 			tower_hovered = null
+			
+		if Input.is_action_just_pressed("Action"):
+			Messenger.tower_selected.emit(null)
 
 func check_for_path_collision() -> void:
 	if collision.is_colliding():
