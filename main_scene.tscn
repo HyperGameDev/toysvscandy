@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=62 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://d0l008crncmg6" path="res://projctile_collector.gd" id="13_mo76n"]
 [ext_resource type="PackedScene" uid="uid://w2ffngwoj7g6" path="res://Assets/towers/tower_2_spinningtop.tscn" id="14_42l1d"]
 [ext_resource type="PackedScene" uid="uid://bhcvbk8530le5" path="res://Assets/towers/tower_3_snowglobe.tscn" id="15_2jcla"]
+[ext_resource type="Theme" uid="uid://csp1g1jbl0ipm" path="res://Themes/ui_02.tres" id="17_7th4q"]
+[ext_resource type="Texture2D" uid="uid://blhkql2ocoud4" path="res://Assets/ui/upgrade_speed.png" id="18_6jybn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c62f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -261,6 +263,12 @@ _data = {
 &"show_side_ui_right": SubResource("Animation_ak604")
 }
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_84odl"]
+viewport_path = NodePath("HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ak604"]
+bg_color = Color(0.729412, 0.141176, 0.219608, 1)
+
 [sub_resource type="Animation" id="Animation_vimvf"]
 resource_name = "menu_state_change"
 length = 0.2
@@ -470,7 +478,7 @@ transparent_bg = true
 [node name="Camera" type="Camera3D" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1/SubViewport"]
 transform = Transform3D(0.224407, 0.638954, -0.735785, -1.26642e-07, 0.755042, 0.655677, 0.974496, -0.147138, 0.169437, -84.605, 20.397, 121.175)
 projection = 1
-size = 5.64
+size = 5.643
 far = 414.87
 
 [node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1"]
@@ -601,6 +609,7 @@ theme = ExtResource("7_nfk4m")
 text = "Start Wave"
 
 [node name="Side_UI" type="MarginContainer" parent="HUD"]
+unique_name_in_owner = true
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -620,6 +629,59 @@ libraries = {
 [node name="Panel" type="Panel" parent="HUD/Side_UI"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_66tet")
+
+[node name="Side_UI_Contents" type="MarginContainer" parent="HUD/Side_UI"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Side_UI/Side_UI_Contents"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("ViewportTexture_84odl")
+expand_mode = 4
+
+[node name="Button_Sell" type="Button" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ak604")
+text = "SELL"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button_Upgrade_Left" type="Button" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_7th4q")
+theme_override_icons/icon = ExtResource("18_6jybn")
+text = "FASTER"
+clip_text = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Button_Upgrade_Right" type="Button" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("17_7th4q")
+theme_override_icons/icon = ExtResource("18_6jybn")
+text = "FASTER"
+clip_text = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 
 [node name="Top_UI" type="MarginContainer" parent="HUD"]
 anchors_preset = 10
@@ -692,6 +754,7 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="Debug" type="MarginContainer" parent="HUD"]
+visible = false
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0

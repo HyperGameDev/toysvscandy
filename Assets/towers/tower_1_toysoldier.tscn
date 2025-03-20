@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ct1k05v5lr35q"]
+[gd_scene load_steps=13 format=3 uid="uid://ct1k05v5lr35q"]
 
 [ext_resource type="PackedScene" uid="uid://dtpwvoj8qwfm0" path="res://Assets/towers/tower_1_toysoldier.blend" id="1_l3icw"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_a31ub"]
@@ -31,61 +31,6 @@ material = SubResource("StandardMaterial3D_3hbij")
 radius = 0.001
 height = 0.001
 
-[sub_resource type="Animation" id="Animation_3hbij"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("base_002 Remeshed Remeshed:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.43, 0.43, 0.43)]
-}
-
-[sub_resource type="Animation" id="Animation_rflfq"]
-resource_name = "attack"
-length = 0.325
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("base_002 Remeshed Remeshed:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.225, 0.325),
-"transitions": PackedFloat32Array(3.03143, 3.13833, 2.14355, 1),
-"update": 0,
-"values": [Vector3(0.43, 0.43, 0.43), Vector3(0.24, 0.365, 0.215), Vector3(0.625, 0.455, 0.54), Vector3(0.43, 0.43, 0.43)]
-}
-
-[sub_resource type="Animation" id="Animation_a31ub"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("base_002 Remeshed Remeshed:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.466667),
-"transitions": PackedFloat32Array(0.732043, 1.7411),
-"update": 0,
-"values": [Vector3(0.43, 0.43, 0.43), Vector3(0.43, 0.45, 0.43)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rflfq"]
-_data = {
-&"RESET": SubResource("Animation_3hbij"),
-&"attack": SubResource("Animation_rflfq"),
-&"idle": SubResource("Animation_a31ub")
-}
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tm0xo"]
 animation = &"attack"
 
@@ -114,7 +59,7 @@ radius = 2.749
 script = ExtResource("2_a31ub")
 
 [node name="base_002 Remeshed Remeshed" parent="." index="0"]
-transform = Transform3D(-1.87959e-08, 0, -0.43, 0, 0.43, 0, 0.43, 0, -1.87959e-08, 0, 0, 0)
+transform = Transform3D(-4.08428e-08, 0, -0.926562, 0, 0.978125, 0, 0.934375, 0, -4.05013e-08, 0, 0, 0)
 lod_bias = 128.0
 surface_material_override/0 = SubResource("StandardMaterial3D_a31ub")
 
@@ -127,12 +72,7 @@ mesh = SubResource("SphereMesh_l3icw")
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 8.2, 0.200001)
 
-[node name="AnimationPlayer_old" type="AnimationPlayer" parent="." index="3"]
-libraries = {
-&"": SubResource("AnimationLibrary_rflfq")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
 unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_3hbij")
@@ -141,7 +81,7 @@ parameters/attack/active = false
 parameters/attack/internal_active = false
 parameters/attack/request = 0
 
-[node name="Area3D" type="Area3D" parent="." index="6"]
+[node name="Area3D" type="Area3D" parent="." index="5"]
 collision_layer = 2
 collision_mask = 0
 

@@ -62,13 +62,17 @@ var attacking: bool = false
 
 
 func _ready() -> void:
-	if not mesh_only:
+	animation = %AnimationTree
+	
+	if mesh_only:
+		animation.active = false
+		
+	else: #is an actual tower
 		Messenger.tower_spawned.emit(self)
 		
 		cursor_target = get_tree().get_current_scene().get_node("%Cursor_Target")
 		shoot_point = %Shoot_Point
 		visible_radius = %Visible_Radius
-		animation = %AnimationTree
 		
 		Messenger.tower_placed.connect(_on_tower_placed)
 		Messenger.tower_hovered.connect(_on_tower_hovered)
@@ -218,9 +222,12 @@ func _on_tower_placed(tower) -> void:
 		visible_radius.visible = false
 		is_placed = true
 		tower_xy = Vector2(global_position.x,global_position.z)
+		
+func side_ui_hover() -> bool:
+	return HUD.ref.side_ui_hovered
 
 func _on_tower_hovered(tower) -> void:
-	if not interact_state == interact_states.SELECTED:
+	if not interact_state == interact_states.SELECTED and side_ui_hover() == false:
 		if tower == self:
 			interact_state = interact_states.HOVERED
 			visible_radius.visible = true
@@ -229,12 +236,13 @@ func _on_tower_hovered(tower) -> void:
 			visible_radius.visible = false	
 		
 func _on_tower_selected(tower) -> void:
-	if tower == self:
-		interact_state = interact_states.SELECTED
-		visible_radius.visible = true
-	else:
-		interact_state = interact_states.NONE
-		visible_radius.visible = false
+	if side_ui_hover() == false:
+		if tower == self:
+			interact_state = interact_states.SELECTED
+			visible_radius.visible = true
+		else:
+			interact_state = interact_states.NONE
+			visible_radius.visible = false
 		
 		
 func update_targets_to_track() -> void:
