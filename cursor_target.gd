@@ -8,6 +8,9 @@ enum cursor_states {SELECT,HOLD}
 var can_place: bool = true
 var tower_currently_held: Node3D
 
+var tower_hovered: Node3D
+var emit_hover: bool = false
+
 @onready var ground: MeshInstance3D = %Ground
 @onready var camera: Camera3D = %Camera3D
 
@@ -37,7 +40,14 @@ func _process(delta: float) -> void:
 			print("cursor state null")
 			
 func check_for_tower_collision() -> void:
-	pass
+	if collision.is_colliding():
+		tower_hovered = collision.get_collider(0).get_parent()
+		
+		Messenger.tower_hovered.emit(tower_hovered)
+	else: #not colliding
+		if tower_hovered != null:
+			Messenger.tower_hovered.emit(null)
+			tower_hovered = null
 
 func check_for_path_collision() -> void:
 	if collision.is_colliding():

@@ -14,6 +14,9 @@ var radius_color_invalid: Color = Color(0.77, 0.0, 0.0, 0.675)
 var is_held: bool = true
 var is_placed: bool = false
 
+var interact_state: interact_states
+enum interact_states {NONE,HOVERED,SELECTED}
+
 var is_attack_animating: bool = false
 
 var one_shot: bool = false
@@ -68,6 +71,7 @@ func _ready() -> void:
 		animation = %AnimationTree
 		
 		Messenger.tower_placed.connect(_on_tower_placed)
+		Messenger.tower_hovered.connect(_on_tower_hovered)
 		Messenger.target_added_to_path.connect(_on_target_added_to_path)
 		animation.animation_finished.connect(_on_animation_finished)
 		animation.animation_started.connect(_on_animation_started)
@@ -198,8 +202,18 @@ func stop_attack_timer() -> void:
 	
 func _on_tower_placed(tower) -> void:
 	if tower == self:
+		visible_radius.visible = false
 		is_placed = true
 		tower_xy = Vector2(global_position.x,global_position.z)
+
+func _on_tower_hovered(tower) -> void:
+	print(tower)
+	if tower == self:
+		interact_state = interact_states.HOVERED
+		visible_radius.visible = true
+	else:
+		interact_state = interact_states.NONE
+		visible_radius.visible = false
 		
 func update_targets_to_track() -> void:
 	for target: Node3D in targets_on_path:
