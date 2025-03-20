@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=58 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -75,10 +75,12 @@ size = Vector2(200, 200)
 
 [sub_resource type="Curve3D" id="Curve3D_hq1ik"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, -5.76, 0, 0, 0, 0, 0, 2.075, 0, 0, 12.63, 0, 0, 0, 0, 0, 0, 3.52, 0, 14.635, 0, 0, 0, 3.19, 0, 0, 9.43, 0, 14.635, 0, 0, 0, 0, 0, 0, 12.63, 0, 16.635, 0, 0, 0, 0, 0, 2.42, 12.63, 0, 20.59, 0, 0, 0, 0, 0, 0, 9.89, 0, 23.29, 0, 0, 0, -1.81, 0, 0, 6.28, 0, 23.29, 0, 0, 0, 0, 0, 0, 4.555, 0, 25.62, 0, 0, 0, 0, 0, 1.33, 4.555, 0, 29.62, 0, 0, 0, 0, 0, 0, 7.075, 0, 30.965, 0, 0, 0, 2.15, 0, 0, 9.76, 0, 30.965, 0, 0, 0, 0, 0, 0, 12.22, 0, 33.38, 0, 0, 0, 0, 0, 2.92, 12.22, 0, 40.71, 0, 0, 0, 0, 0, 0, 10.095, 0, 44.025, 0, 0, 0, -3.24, 0, 0, -13.74, 0, 44.025, 0, 0, 0, 0, 0, 0, -17.73, 0, 41.24, 0, 0, 0, 0, 0, -2.67, -17.73, 0, 37.36, 0, 0, 0, 0, 0, 0, -14.47, 0, 34.625, 0, 0, 0, 3.765, 0, 0, -8.495, 0, 34.625, 0, 0, 0, 0, 0, 0, -5.25, 0, 31.505, 0, 0, 0, 0, 0, -1.715, -5.25, 0, 20.645, 0, 0, 0, 0, 0, 0, -8.11, 0, 17.445, 0, 0, 0, -2.29, 0, 0, -10.805, 0, 17.445, 0, 0, 0, 0, 0, 0, -13.805, 0, 20.59, 0, 0, 0, 0, 0, 2.955, -13.805, 0, 23.285, 0, 0, 0, 0, 0, 0, -16.44, 0, 26.14, 0, 0, 0, 0, 0, 0, -21.005, 0, 26.14),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, -5.76, 0, 0, 0, 0, 0, 2.075, 0, 0, 12.63, 0, 0, 0, 0, 0, 0, 3.52, 0, 14.435, 0, 0, 0, 3.19, 0, 0, 9.43, 0, 14.435, 0, 0, 0, 0, 0, 0, 12.63, 0, 16.635, 0, 0, 0, 0, 0, 2.42, 12.63, 0, 20.59, 0, 0, 0, 0, 0, 0, 9.89, 0, 23.39, 0, 0, 0, -1.81, 0, 0, 6.28, 0, 23.39, 0, 0, 0, 0, 0, 0, 4.155, 0, 25.62, 0, 0, 0, 0, 0, 1.33, 4.155, 0, 29.62, 0, 0, 0, 0, 0, 0, 7.075, 0, 30.965, 0, 0, 0, 2.15, 0, 0, 9.76, 0, 30.965, 0, 0, 0, 0, 0, 0, 12.42, 0, 33.38, 0, 0, 0, 0, 0, 2.92, 12.42, 0, 40.71, 0, 0, 0, 0, 0, 0, 10.095, 0, 44.025, 0, 0, 0, -3.24, 0, 0, -11.14, 0, 44.025, 0, 0, 0, 0, 0, 0, -14.23, 0, 41.24, 0, 0, 0, 0, 0, -2.67, -14.23, 0, 37.36, 0, 0, 0, 0, 0, 0, -12.57, 0, 34.425, 0, 0, 0, 3.765, 0, 0, -8.495, 0, 34.425, 0, 0, 0, 0, 0, 0, -5.05, 0, 31.505, 0, 0, 0, 0, 0, -1.715, -5.05, 0, 22.645, 0, 0, 0, 0, 0, 0, -8.11, 0, 20.445, 0, 0, 0, -2.29, 0, 0, -10.805, 0, 20.445, 0, 0, 0, 0, 0, 0, -13.805, 0, 21.99, 0, 0, 0, 0, 0, 2.955, -13.805, 0, 23.585, 0, 0, 0, 0, 0, 0, -16.44, 0, 26.24, 0, 0, 0, 0, 0, 0, -21.005, 0, 26.24),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 28
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_m35m6"]
 
 [sub_resource type="Animation" id="Animation_u0ygc"]
 length = 0.001
@@ -186,8 +188,8 @@ tracks/0/keys = {
 "values": [Vector2(1024, 69)]
 }
 
-[sub_resource type="Animation" id="Animation_84odl"]
-resource_name = "hide_side_ui"
+[sub_resource type="Animation" id="Animation_fv2he"]
+resource_name = "hide_side_ui_left"
 length = 0.2017
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -199,11 +201,27 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(0.575, 1),
 "update": 0,
-"values": [Vector2(771, 69), Vector2(1024, 69)]
+"values": [Vector2(0, 69), Vector2(-257, 69)]
+}
+
+[sub_resource type="Animation" id="Animation_5smuj"]
+resource_name = "show_side_ui_left"
+length = 0.0925
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0916667),
+"transitions": PackedFloat32Array(0.575, 1),
+"update": 0,
+"values": [Vector2(-257, 69), Vector2(0, 69)]
 }
 
 [sub_resource type="Animation" id="Animation_ak604"]
-resource_name = "show_side_ui"
+resource_name = "show_side_ui_right"
 length = 0.0925
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -218,11 +236,29 @@ tracks/0/keys = {
 "values": [Vector2(1024, 69), Vector2(771, 69)]
 }
 
+[sub_resource type="Animation" id="Animation_84odl"]
+resource_name = "hide_side_ui_right"
+length = 0.2017
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.575, 1),
+"update": 0,
+"values": [Vector2(771, 69), Vector2(1024, 69)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vimvf"]
 _data = {
 &"RESET": SubResource("Animation_6jybn"),
-&"hide_side_ui": SubResource("Animation_84odl"),
-&"show_side_ui": SubResource("Animation_ak604")
+&"hide_side_ui_left": SubResource("Animation_fv2he"),
+&"hide_side_ui_right": SubResource("Animation_84odl"),
+&"show_side_ui_left": SubResource("Animation_5smuj"),
+&"show_side_ui_right": SubResource("Animation_ak604")
 }
 
 [sub_resource type="Animation" id="Animation_vimvf"]
@@ -261,6 +297,9 @@ _data = {
 &"RESET": SubResource("Animation_ghshe"),
 &"menu_state_change": SubResource("Animation_vimvf")
 }
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m35m6"]
+height = 100.0
 
 [node name="Node3D" type="Node3D"]
 
@@ -357,6 +396,25 @@ transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, 0, 0)
 
 [node name="table_01_00" parent="Path/Table_Mesh" instance=ExtResource("5_8mm7a")]
 transform = Transform3D(8.23, 0, 0, 0, 8, 0, 0, 0, 5.655, 0.844696, 0, -2.54291)
+
+[node name="Level_Boundary" type="Area3D" parent="Path"]
+collision_mask = 0
+
+[node name="Boundary_bottom" type="CollisionShape3D" parent="Path/Level_Boundary"]
+transform = Transform3D(-4.2642e-08, 0.975534, 0.219846, -1, -4.37114e-08, 0, 9.60978e-09, -0.219846, 0.975534, -19.5584, 5, 0.362642)
+shape = SubResource("WorldBoundaryShape3D_m35m6")
+
+[node name="Boundary_bottom2" type="CollisionShape3D" parent="Path/Level_Boundary"]
+transform = Transform3D(-4.37114e-08, 0.258819, -0.965926, -1, -1.13133e-08, 4.2222e-08, 0, 0.965926, 0.258819, 2.64205, 5, -27.9653)
+shape = SubResource("WorldBoundaryShape3D_m35m6")
+
+[node name="Boundary_bottom3" type="CollisionShape3D" parent="Path/Level_Boundary"]
+transform = Transform3D(-4.37114e-08, -0.97794, -0.208885, -1, 4.27471e-08, 9.13064e-09, 0, 0.208885, -0.97794, 23.5483, 5, -8.38223)
+shape = SubResource("WorldBoundaryShape3D_m35m6")
+
+[node name="Boundary_bottom4" type="CollisionShape3D" parent="Path/Level_Boundary"]
+transform = Transform3D(-4.37114e-08, -0.208885, 0.97794, -1, 9.13064e-09, -4.27471e-08, 0, -0.97794, -0.208885, -6.98806, 5, 24.1809)
+shape = SubResource("WorldBoundaryShape3D_m35m6")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_7ycvg")
@@ -634,7 +692,6 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="Debug" type="MarginContainer" parent="HUD"]
-visible = false
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -655,8 +712,25 @@ theme_override_constants/outline_size = 32
 theme_override_font_sizes/font_size = 37
 text = "Menu State:"
 
+[node name="VSeparator" type="VSeparator" parent="HUD/Debug/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Label_Side-Menu-States" type="Label" parent="HUD/Debug/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 37
+text = "Menu State:"
+
 [node name="Animation_Menu-States" type="AnimationPlayer" parent="HUD/Debug/HBoxContainer"]
 unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_fv2he")
 }
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+visible = false
+mesh = SubResource("CylinderMesh_m35m6")

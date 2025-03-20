@@ -33,6 +33,11 @@ Action={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="Path"
+3d_physics/layer_2="Towers"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
