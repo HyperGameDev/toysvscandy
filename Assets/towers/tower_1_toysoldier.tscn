@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ct1k05v5lr35q"]
+[gd_scene load_steps=14 format=3 uid="uid://ct1k05v5lr35q"]
 
 [ext_resource type="PackedScene" uid="uid://dtpwvoj8qwfm0" path="res://Assets/towers/tower_1_toysoldier.blend" id="1_l3icw"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_a31ub"]
@@ -37,6 +37,8 @@ animation = &"attack"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a31ub"]
 animation = &"idle"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_3hbij"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_rv1s5"]
 fadein_time = 0.1
 fadeout_time = 0.1
@@ -44,13 +46,15 @@ fadeout_time = 0.1
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_3hbij"]
 graph_offset = Vector2(-312.883, 50.8735)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_a31ub")
-nodes/Animation/position = Vector2(-20, 160)
+nodes/Animation/position = Vector2(-180, 160)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_tm0xo")
-"nodes/Animation 2/position" = Vector2(-20, 320)
+"nodes/Animation 2/position" = Vector2(-180, 320)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_3hbij")
+nodes/TimeScale/position = Vector2(400, 180)
 nodes/attack/node = SubResource("AnimationNodeOneShot_rv1s5")
 nodes/attack/position = Vector2(200, 140)
-nodes/output/position = Vector2(380, 140)
-node_connections = [&"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"attack"]
+nodes/output/position = Vector2(560, 180)
+node_connections = [&"TimeScale", 0, &"attack", &"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"TimeScale"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3hbij"]
 radius = 2.749
@@ -59,7 +63,7 @@ radius = 2.749
 script = ExtResource("2_a31ub")
 
 [node name="base_002 Remeshed Remeshed" parent="." index="0"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.0021, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.04995, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 lod_bias = 128.0
 surface_material_override/0 = SubResource("StandardMaterial3D_a31ub")
 
@@ -77,8 +81,9 @@ unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_3hbij")
 anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 0.0
 parameters/attack/active = false
-parameters/attack/internal_active = false
+parameters/attack/internal_active = 0.375
 parameters/attack/request = 0
 
 [node name="Area3D" type="Area3D" parent="." index="5"]
@@ -88,3 +93,6 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 shape = SubResource("SphereShape3D_3hbij")
+
+[node name="WeaponTimer" type="Timer" parent="." index="6"]
+unique_name_in_owner = true

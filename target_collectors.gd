@@ -14,7 +14,8 @@ var reparent_timer: float
 var reparent_timer_running: bool = false
 
 var reparent_timer_length: float
-@export var reparent_timer_length_divisor: float
+@export var density: float = 1.
+@export var density_scalar: float = .95
 
 var current_wave_array: Array[int] = []
 
@@ -37,7 +38,7 @@ func stop_reparent_timer() -> void:
 	reparent_timer_running = false
 	
 func random_timer_length() -> float:
-	reparent_timer_length = reparent_timer_length_divisor * randf_range(reparent_timer_length_min,reparent_timer_length_max)
+	reparent_timer_length = density * randf_range(reparent_timer_length_min,reparent_timer_length_max)
 	return reparent_timer_length
 
 func _process(delta: float) -> void:
@@ -56,6 +57,7 @@ func spawn_targets() -> void:
 	add_child(target_to_spawn)
 	
 func _on_start_next_wave() -> void:
+	#density *= density_scalar
 	targets_in_current_wave = 0
 	assign_target_counts()
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=70 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -13,7 +13,8 @@
 [ext_resource type="Gradient" uid="uid://dj72fx45gaaji" path="res://Colors/ui_colors/hud_01.tres" id="6_hq1ik"]
 [ext_resource type="Script" uid="uid://dberpdrjbjji6" path="res://target_collectors.gd" id="7_66tet"]
 [ext_resource type="Theme" uid="uid://xwraynlxvb7d" path="res://Themes/ui_01.tres" id="7_nfk4m"]
-[ext_resource type="PackedScene" uid="uid://dr0jhr7bjbckv" path="res://Towers/subviewport_tower_1.tscn" id="13_ak604"]
+[ext_resource type="Script" uid="uid://b8pxs1hrwkp7i" path="res://UI/tower_button.gd" id="12_5smuj"]
+[ext_resource type="PackedScene" uid="uid://cfetiahnml574" path="res://Towers/subviewport_tower_1.tscn" id="13_ak604"]
 [ext_resource type="Script" uid="uid://d0l008crncmg6" path="res://projctile_collector.gd" id="13_mo76n"]
 [ext_resource type="PackedScene" uid="uid://w2ffngwoj7g6" path="res://Assets/towers/tower_2_spinningtop.tscn" id="14_42l1d"]
 [ext_resource type="PackedScene" uid="uid://bhcvbk8530le5" path="res://Assets/towers/tower_3_snowglobe.tscn" id="15_2jcla"]
@@ -21,6 +22,8 @@
 [ext_resource type="Theme" uid="uid://csp1g1jbl0ipm" path="res://Themes/ui_02.tres" id="17_7th4q"]
 [ext_resource type="PackedScene" uid="uid://cd2q7i01bypun" path="res://Towers/subviewport_tower_3.tscn" id="17_ghshe"]
 [ext_resource type="Texture2D" uid="uid://blhkql2ocoud4" path="res://Assets/ui/upgrade_speed.png" id="18_6jybn"]
+[ext_resource type="PackedScene" uid="uid://bdtqrdgv6fb3g" path="res://Assets/towers/tower_5_supersoldier.tscn" id="19_ghshe"]
+[ext_resource type="PackedScene" uid="uid://5lsyn0xb4cjs" path="res://Towers/subviewport_tower_5.tscn" id="20_fv2he"]
 [ext_resource type="Texture2D" uid="uid://crdctfuvyvcfv" path="res://Assets/ui/upgrade_range.png" id="22_vimvf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c62f"]
@@ -148,8 +151,8 @@ fill_to = Vector2(0.525641, 0)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66tet"]
 texture = SubResource("GradientTexture2D_nfk4m")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2jcla"]
-viewport_path = NodePath("HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1/SubViewport_Tower_1")
+[sub_resource type="ViewportTexture" id="ViewportTexture_fv2he"]
+viewport_path = NodePath(".")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jcla"]
 
@@ -168,16 +171,19 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2jcla"]
 texture = SubResource("GradientTexture2D_m35m6")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_m35m6"]
-viewport_path = NodePath("HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2/SubViewport_Tower_2")
+[sub_resource type="ViewportTexture" id="ViewportTexture_5smuj"]
+viewport_path = NodePath(".")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_u0ygc"]
-viewport_path = NodePath("HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3/SubViewport_Tower_3")
+[sub_resource type="ViewportTexture" id="ViewportTexture_y5ved"]
+viewport_path = NodePath(".")
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7ycvg"]
 gradient = ExtResource("6_66tet")
 fill = 2
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ghshe"]
+viewport_path = NodePath(".")
 
 [sub_resource type="Animation" id="Animation_6jybn"]
 length = 0.001
@@ -324,7 +330,6 @@ shadow_enabled = true
 [node name="Target_Collector" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31, 0, -43)
 script = ExtResource("7_66tet")
-reparent_timer_length_divisor = 0.3
 
 [node name="Projctile_Collector" type="Node3D" parent="."]
 script = ExtResource("13_mo76n")
@@ -464,19 +469,19 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_icons/icon = SubResource("ViewportTexture_2jcla")
+theme_override_icons/icon = SubResource("ViewportTexture_fv2he")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
 action_mode = 0
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("12_5smuj")
 
-[node name="tower_1_toysoldier5" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1" instance=ExtResource("5_mo76n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 117)
+[node name="tower_1_toysoldier" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1" instance=ExtResource("5_mo76n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 118.8)
 mesh_only = true
 
 [node name="SubViewport_Tower_1" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1" instance=ExtResource("13_ak604")]
-unique_name_in_owner = true
 
 [node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1"]
 z_index = -1
@@ -500,12 +505,13 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_2jcla")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_icons/icon = SubResource("ViewportTexture_m35m6")
+theme_override_icons/icon = SubResource("ViewportTexture_5smuj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
 action_mode = 0
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("12_5smuj")
 
 [node name="tower_2_spinningtop" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2" instance=ExtResource("14_42l1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 126)
@@ -536,12 +542,13 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_2jcla")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_icons/icon = SubResource("ViewportTexture_u0ygc")
+theme_override_icons/icon = SubResource("ViewportTexture_y5ved")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
 action_mode = 0
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("12_5smuj")
 
 [node name="tower_3_snowglobe" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3" instance=ExtResource("15_2jcla")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 137)
@@ -576,13 +583,42 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Panel5" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+[node name="Button_Tower_5" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_icons/icon = SubResource("GradientTexture2D_7ycvg")
+theme_override_icons/icon = SubResource("ViewportTexture_ghshe")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
+action_mode = 0
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("12_5smuj")
+
+[node name="tower_5_supersoldier" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_5" instance=ExtResource("19_ghshe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 149)
+mesh_only = true
+
+[node name="SubViewport_Tower_5" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_5" instance=ExtResource("20_fv2he")]
+unique_name_in_owner = true
+
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_5"]
+z_index = -1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2jcla")
 
 [node name="HBox_Buttons" type="HBoxContainer" parent="HUD/Bottom_UI/HSplitContainer"]
 layout_mode = 2

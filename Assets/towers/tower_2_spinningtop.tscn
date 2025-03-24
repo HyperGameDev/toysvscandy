@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://w2ffngwoj7g6"]
+[gd_scene load_steps=33 format=3 uid="uid://w2ffngwoj7g6"]
 
 [ext_resource type="PackedScene" uid="uid://ccvnnfkx3ckng" path="res://Assets/towers/tower_2_spinningtop.blend" id="1_scsal"]
 [ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_kw80a"]
@@ -124,20 +124,24 @@ animation = &"attack"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kw80a"]
 animation = &"idle"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_syw3k"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_scsal"]
 fadein_time = 0.5
 fadeout_time = 0.5
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yqg5y"]
-graph_offset = Vector2(-436.008, 125.364)
+graph_offset = Vector2(-422.008, 9.364)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_kw80a")
-nodes/Animation/position = Vector2(-100, 140)
+nodes/Animation/position = Vector2(-260, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_scsal")
-"nodes/Animation 2/position" = Vector2(-100, 320)
+"nodes/Animation 2/position" = Vector2(-260, 320)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_syw3k")
+nodes/TimeScale/position = Vector2(320, 260)
 nodes/attack/node = SubResource("AnimationNodeOneShot_scsal")
 nodes/attack/position = Vector2(120, 260)
-nodes/output/position = Vector2(380, 140)
-node_connections = [&"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"attack"]
+nodes/output/position = Vector2(540, 220)
+node_connections = [&"TimeScale", 0, &"attack", &"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"TimeScale"]
 
 [sub_resource type="Animation" id="Animation_scsal"]
 length = 0.001
@@ -228,6 +232,7 @@ unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_yqg5y")
 anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 1.0
 parameters/attack/active = false
 parameters/attack/internal_active = false
 parameters/attack/request = 0
@@ -243,3 +248,6 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("SphereShape3D_syw3k")
+
+[node name="WeaponTimer" type="Timer" parent="." index="7"]
+unique_name_in_owner = true

@@ -6,7 +6,9 @@ var shoot_point: Marker3D
 var animation: AnimationTree
 var visible_radius: MeshInstance3D
 var tower_area: Area3D
-
+var weapon_timer: Timer
+var animation_data: AnimationPlayer
+	
 var radius_color_state: radius_color_states
 enum radius_color_states {VALID,INVALID}
 var radius_color_valid: Color = Color(0.7666, 0.7666, 0.7666, 0.6745)
@@ -40,6 +42,10 @@ var radius_4: float = 8.54
 var radius_5: float = 9.9
 var radius_6: float = 16.83
 
+@export var attack_animation_speed: float = 1.
+var attack_animation_speed_2: float = 1.5
+var attack_animation_speed_3: float = 2.75
+
 var attack_timer: float
 @export var attack_timer_length: float = 1.
 var attack_timer_running: bool = false
@@ -47,7 +53,7 @@ var attack_timer_running: bool = false
 var attack_speed_1: float = 1.
 var attack_speed_2: float = .7
 var attack_speed_3: float = .5
-var attack_speed_4: float = .1
+#var attack_speed_4: float = .1
 
 var aiming: bool = false
 var aiming_target_pos: Vector3
@@ -75,6 +81,8 @@ func _ready() -> void:
 		shoot_point = %Shoot_Point
 		visible_radius = %Visible_Radius
 		tower_area = $Area3D
+		weapon_timer = %WeaponTimer
+		animation_data = $AnimationPlayer
 		
 		Messenger.tower_placed.connect(_on_tower_placed)
 		Messenger.tower_hovered.connect(_on_tower_hovered)
@@ -83,6 +91,7 @@ func _ready() -> void:
 		Messenger.target_added_to_path.connect(_on_target_added_to_path)
 		animation.animation_finished.connect(_on_animation_finished)
 		animation.animation_started.connect(_on_animation_started)
+		weapon_timer.timeout.connect(_on_weapon_timer_timeout)
 		
 		set_tower_stats()
 		_upgrade_radius(detection_radius)
@@ -150,6 +159,7 @@ func set_tower_stats():
 		tower_types.DART:
 			attack_timer_length = attack_speed_3
 			detection_radius = radius_3
+			
 		tower_types.TACK:
 			attack_timer_length = attack_speed_2
 			detection_radius = radius_1
@@ -160,11 +170,14 @@ func set_tower_stats():
 			attack_timer_length = attack_speed_2
 			detection_radius = radius_4
 		tower_types.SUPER:
-			attack_timer_length = attack_speed_4
 			detection_radius = radius_5
+			attack_animation_speed = attack_animation_speed_3
+			attack_timer_length = animation_data.get_animation("attack").length / attack_animation_speed
 		_:
 			print("null case tower type")
 			return
+	
+	animation.set("parameters/TimeScale/scale", attack_animation_speed)
 			
 func set_tower_aiming():
 	match aim_type:
@@ -208,6 +221,9 @@ func emit_projectile(target_to_attack : Node3D):
 	attacking = false
 
 func _on_target_added_to_path() -> void:
+	fetch_targets_on_path()
+	
+func fetch_targets_on_path() -> void:
 	targets_on_path = Globals.targets_on_path
 
 func start_attack_timer() -> void:
@@ -221,6 +237,7 @@ func stop_attack_timer() -> void:
 	
 func _on_tower_placed(tower) -> void:
 	if tower == self:
+		fetch_targets_on_path()
 		tower_area.set_collision_layer_value(3,true)
 		visible_radius.visible = false
 		is_placed = true
@@ -292,12 +309,13 @@ func _on_attack_target_detected(target_to_attack : Node3D) -> void:
 func attack_target(target_to_attack : Node3D) -> void:
 	if not target_hit_during_interval:
 		animation.set("parameters/attack/request", 1)
-		#TODO untemporary this await with a projectile emission collision
-		await animation.animation_finished
-		target_to_attack.target_level -= 1
-		#target_to_attack.speed = 0 # Freeze
-		#Messenger.frozen_target.emit(target_to_attack)
-		target_hit_during_interval = true
+		weapon_timer.start(attack_timer_length)
+		
+func _on_weapon_timer_timeout() -> void:
+	target_to_attack.target_level -= 1
+	#target_to_attack.speed = 0 # Freeze
+	#Messenger.frozen_target.emit(target_to_attack)
+	target_hit_during_interval = true
 
 func aim_at_target(target_to_attack : Node3D) -> void:
 	var target_direction : Vector3 = (target_to_attack.global_position - global_position).normalized()
@@ -311,5 +329,5 @@ func aim_at_target(target_to_attack : Node3D) -> void:
 	#var distance_to_target
 
 func _upgrade_radius(radius: float) -> void:
-	visible_radius.mesh.radius = radius
+	visible_radius.mesh.radius = radius -.5
 	
