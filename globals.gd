@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = true
+var debug: bool = false
 var wave_number: int = 0
 
 var targets_on_path: Variant = []
