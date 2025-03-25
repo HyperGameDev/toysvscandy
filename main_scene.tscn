@@ -52,13 +52,13 @@ height = 3.841
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_66tet"]
 gradient = ExtResource("2_gyfs4")
 
-[sub_resource type="Gradient" id="Gradient_d5x1h"]
+[sub_resource type="Gradient" id="Gradient_y5ved"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0.0070922, 0.0585106, 0.102837, 0.152482, 0.219858, 0.342199, 0.391844, 0.445035, 0.502242, 0.556054, 0.605381, 0.641256, 0.691489, 0.730942, 0.760837, 0.796712, 0.852018, 0.88216, 0.920213, 0.973404)
 colors = PackedColorArray(0.243137, 0.168627, 0.0901961, 1, 0.317647, 0.152941, 0.227451, 1, 0.317647, 0.180392, 0.337255, 1, 0.196078, 0.309804, 0.552941, 1, 0.0313726, 0.529412, 0.831373, 1, 0.211765, 0.764706, 0.784314, 1, 0.266667, 0.54902, 0.321569, 1, 0.298039, 0.470588, 0.105882, 1, 0.45098, 0.670588, 0.160784, 1, 0.529412, 0.505882, 0.341176, 1, 0.421684, 0.232404, 0.396339, 1, 0.580392, 0.247059, 0.560784, 1, 0.635294, 0.235294, 0.509804, 1, 0.675087, 0.27845, 0.377538, 1, 0.59, 0.1062, 0.138453, 1, 0.733333, 0.145098, 0.223529, 1, 0.882353, 0.486275, 0.243137, 1, 0.898039, 0.588235, 0.160784, 1, 0.929412, 0.8, 0.454902, 1, 0.952941, 0.941176, 0.901961, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_8mm7a"]
-gradient = SubResource("Gradient_d5x1h")
+gradient = SubResource("Gradient_y5ved")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_d5x1h"]
 noise_type = 2
@@ -478,6 +478,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 118.8)
 mesh_only = true
 
 [node name="SubViewport_Tower_1" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1" instance=ExtResource("13_ak604")]
+unique_name_in_owner = true
 
 [node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1"]
 z_index = -1

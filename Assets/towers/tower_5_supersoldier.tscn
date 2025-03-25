@@ -49,7 +49,7 @@ script = ExtResource("2_vgkiq")
 tower_type = 4
 
 [node name="base_002 Remeshed Remeshed" parent="." index="0"]
-transform = Transform3D(-4.08428e-08, 0, -0.926562, 0, 0.978125, 0, 0.934375, 0, -4.05013e-08, 0, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.00089, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 lod_bias = 128.0
 surface_material_override/0 = ExtResource("3_0srtc")
 

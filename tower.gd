@@ -241,8 +241,16 @@ func _on_tower_placed(tower) -> void:
 		tower_area.set_collision_layer_value(3,true)
 		visible_radius.visible = false
 		is_placed = true
-		tower_xy = Vector2(global_position.x,global_position.z)	
+		tower_xy = Vector2(global_position.x,global_position.z)
+			
+		if tower_type == tower_types.BOMB:
+			lockdown_launchpad()
 		
+func lockdown_launchpad() -> void:
+	%Pad.top_level = true
+	%Wing_L.top_level = true
+	%Wing_R.top_level = true
+	
 func side_ui_hover() -> bool:
 	return HUD.ref.side_ui_hovered
 

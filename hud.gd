@@ -129,7 +129,7 @@ func _on_tower_placed(_tower):
 		animation_bottom_ui.play("show_bottom_ui")
 		
 		update_menu_state(menu_states.DEFAULT)
-	
+
 func _on_tower_selected(tower):
 	if tower == null:
 		if menu_state != menu_states.DEFAULT and side_ui_hovered == false:
