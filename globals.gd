@@ -68,6 +68,9 @@ const tower_data = {
 	FREEZE = {
 		icon = "%SubViewport_Tower_3"
 	},
+	BOMB = {
+		icon = "%SubViewport_Tower_4"
+	},
 	SUPER = {
 		icon = "%SubViewport_Tower_5"
 	}

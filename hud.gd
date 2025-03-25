@@ -41,6 +41,9 @@ var side_ui_visible: bool = false
 @onready var button_tower_3: Button = %Button_Tower_3
 @onready var tower_3_scene: PackedScene = preload("res://Assets/towers/tower_3_snowglobe.tscn")
 
+@onready var button_tower_4: Button = %Button_Tower_4
+@onready var tower_4_scene: PackedScene = preload("res://Assets/towers/tower_4_toyrocket.tscn")
+
 
 @onready var button_tower_5: Button = %Button_Tower_5
 @onready var tower_5_scene: PackedScene = preload("res://Assets/towers/tower_5_supersoldier.tscn")
@@ -73,6 +76,7 @@ func _ready() -> void:
 	button_tower_1.pressed.connect(_on_tower_1_pressed)
 	button_tower_2.pressed.connect(_on_tower_2_pressed)
 	button_tower_3.pressed.connect(_on_tower_3_pressed)
+	button_tower_4.pressed.connect(_on_tower_4_pressed)
 	button_tower_5.pressed.connect(_on_tower_5_pressed)
 	
 #func _physics_process(delta: float) -> void:
@@ -191,6 +195,11 @@ func _on_tower_3_pressed():
 	if cursor_target.cursor_available:
 		var tower_3_spawn: Node3D = tower_3_scene.instantiate()
 		tower_collector.add_child(tower_3_spawn)
+		
+func _on_tower_4_pressed():
+	if cursor_target.cursor_available:
+		var tower_4_spawn: Node3D = tower_4_scene.instantiate()
+		tower_collector.add_child(tower_4_spawn)
 	
 func _on_tower_5_pressed():
 	if cursor_target.cursor_available:

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cffpr8fppyjp6"]
+
+[node name="SubViewport_Tower_4" type="SubViewport"]
+transparent_bg = true
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(0.224407, 0.638954, -0.735785, -1.26642e-07, 0.755042, 0.655677, 0.974496, -0.147138, 0.169437, -84.93, 20.427, 162.695)
+projection = 1
+size = 6.763
+far = 414.87
