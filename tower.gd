@@ -118,7 +118,7 @@ func _process(delta: float) -> void:
 			else: #Can't place the tower
 				radius_color_red(true)
 				pass
-		else:
+		else: #is a placed tower
 			if attack_timer_running:
 				attack_timer = move_toward(attack_timer,0,delta)
 				
@@ -182,27 +182,40 @@ func set_tower_stats():
 func set_tower_aiming():
 	match aim_type:
 		aim_types.AIMING:
-			if aiming:
-				aim_at_target(target_to_attack)
-				
-				if attacking:
-					emit_projectile(target_to_attack)
+			aim_tower_do_shoot()
 					
 		aim_types.AREA:
-			if attack_timer_running:
-				if not one_shot and not is_attack_animating:
-					animation.set("parameters/attack/request", 1)
-					one_shot = true
-			else:
-				match tower_type:
-					tower_types.TACK:
-						animation.set("parameters/attack/request", 3)
-					tower_types.FREEZE:
-						animation.set("parameters/attack/request", 2)
+			area_tower_do_attack()
+			
+func aim_tower_do_shoot() -> void:
+	if aiming:
+		aim_at_target(target_to_attack)
+		
+		if attacking:
+			emit_projectile(target_to_attack)
+			
+func animate_aiming_tower() -> void:
+	animation.set("parameters/attack/request", 1)
+
+func area_tower_do_attack() -> void:
+	animate_area_tower()
+	
+func animate_area_tower() -> void:
+	if attack_timer_running:
+		if not one_shot and not is_attack_animating:
+			animation.set("parameters/attack/request", 1)
+			attack_target(target_to_attack)
+			one_shot = true
+	else:
+		match tower_type:
+			tower_types.TACK:
+				animation.set("parameters/attack/request", 3)
+			tower_types.FREEZE:
+				animation.set("parameters/attack/request", 2)
 				one_shot = false
-		_:
-			print("null case aim")
-			return
+			_:
+				print("null case aim")
+				return
 			
 func _on_animation_started(anim_name) -> void:
 	if anim_name == "attack":
@@ -315,15 +328,31 @@ func _on_attack_target_detected(target_to_attack : Node3D) -> void:
 	attacking = true
 	
 func attack_target(target_to_attack : Node3D) -> void:
-	if not target_hit_during_interval:
-		animation.set("parameters/attack/request", 1)
-		weapon_timer.start(attack_timer_length)
+	weapon_timer.start(attack_timer_length)
+	print("weapon timer started")
 		
 func _on_weapon_timer_timeout() -> void:
-	target_to_attack.target_level -= 1
-	#target_to_attack.speed = 0 # Freeze
-	#Messenger.frozen_target.emit(target_to_attack)
+	print("weapon timer timedout")
+	match tower_type:
+		tower_types.DART:
+			damage_single()
+		tower_types.TACK:
+			damage_single()
+		tower_types.FREEZE:
+			damage_freeze()
+		tower_types.BOMB:
+			damage_single()
+		tower_types.SUPER:
+			damage_single()
+			
 	target_hit_during_interval = true
+
+func damage_single() -> void:
+	target_to_attack.target_level -= 1
+
+func damage_freeze() -> void:
+	target_to_attack.speed = 0 # Freeze
+	Messenger.target_frozen.emit(target_to_attack)
 
 func aim_at_target(target_to_attack : Node3D) -> void:
 	var target_direction : Vector3 = (target_to_attack.global_position - global_position).normalized()
@@ -333,7 +362,9 @@ func aim_at_target(target_to_attack : Node3D) -> void:
 	
 	
 	#change to attack when projectile "reaches" target
-	attack_target(target_to_attack)
+	if not target_hit_during_interval:
+		animate_aiming_tower()
+		attack_target(target_to_attack)
 	#var distance_to_target
 
 func _upgrade_radius(radius: float) -> void:

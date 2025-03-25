@@ -6,6 +6,8 @@ signal start_next_wave
 
 signal target_added_to_path
 
+signal target_frozen ##arg1: PathFollow3D = target frozen
+
 signal tower_spawned ##arg1: Node3D = tower self
 signal tower_placed ##arg1: Node3D = tower self
 
