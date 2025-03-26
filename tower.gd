@@ -133,6 +133,9 @@ func _process(delta: float) -> void:
 				
 				if targets_on_path.size() > 0:
 					update_targets_to_track()
+					
+					if detected_targets.size() > 0:
+						verify_targets_still_detected()
 
 			set_tower_aiming()
 			
@@ -247,6 +250,8 @@ func _on_target_added_to_path() -> void:
 func _on_target_removed_from_path() -> void:
 	fetch_targets_on_path()
 	
+	
+	
 func fetch_targets_on_path() -> void:
 	targets_on_path = Globals.targets_on_path
 
@@ -297,34 +302,41 @@ func _on_tower_selected(tower) -> void:
 			interact_state = interact_states.NONE
 			visible_radius.visible = false
 		
-		
+func verify_targets_still_detected() -> void:
+	for target in detected_targets:
+		var distance: float = calculate_distance_to_target(target)
+		if distance > detection_radius:
+			detected_targets.erase(target)
+	
+func calculate_distance_to_target(target: Node3D) -> float:
+	var target_xy: Vector2 = Vector2(target.global_position.x,target.global_position.z)
+	var distance: float = tower_xy.distance_to(target_xy)
+	return distance
+	
 func update_targets_to_track() -> void:
 	for target: Node3D in targets_on_path:
-		var target_xy: Vector2 = Vector2(target.global_position.x,target.global_position.z)
-		check_distance_from_target(target,target_xy)
+		check_distance_from_target(target)
 
-func check_distance_from_target(target: Node3D ,target_xy: Vector2) -> void:
-	var distance: float = tower_xy.distance_to(target_xy)
-	
-	if distance <= detection_radius:
-		detected_targets.append(target)
-		detected_targets_positions.append(distance)
+func check_distance_from_target(target: Node3D) -> void:	
+	if not detected_targets.has(target):
+		var distance: float = calculate_distance_to_target(target)
 		
-		var detected_target_index: int = detected_targets_positions.find(detected_targets_positions.min())
-		
-		target_to_attack = detected_targets[detected_target_index]
-		
-		start_attack_timer()
-		do_aiming(target_to_attack)
-		
-		if not target_to_attack.attack_target_detected.is_connected(_on_attack_target_detected):
-			target_to_attack.attack_target_detected.connect(_on_attack_target_detected)
-			target_to_attack.attack_target_detected.emit(target_to_attack)
+		if distance <= detection_radius:
+			detected_targets.append(target)
+			target_to_attack = target
 			
-	else:
-		if detected_targets.size() <= 0:
-			no_enemies_detected()
+			start_attack_timer()
+			do_aiming(target_to_attack)
+			
+			if not target_to_attack.attack_target_detected.is_connected(_on_attack_target_detected):
+				target_to_attack.attack_target_detected.connect(_on_attack_target_detected)
+				target_to_attack.attack_target_detected.emit(target_to_attack)
+				
+		else:
+			if detected_targets.size() <= 0:
+				no_enemies_detected()
 		
+
 func no_enemies_detected() -> void:
 	print("No enemies detected! Weapon speed timer stopped")
 	weapon_speed_timer.stop()

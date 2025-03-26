@@ -89,11 +89,11 @@ func _on_start_next_wave():
 	wave_number += 1
 	
 func _on_target_added_to_path() -> void:
-	print("targets added")
+	#print("targets added")
 	update_path_targets_array()
 	
 func _on_target_removed_from_path() -> void:
-	print("targets removed")
+	#print("targets removed")
 	update_path_targets_array()
 	
 func update_path_targets_array() -> void:
