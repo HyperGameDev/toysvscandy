@@ -1,0 +1,1 @@
+class_name Tower_Dart extends Single_Towers

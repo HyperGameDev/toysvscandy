@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://w2ffngwoj7g6"]
 
 [ext_resource type="PackedScene" uid="uid://ccvnnfkx3ckng" path="res://Assets/towers/tower_2_spinningtop.blend" id="1_scsal"]
-[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_kw80a"]
+[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://Assets/towers/scripts/tower.gd" id="2_kw80a"]
 [ext_resource type="Shader" uid="uid://cjudevm07c2ov" path="res://Shaders/outline2.gdshader" id="3_kw80a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5nkns"]

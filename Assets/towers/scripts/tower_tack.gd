@@ -1,0 +1,1 @@
+class_name Tower_Tack extends Area_Towers

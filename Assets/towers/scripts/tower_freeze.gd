@@ -1,0 +1,1 @@
+class_name Tower_Freeze extends Area_Towers

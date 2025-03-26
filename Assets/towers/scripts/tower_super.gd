@@ -1,0 +1,1 @@
+class_name Tower_Super extends Single_Towers

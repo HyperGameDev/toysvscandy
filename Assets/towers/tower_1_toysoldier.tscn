@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://ct1k05v5lr35q"]
 
 [ext_resource type="PackedScene" uid="uid://dtpwvoj8qwfm0" path="res://Assets/towers/tower_1_toysoldier.blend" id="1_l3icw"]
-[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_a31ub"]
+[ext_resource type="Script" uid="uid://b7ousvqfau3bo" path="res://Assets/towers/scripts/tower3.gd" id="2_3hbij"]
 [ext_resource type="Shader" uid="uid://cjudevm07c2ov" path="res://Shaders/outline2.gdshader" id="3_3hbij"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rflfq"]
@@ -60,7 +60,7 @@ node_connections = [&"TimeScale", 0, &"attack", &"attack", 0, &"Animation", &"at
 radius = 2.749
 
 [node name="tower_1_toysoldier" instance=ExtResource("1_l3icw")]
-script = ExtResource("2_a31ub")
+script = ExtResource("2_3hbij")
 
 [node name="base_002 Remeshed Remeshed" parent="." index="0"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.00089, 0, 1, 0, -4.37114e-08, 0, 0, 0)

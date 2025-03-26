@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bdtqrdgv6fb3g"]
 
 [ext_resource type="PackedScene" uid="uid://dtpwvoj8qwfm0" path="res://Assets/towers/tower_1_toysoldier.blend" id="1_0srtc"]
-[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_vgkiq"]
+[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://Assets/towers/scripts/tower.gd" id="2_vgkiq"]
 [ext_resource type="Material" uid="uid://b01aeyvc4acnd" path="res://Textures/camo_soldier.tres" id="3_0srtc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0srtc"]

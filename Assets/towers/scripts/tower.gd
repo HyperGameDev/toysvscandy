@@ -411,7 +411,6 @@ func aim_at_target(target_to_attack : Node3D) -> void:
 	if not target_hit_during_interval:
 		animate_aiming_tower()
 		attack_target(target_to_attack)
-	#var distance_to_target
 
 func _upgrade_radius(radius: float) -> void:
 	visible_radius.mesh.radius = radius

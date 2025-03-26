@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bvwntpbl6cq1i" path="res://Assets/towers/tower_3_snowglobe.blend" id="1_6r33o"]
 [ext_resource type="Shader" uid="uid://bbvni87enteg7" path="res://Shaders/freeze_aura.gdshader" id="2_7wr5a"]
-[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://tower.gd" id="2_ckecl"]
+[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://Assets/towers/scripts/tower.gd" id="2_ckecl"]
 [ext_resource type="Shader" uid="uid://cjudevm07c2ov" path="res://Shaders/outline2.gdshader" id="3_if0uw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ei48"]
