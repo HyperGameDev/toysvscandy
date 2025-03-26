@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = true
+var debug: bool = false
 var wave_number: int = 0
 
 var targets_on_path: Variant = []
@@ -104,11 +104,22 @@ func update_path_targets_array() -> void:
 func add_debug_wave_data():
 	wave_data = {
 		wave_0 = [0,  0,  0,  0,  0,  0],
-		wave_1 = [0, 0, 0, 6, 0, 0],
-		wave_2 = [5, 5, 0, 0, 0, 0],
-		wave_3 = [0, 0, 10, 0, 0, 0],
+		wave_1 = [0, 0, 0, 10, 0, 0],
+		wave_2 = [0, 0, 0, 10, 0, 0],
+		wave_3 = [0, 0, 0, 10, 0, 0],
 		wave_4 = [0, 0, 0, 10, 0, 0],
 		wave_5 = [0, 0, 0, 0, 10, 0],
-		wave_6 = [0, 0, 0, 0, 0, 10],
-		wave_7 = [5, 5, 5, 5, 5, 5],
+		wave_6 = [0, 0, 0, 10, 0, 0],
+		wave_7 = [0, 0, 10, 0, 10, 0],
+		wave_8 = [0, 0, 10, 0, 10, 0],
+		wave_9 = [0, 0, 10, 0, 10, 0],
+		wave_10 = [0, 0, 10, 0, 10, 0],
+		wave_11 = [0, 0, 10, 0, 10, 0],
+		wave_12 = [0, 0, 10, 0, 10, 0],
+		wave_13 = [0, 0, 10, 0, 10, 0],
+		wave_14 = [0, 0, 10, 0, 10, 0],
+		wave_15 = [0, 0, 10, 0, 10, 0],
+		wave_16 = [0, 0, 10, 0, 10, 0],
+		wave_17 = [0, 0, 10, 0, 10, 0],
+		wave_18 = [0, 0, 10, 0, 10, 0],
 	}

@@ -1,5 +1,7 @@
 class_name Tower3 extends Node3D
 
+signal attack_moment
+
 var detected_targets: Array[PathFollow3D] = []
 
 
@@ -215,7 +217,7 @@ func start_attack_timer() -> void:
 func stop_attack_timer() -> void:
 	attack_timer_running = false
 
-	Messenger.attack_moment.emit(detected_targets)
+	attack_moment.emit()
 	
 func find_nearby_targets() -> void:
 	if targets_on_path.size() > 0:
