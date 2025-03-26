@@ -28,11 +28,12 @@ func _on_attack_moment() -> void:
 			
 		if target_to_attack != null:
 			is_attacking = true
-			#print("Attacking ",target_to_attack.get_parent().name)
+			print("Attacking ", target_to_attack," at ", target_to_attack.get_parent().name)
 			do_attack(target_to_attack)
 	
 func do_attack(target) -> void:
 	aim_at_target(target)
+	animation.set("parameters/attack/request", 1)
 	target.take_single_damage()
 	#print("Attack Done! ",Engine.get_physics_frames())
 	#print("------------------")

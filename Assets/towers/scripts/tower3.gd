@@ -206,7 +206,8 @@ func fetch_targets_on_path() -> void:
 func _on_target_added_to_path() -> void:
 	fetch_targets_on_path()
 	
-func _on_target_removed_from_path() -> void:
+func _on_target_removed_from_path(target) -> void:
+	detected_targets.erase(target)
 	fetch_targets_on_path()
 
 func start_attack_timer() -> void:
@@ -233,6 +234,7 @@ func find_nearby_targets() -> void:
 				detected_targets.erase(target)
 
 func _on_target_destroyed(target) -> void:
+	print(target," removed from array!")
 	detected_targets.erase(target)
 		
 func calculate_distance_to_target(target: Node3D) -> float:

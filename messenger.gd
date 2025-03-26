@@ -5,7 +5,7 @@ extends Node
 signal start_next_wave
 
 signal target_added_to_path
-signal target_removed_from_path
+signal target_removed_from_path ##arg1: PathFollow3D = self
 
 signal target_destroyed ##arg1: PathFollow3D = self
 

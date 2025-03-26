@@ -250,7 +250,7 @@ func emit_projectile(target_to_attack : Node3D):
 func _on_target_added_to_path() -> void:
 	fetch_targets_on_path()
 	
-func _on_target_removed_from_path() -> void:
+func _on_target_removed_from_path(_target) -> void:
 	fetch_targets_on_path()
 	
 	

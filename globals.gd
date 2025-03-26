@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = false
+var debug: bool = true
 var wave_number: int = 0
 
 var targets_on_path: Variant = []
@@ -92,7 +92,7 @@ func _on_target_added_to_path() -> void:
 	#print("targets added")
 	update_path_targets_array()
 	
-func _on_target_removed_from_path() -> void:
+func _on_target_removed_from_path(_target) -> void:
 	#print("targets removed")
 	update_path_targets_array()
 	

@@ -15,14 +15,14 @@ func _ready() -> void:
 	
 	timer_frozen.timeout.connect(_on_timer_frozen_timeout)
 	
-func mark_me(distance: float) -> void:
-	marked = true
-	%Label3D.text = str(distance)
-	%Label3D.visible = true
-	
-func unmark_me() -> void:
-	%Label3D.visible = false
-	marked = false
+#func mark_me(distance: float) -> void:
+	#marked = true
+	#%Label3D.text = str(distance)
+	#%Label3D.visible = true
+	#
+#func unmark_me() -> void:
+	#%Label3D.visible = false
+	#marked = false
 
 func _process(_delta: float) -> void:
 	#super._process(_delta)
@@ -33,7 +33,7 @@ func take_single_damage() -> void:
 	target_level -= 1
 	
 	if target_level > -1:
-		update_target()
+		update_target(true)
 		
 	else:
 		reparent_to_collector()
