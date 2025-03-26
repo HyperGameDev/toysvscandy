@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = false
+var debug: bool = true
 var wave_number: int = 0
 
 var targets_on_path: Variant = []
@@ -80,6 +80,7 @@ func _ready() -> void:
 	print("Change wave_data to a constant and remove debug stuff!")
 	Messenger.start_next_wave.connect(_on_start_next_wave)
 	Messenger.target_added_to_path.connect(_on_target_added_to_path)
+	Messenger.target_removed_from_path.connect(_on_target_removed_from_path)
 	
 	if debug:
 		add_debug_wave_data()
@@ -88,12 +89,22 @@ func _on_start_next_wave():
 	wave_number += 1
 	
 func _on_target_added_to_path() -> void:
+	print("targets added")
+	update_path_targets_array()
+	
+func _on_target_removed_from_path() -> void:
+	print("targets removed")
+	update_path_targets_array()
+	
+func update_path_targets_array() -> void:
 	targets_on_path = Path.ref.get_children()
+
+	
 
 func add_debug_wave_data():
 	wave_data = {
 		wave_0 = [0,  0,  0,  0,  0,  0],
-		wave_1 = [0, 0, 0, 0, 99, 100],
+		wave_1 = [0, 0, 0, 6, 0, 0],
 		wave_2 = [0, 10, 0, 0, 0, 0],
 		wave_3 = [0, 0, 10, 0, 0, 0],
 		wave_4 = [0, 0, 10, 0, 0, 0],

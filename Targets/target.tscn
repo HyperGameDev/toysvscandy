@@ -21,3 +21,6 @@ billboard = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00714385, 0.448434, 0.00861764)
 visible = false
 mesh = SubResource("SphereMesh_wbg1h")
+
+[node name="Timer_Frozen" type="Timer" parent="."]
+unique_name_in_owner = true

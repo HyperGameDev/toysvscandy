@@ -1,7 +1,5 @@
 class_name Target extends PathFollow3D
 
-var performance: bool = false
-
 const sprite_array: Array[CompressedTexture2D] = [
 	preload("res://Assets/targets/target_1_brownie.png"),
 	preload("res://Assets/targets/target_2_donut.png"),
@@ -21,7 +19,7 @@ const speed_array: Array[float] = [
 ]
 
 @export var speed: float = 8.
-
+var frozen: bool = false
 
 @onready var sprite: Sprite3D = %Sprite3D
 
@@ -31,7 +29,8 @@ const speed_array: Array[float] = [
 		if target_level > -1:
 			sprite.texture = sprite_array[target_level]
 			speed = speed_array[target_level]
-		else: reparent_to_collector()
+		else:
+			reparent_to_collector()
 			
 		
 var dont_skip_frame: int #bool 0=false, 1=true
@@ -39,18 +38,14 @@ var dont_skip_frame: int #bool 0=false, 1=true
 func _ready() -> void:
 	dont_skip_frame = randi_range(0,1)
 
-#func _process(delta: float) -> void:
-	#if (Engine.get_process_frames() % 2) == dont_skip_frame:
-		#progress += speed * 2 * delta
-		#if progress_ratio >= 1.0:
-			#reparent(Target_Collector.ref)
-			#process_mode = PROCESS_MODE_DISABLED
-
 func _physics_process(delta: float) -> void:
 		progress += speed * delta
-		if progress_ratio >= 1.0:
-			reparent_to_collector()
 
 func reparent_to_collector():
 	reparent(Target_Collector.ref)
+	position = Vector3.ZERO
+	progress = 0.
+	Messenger.target_removed_from_path.emit()
+	
 	process_mode = PROCESS_MODE_DISABLED
+	

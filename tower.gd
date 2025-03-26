@@ -1,12 +1,15 @@
 class_name Tower extends Node3D
 
+var detected_targets: Array[PathFollow3D] = []
+var detected_targets_positions: Array[float]
+
 #WARNING DON'T DO @ONREADYS
 var cursor_target: Node3D
 var shoot_point: Marker3D
 var animation: AnimationTree
 var visible_radius: MeshInstance3D
 var tower_area: Area3D
-var weapon_timer: Timer
+var weapon_speed_timer: Timer
 var animation_data: AnimationPlayer
 	
 var radius_color_state: radius_color_states
@@ -81,7 +84,7 @@ func _ready() -> void:
 		shoot_point = %Shoot_Point
 		visible_radius = %Visible_Radius
 		tower_area = $Area3D
-		weapon_timer = %WeaponTimer
+		weapon_speed_timer = %WeaponTimer
 		animation_data = $AnimationPlayer
 		
 		Messenger.tower_placed.connect(_on_tower_placed)
@@ -89,9 +92,12 @@ func _ready() -> void:
 		Messenger.tower_selected.connect(_on_tower_selected)
 		
 		Messenger.target_added_to_path.connect(_on_target_added_to_path)
+		Messenger.target_removed_from_path.connect(_on_target_removed_from_path)
+		
+		
 		animation.animation_finished.connect(_on_animation_finished)
 		animation.animation_started.connect(_on_animation_started)
-		weapon_timer.timeout.connect(_on_weapon_timer_timeout)
+		weapon_speed_timer.timeout.connect(_on_weapon_speed_timer_timeout)
 		
 		set_tower_stats()
 		_upgrade_radius(detection_radius)
@@ -124,8 +130,10 @@ func _process(delta: float) -> void:
 				
 			if attack_timer == 0:
 				stop_attack_timer()
-				update_targets_to_track()
 				
+				if targets_on_path.size() > 0:
+					update_targets_to_track()
+
 			set_tower_aiming()
 			
 func i_am_placeable() -> bool:
@@ -236,10 +244,14 @@ func emit_projectile(target_to_attack : Node3D):
 func _on_target_added_to_path() -> void:
 	fetch_targets_on_path()
 	
+func _on_target_removed_from_path() -> void:
+	fetch_targets_on_path()
+	
 func fetch_targets_on_path() -> void:
 	targets_on_path = Globals.targets_on_path
 
 func start_attack_timer() -> void:
+	#print("attack timer started")
 	attack_timer = attack_timer_length
 	attack_timer_running = true
 	target_hit_during_interval = false
@@ -289,28 +301,33 @@ func _on_tower_selected(tower) -> void:
 func update_targets_to_track() -> void:
 	for target: Node3D in targets_on_path:
 		var target_xy: Vector2 = Vector2(target.global_position.x,target.global_position.z)
-		update_target_distances(target,target_xy)
-		
-func update_target_distances(target : Node3D,target_xy: Vector2) -> void:
-	var distance: float = tower_xy.distance_to(target_xy)
-	check_distance_from_target(target,distance)
+		check_distance_from_target(target,target_xy)
 
-func check_distance_from_target(target: Node3D ,distance: float) -> void:
+func check_distance_from_target(target: Node3D ,target_xy: Vector2) -> void:
+	var distance: float = tower_xy.distance_to(target_xy)
+	
 	if distance <= detection_radius:
-		var detected_targets: Array[PathFollow3D] = []
 		detected_targets.append(target)
-		var detected_targets_positions: Array[float]
 		detected_targets_positions.append(distance)
+		
 		var detected_target_index: int = detected_targets_positions.find(detected_targets_positions.min())
+		
 		target_to_attack = detected_targets[detected_target_index]
 		
 		start_attack_timer()
-		
 		do_aiming(target_to_attack)
 		
 		if not target_to_attack.attack_target_detected.is_connected(_on_attack_target_detected):
 			target_to_attack.attack_target_detected.connect(_on_attack_target_detected)
 			target_to_attack.attack_target_detected.emit(target_to_attack)
+			
+	else:
+		if detected_targets.size() <= 0:
+			no_enemies_detected()
+		
+func no_enemies_detected() -> void:
+	print("No enemies detected! Weapon speed timer stopped")
+	weapon_speed_timer.stop()
 			
 func do_aiming(target_to_attack : Node3D) -> void:
 	match aim_type:
@@ -328,10 +345,10 @@ func _on_attack_target_detected(target_to_attack : Node3D) -> void:
 	attacking = true
 	
 func attack_target(target_to_attack : Node3D) -> void:
-	weapon_timer.start(attack_timer_length)
-	print("weapon timer started")
+	print("weapon speed timer started")
+	weapon_speed_timer.start(attack_timer_length)
 		
-func _on_weapon_timer_timeout() -> void:
+func _on_weapon_speed_timer_timeout() -> void:
 	print("weapon timer timedout")
 	match tower_type:
 		tower_types.DART:
@@ -351,8 +368,10 @@ func damage_single() -> void:
 	target_to_attack.target_level -= 1
 
 func damage_freeze() -> void:
-	target_to_attack.speed = 0 # Freeze
-	Messenger.target_frozen.emit(target_to_attack)
+	if not target_to_attack.frozen:
+		target_to_attack.speed = 0
+		target_to_attack.frozen = true
+		Messenger.target_frozen.emit(target_to_attack)
 
 func aim_at_target(target_to_attack : Node3D) -> void:
 	var target_direction : Vector3 = (target_to_attack.global_position - global_position).normalized()
