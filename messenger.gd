@@ -9,6 +9,8 @@ signal target_removed_from_path
 
 signal attack_moment ##arg1: Array[PathFollow3D] = detected_targets
 
+signal target_destroyed ##arg1: PathFollow3D = self
+
 
 signal target_frozen ##arg1: PathFollow3D = target frozen
 

@@ -20,7 +20,6 @@ func mark_me(distance: float) -> void:
 	%Label3D.text = str(distance)
 	%Label3D.visible = true
 	
-	
 func unmark_me() -> void:
 	%Label3D.visible = false
 	marked = false
@@ -29,6 +28,17 @@ func _process(_delta: float) -> void:
 	#super._process(_delta)
 	if progress_ratio >= .99:
 		reparent_to_collector()
+		
+func take_single_damage() -> void:
+	target_level -= 1
+	
+	if target_level > -1:
+		update_target()
+		
+	else:
+		reparent_to_collector()
+		Messenger.target_destroyed.emit(self)
+	
 
 func _on_target_frozen(target) -> void:
 	if target == self:

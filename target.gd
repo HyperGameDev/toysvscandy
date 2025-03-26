@@ -24,23 +24,20 @@ var marked: bool = false
 
 @onready var sprite: Sprite3D = %Sprite3D
 
-@export_range(0,5,1) var target_level: int:
-	set(new_level):
-		target_level = new_level
-		if target_level > -1:
-			sprite.texture = sprite_array[target_level]
-			speed = speed_array[target_level]
-		else:
-			reparent_to_collector()
+@export_range(0,5,1) var target_level: int
+
 			
 		
-var dont_skip_frame: int #bool 0=false, 1=true
 		
 func _ready() -> void:
-	dont_skip_frame = randi_range(0,1)
+	update_target()
 
 func _physics_process(delta: float) -> void:
 		progress += speed * delta
+		
+func update_target() -> void:
+	sprite.texture = sprite_array[target_level]
+	speed = speed_array[target_level]
 
 func reparent_to_collector():
 	reparent(Target_Collector.ref)

@@ -75,6 +75,8 @@ func _ready() -> void:
 		
 		Messenger.target_added_to_path.connect(_on_target_added_to_path)
 		Messenger.target_removed_from_path.connect(_on_target_removed_from_path)
+		
+		Messenger.target_destroyed.connect(_on_target_destroyed)
 
 		
 		set_tower_stats()
@@ -106,8 +108,8 @@ func _process(delta: float) -> void:
 			if attack_timer_running:
 				attack_interval = move_toward(attack_interval,0,delta)
 				
-			if attack_interval == 0:
-				stop_attack_timer()
+				if attack_interval == 0:
+					stop_attack_timer()
 				
 			find_nearby_targets()				
 
@@ -120,7 +122,7 @@ func i_am_placeable() -> bool:
 		return cursor_tower_currently_held == self
 	else:
 		return false
-			
+
 func follow_cursor_pos() -> void:
 	global_position = cursor_target.global_position
 	
@@ -137,7 +139,7 @@ func radius_color_red(make_red) -> void:
 	else:
 		radius_color_state = radius_color_states.VALID
 		visible_radius.mesh.material.albedo_color = radius_color_valid
-			
+
 func set_tower_stats():
 	match tower_type:
 		tower_types.DART:
@@ -212,19 +214,24 @@ func start_attack_timer() -> void:
 
 func stop_attack_timer() -> void:
 	attack_timer_running = false
-	
+
 	Messenger.attack_moment.emit(detected_targets)
 	
-func find_nearby_targets():
+func find_nearby_targets() -> void:
 	if targets_on_path.size() > 0:
 		for target in targets_on_path:
 			var distance: float = calculate_distance_to_target(target)
 			if distance <= detection_radius:
-				detected_targets.append(target)
+				if not detected_targets.has(target):
+					detected_targets.append(target)
+				
 				if not attack_timer_running:
 					start_attack_timer()
 			else:
 				detected_targets.erase(target)
+
+func _on_target_destroyed(target) -> void:
+	detected_targets.erase(target)
 		
 func calculate_distance_to_target(target: Node3D) -> float:
 	var target_xy: Vector2 = Vector2(target.global_position.x,target.global_position.z)
