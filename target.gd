@@ -20,6 +20,7 @@ const speed_array: Array[float] = [
 
 @export var speed: float = 8.
 var frozen: bool = false
+var marked: bool = false
 
 @onready var sprite: Sprite3D = %Sprite3D
 
