@@ -234,7 +234,7 @@ func find_nearby_targets() -> void:
 				detected_targets.erase(target)
 
 func _on_target_destroyed(target) -> void:
-	print(target," removed from array!")
+	#print(target," removed from array!")
 	detected_targets.erase(target)
 		
 func calculate_distance_to_target(target: Node3D) -> float:

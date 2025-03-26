@@ -51,12 +51,11 @@ func update_target(attacked:bool) -> void:
 	if attacked:
 		show_attacked_fx()
 		
-		if target_level == 0:
-			reparent_to_collector()
-		elif target_level < 0:
+		if target_level < 0:
 			print("INVALID TARGET LEVEL ATTACKED!")
 			breakpoint
 			reparent(Debug_Collector.ref)
+
 			
 	
 	sprite.texture = sprite_array[target_level]
@@ -74,10 +73,12 @@ func show_attacked_fx() -> void:
 	var randfx: int = randi_range(0,2)
 	sprite_blastfx.texture = blastfx_array[randfx]
 	sprite_blastfx.visible = true
-	timer_blastfx.start(.3)
+	timer_blastfx.start(.1)
 	
 	
 func _on_timer_blastfx_timeout() -> void:
 	sprite_blastfx.visible = false
 	
-	
+	if target_level == -1:
+		reparent_to_collector()
+		

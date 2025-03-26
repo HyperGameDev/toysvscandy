@@ -22,7 +22,7 @@ unique_name_in_owner = true
 transform = Transform3D(-0.665, 0, 5.81361e-08, 0, 0.665, 0, -5.81361e-08, 0, -0.665, 0, 1.415, 0)
 visible = false
 billboard = 1
-render_priority = 1
+render_priority = 10
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00714385, 0.448434, 0.00861764)

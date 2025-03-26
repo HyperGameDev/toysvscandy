@@ -112,7 +112,9 @@ func reparent_target_to_path() -> void:
 	
 	
 	
-	target_to_reparent.sprite.render_priority = (targets_in_current_wave - 1) % 127 + 1
+	var sprite_priority: int = (targets_in_current_wave - 1) % 126 + 1
+	target_to_reparent.sprite.render_priority = sprite_priority
+	target_to_reparent.sprite_blastfx.render_priority = sprite_priority + 1
 	
 	#opposite numbering
 	#target_to_reparent.sprite.render_priority = 127 - ((targets_in_current_wave - 1) % 127)
