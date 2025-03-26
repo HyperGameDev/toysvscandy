@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 	timer_frozen.timeout.connect(_on_timer_frozen_timeout)
 	
-func mark_me(distance: float,radius:float) -> void:
+func mark_me(distance: float) -> void:
 	marked = true
 	%Label3D.text = str(distance)
 	%Label3D.visible = true

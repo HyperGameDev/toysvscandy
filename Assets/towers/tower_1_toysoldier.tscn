@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://ct1k05v5lr35q"]
 
 [ext_resource type="PackedScene" uid="uid://dtpwvoj8qwfm0" path="res://Assets/towers/tower_1_toysoldier.blend" id="1_l3icw"]
-[ext_resource type="Script" uid="uid://b7ousvqfau3bo" path="res://Assets/towers/scripts/tower3.gd" id="2_3hbij"]
+[ext_resource type="Script" uid="uid://18y1dclhcqh" path="res://Assets/towers/scripts/single_towers.gd" id="2_3hbij"]
 [ext_resource type="Shader" uid="uid://cjudevm07c2ov" path="res://Shaders/outline2.gdshader" id="3_3hbij"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rflfq"]

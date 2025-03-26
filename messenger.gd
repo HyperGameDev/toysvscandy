@@ -7,6 +7,9 @@ signal start_next_wave
 signal target_added_to_path
 signal target_removed_from_path
 
+signal attack_moment ##arg1: Array[PathFollow3D] = detected_targets
+
+
 signal target_frozen ##arg1: PathFollow3D = target frozen
 
 signal tower_spawned ##arg1: Node3D = tower self

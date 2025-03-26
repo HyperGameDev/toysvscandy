@@ -312,7 +312,7 @@ func verify_targets_still_detected() -> void:
 			target_to_attack.unmark_me()
 			target_to_attack = null
 		else:
-			target_to_attack.mark_me(marked_target_distance,detection_radius)
+			target_to_attack.mark_me(marked_target_distance)
 		
 	for target in detected_targets:
 		var distance: float = calculate_distance_to_target(target)

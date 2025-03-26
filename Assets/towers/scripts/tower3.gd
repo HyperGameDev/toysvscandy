@@ -2,6 +2,8 @@ class_name Tower3 extends Node3D
 
 var detected_targets: Array[PathFollow3D] = []
 
+
+
 #WARNING DON'T DO @ONREADYS
 var cursor_target: Node3D
 var animation: AnimationTree
@@ -40,7 +42,7 @@ var radius_6: float = 16.83
 var attack_animation_speed_2: float = 1.5
 var attack_animation_speed_3: float = 2.75
 
-var attack_timer: float
+var attack_interval: float
 @export var attack_timer_length: float = 1.
 var attack_timer_running: bool = false
 
@@ -71,6 +73,10 @@ func _ready() -> void:
 		Messenger.tower_hovered.connect(_on_tower_hovered)
 		Messenger.tower_selected.connect(_on_tower_selected)
 		
+		Messenger.target_added_to_path.connect(_on_target_added_to_path)
+		Messenger.target_removed_from_path.connect(_on_target_removed_from_path)
+
+		
 		set_tower_stats()
 		_upgrade_radius(detection_radius)
 		
@@ -96,7 +102,16 @@ func _process(delta: float) -> void:
 			else: #Can't place the tower
 				radius_color_red(true)
 				
-			
+		else: #is a placed tower
+			if attack_timer_running:
+				attack_interval = move_toward(attack_interval,0,delta)
+				
+			if attack_interval == 0:
+				stop_attack_timer()
+				
+			find_nearby_targets()				
+
+#region Placing
 func i_am_placeable() -> bool:
 	var cursor_tower_currently_held: Node3D = Cursor_Target.ref.tower_currently_held
 	var cursor_can_place: bool = Cursor_Target.ref.can_place
@@ -147,9 +162,6 @@ func set_tower_stats():
 			return
 	
 	animation.set("parameters/TimeScale/scale", attack_animation_speed)
-			
-func fetch_targets_on_path() -> void:
-	targets_on_path = Globals.targets_on_path
 	
 func _on_tower_placed(tower) -> void:
 	if tower == self:
@@ -182,4 +194,39 @@ func _on_tower_selected(tower) -> void:
 	
 func _upgrade_radius(radius: float) -> void:
 	visible_radius.mesh.radius = radius
+#endregion
+
+func fetch_targets_on_path() -> void:
+	targets_on_path = Globals.targets_on_path
 	
+func _on_target_added_to_path() -> void:
+	fetch_targets_on_path()
+	
+func _on_target_removed_from_path() -> void:
+	fetch_targets_on_path()
+
+func start_attack_timer() -> void:
+	#print("attack timer started")
+	attack_interval = attack_timer_length
+	attack_timer_running = true
+
+func stop_attack_timer() -> void:
+	attack_timer_running = false
+	
+	Messenger.attack_moment.emit(detected_targets)
+	
+func find_nearby_targets():
+	if targets_on_path.size() > 0:
+		for target in targets_on_path:
+			var distance: float = calculate_distance_to_target(target)
+			if distance <= detection_radius:
+				detected_targets.append(target)
+				if not attack_timer_running:
+					start_attack_timer()
+			else:
+				detected_targets.erase(target)
+		
+func calculate_distance_to_target(target: Node3D) -> float:
+	var target_xy: Vector2 = Vector2(target.global_position.x,target.global_position.z)
+	var distance: float = tower_xy.distance_to(target_xy)
+	return distance
