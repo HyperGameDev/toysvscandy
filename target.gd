@@ -121,6 +121,18 @@ func reparent_to_collector() -> void:
 	Messenger.target_removed_from_path.emit(self)
 
 	process_mode = PROCESS_MODE_DISABLED	
+	
+func neighbors_to_explode() -> Array[PathFollow3D]:
+	var neighbors_array: Array[PathFollow3D] = []
+	for neighbor in Globals.targets_on_path:
+		if calculate_neighbor_distance(neighbor.progress_ratio) < Globals.explode_range:
+			if not neighbors_array.has(neighbor):
+				neighbors_array.append(neighbor)
+	return neighbors_array
+			
+func calculate_neighbor_distance(neighbor_ratio) -> float:
+	return abs(progress_ratio - neighbor_ratio)
+	
 
 func _on_target_frozen(target) -> void:
 	if target == self:

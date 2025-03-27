@@ -10,7 +10,9 @@ var targets_on_path: Variant = []:
 		if targets_on_path.size() <= 0:
 			Messenger.path_empty.emit()
 		
-		
+
+var upgraded_explode_range: bool = false
+var explode_range: float = .05
 		 
 		
 
