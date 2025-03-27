@@ -1,8 +1,18 @@
 extends Node
-var debug: bool = false
+var debug: bool = true
 var wave_number: int = 0
 
-var targets_on_path: Variant = []
+var targets_on_path: Variant = []:
+	get: 
+		return targets_on_path
+	set(value):
+		targets_on_path = value
+		if targets_on_path.size() <= 0:
+			Messenger.path_empty.emit()
+		
+		
+		 
+		
 
 var wave_data = {
 	wave_0 = [0, 0, 0, 0, 0, 0],
@@ -103,23 +113,24 @@ func update_path_targets_array() -> void:
 
 func add_debug_wave_data():
 	wave_data = {
-		wave_0 = [0,  0,  0,  0,  0,  0],
-		wave_1 = [0, 5, 0, 0, 0, 0],
-		wave_2 = [0, 0, 5, 0, 0, 0],
-		wave_3 = [0, 5, 0, 0, 0, 0],
-		wave_4 = [0, 0, 0, 10, 0, 0],
-		wave_5 = [0, 0, 0, 0, 10, 0],
-		wave_6 = [0, 0, 0, 10, 0, 0],
-		wave_7 = [0, 0, 10, 0, 10, 0],
-		wave_8 = [0, 0, 10, 0, 10, 0],
-		wave_9 = [0, 0, 10, 0, 10, 0],
-		wave_10 = [0, 0, 10, 0, 10, 0],
-		wave_11 = [0, 0, 10, 0, 10, 0],
-		wave_12 = [0, 0, 10, 0, 10, 0],
-		wave_13 = [0, 0, 10, 0, 10, 0],
-		wave_14 = [0, 0, 10, 0, 10, 0],
-		wave_15 = [0, 0, 10, 0, 10, 0],
-		wave_16 = [0, 0, 10, 0, 10, 0],
-		wave_17 = [0, 0, 10, 0, 10, 0],
-		wave_18 = [0, 0, 10, 0, 10, 0],
+		wave_0 = [0, 0, 0, 0, 0, 0],
+		wave_1 = [0, 0, 0, 0, 1, 0],
+		wave_2 = [0, 0, 0, 0, 0, 1],
+		wave_3 = [0, 0, 0, 0, 1, 0],
+		wave_4 = [0, 0, 0, 0, 0, 1],
+		wave_5 = [0, 0, 0, 0, 1, 0],
+		wave_6 = [0, 0, 0, 0, 0, 1],
+		wave_7 = [0, 0, 0, 0, 1, 0],
+		wave_8 = [0, 0, 0, 0, 0, 1],
+		wave_9 = [0, 0, 0, 0, 1, 0],
+		wave_10 = [0, 0, 0, 0, 0, 1],
+		wave_11 = [0, 0, 0, 0, 1, 0],
+		wave_12 = [0, 0, 0, 0, 0, 1],
+		wave_13 = [0, 0, 0, 0, 1, 0],
+		wave_14 = [0, 0, 0, 0, 0, 1],
+		wave_15 = [0, 0, 0, 0, 1, 0],
+		wave_16 = [0, 0, 0, 0, 0, 1],
+		wave_17 = [0, 0, 0, 0, 1, 0],
+		wave_18 = [0, 0, 0, 0, 0, 1]
+
 	}

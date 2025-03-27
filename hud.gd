@@ -70,6 +70,7 @@ func _ready() -> void:
 	Messenger.tower_selected.connect(_on_tower_selected)
 	
 	button_start_wave.pressed.connect(_on_button_start_wave_pressed)
+	Messenger.path_empty.connect(_on_path_empty)
 	
 	button_sell.pressed.connect(_on_button_sell_pressed)
 	
@@ -172,36 +173,40 @@ func hide_side_ui():
 	else:
 		animation_side_ui.play("hide_side_ui_right")
 
-func _on_button_start_wave_pressed():
+func _on_button_start_wave_pressed() -> void:
 	Messenger.start_next_wave.emit()
 	label_wave.text = str(Globals.wave_number)
+	button_start_wave.disabled = true
 	
-func _on_button_sell_pressed():
+func _on_path_empty() -> void:
+	button_start_wave.disabled = false
+	
+func _on_button_sell_pressed() -> void:
 	tower_last_selected.queue_free()
 	hide_side_ui()
 	update_menu_state(menu_states.DEFAULT)
 
-func _on_tower_1_pressed():
+func _on_tower_1_pressed() -> void:
 	if cursor_target.cursor_available:
 		var tower_1_spawn: Node3D = tower_1_scene.instantiate()
 		tower_collector.add_child(tower_1_spawn)
 	
-func _on_tower_2_pressed():
+func _on_tower_2_pressed() -> void:
 	if cursor_target.cursor_available:
 		var tower_2_spawn: Node3D = tower_2_scene.instantiate()
 		tower_collector.add_child(tower_2_spawn)
 	
-func _on_tower_3_pressed():
+func _on_tower_3_pressed() -> void:
 	if cursor_target.cursor_available:
 		var tower_3_spawn: Node3D = tower_3_scene.instantiate()
 		tower_collector.add_child(tower_3_spawn)
 		
-func _on_tower_4_pressed():
+func _on_tower_4_pressed() -> void:
 	if cursor_target.cursor_available:
 		var tower_4_spawn: Node3D = tower_4_scene.instantiate()
 		tower_collector.add_child(tower_4_spawn)
 	
-func _on_tower_5_pressed():
+func _on_tower_5_pressed() -> void:
 	if cursor_target.cursor_available:
 		var tower_5_spawn: Node3D = tower_5_scene.instantiate()
 		tower_collector.add_child(tower_5_spawn)

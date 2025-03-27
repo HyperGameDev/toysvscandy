@@ -106,21 +106,39 @@ func reparent_target_to_path() -> void:
 	
 	if current_wave_array.size() > 0:
 		level_to_assign = current_wave_array.pop_front()
-	
+		
 	target_to_reparent.process_mode = PROCESS_MODE_INHERIT
 	target_to_reparent.target_level = level_to_assign
 	
-	
-	
 	var sprite_priority: int = (targets_in_current_wave - 1) % 126 + 1
+	
 	target_to_reparent.sprite.render_priority = sprite_priority
 	target_to_reparent.sprite_blastfx.render_priority = sprite_priority + 1
 	
 	#opposite numbering
-	#target_to_reparent.sprite.render_priority = 127 - ((targets_in_current_wave - 1) % 127)
-
+	#target_to_reparent.sprite.render_priority = 126 - ((targets_in_current_wave - 1) % 126)
 	
 	#print("Target's level: ",target_to_reparent.target_level)
 	
 	target_to_reparent.reparent(path_3d)
-		
+	
+func reparent_extra_target_to_path(level:int,progress_ratio:float,offset:float):
+	var available_targets: Array = get_children()
+	
+	var target_to_reparent: PathFollow3D = available_targets.pop_front()
+	var level_to_assign: int = level
+	
+	target_to_reparent.target_level = level_to_assign
+	
+	target_to_reparent.process_mode = PROCESS_MODE_INHERIT
+	target_to_reparent.target_level = level_to_assign
+	
+	var sprite_priority: int = 126
+	target_to_reparent.sprite.render_priority = sprite_priority
+	target_to_reparent.sprite_blastfx.render_priority = sprite_priority + 1
+	
+	target_to_reparent.reparent(path_3d)
+	target_to_reparent.progress_ratio = progress_ratio + offset
+	
+	Messenger.target_added_to_path.emit()
+	

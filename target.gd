@@ -56,25 +56,29 @@ func _physics_process(delta: float) -> void:
 	progress += speed * delta
 	
 func _on_target_added_to_path():
-	update_target(false)
+	update_target(false,false)
 
 	
 func take_single_damage() -> void:
-	target_level -= 1
-	#print(target_level," got damaged!")
-	
-	if target_level > -1:
-		#print(target_level," survived damage")
-		update_target(true)
-	elif target_level == -1:
-		update_target(true)
-		#print(target_level," would be unvisibled")
-		sprite.visible = false
+	if target_level > 3:
+		update_target(true,true)
+		
 	else:
-		print("INVALID TARGET LEVEL")
-		breakpoint
+		target_level -= 1
+		#print(target_level," got damaged!")
+		
+		if target_level > -1: # Target survived damaged
+			#print(target_level," survived damage")
+			update_target(true,false)
+		elif target_level == -1: # Target died due to damage
+			update_target(true,false)
+			#print(target_level," would be unvisibled")
+			sprite.visible = false
+		else:
+			print("INVALID TARGET LEVEL")
+			breakpoint
 
-func update_target(attacked:bool) -> void:
+func update_target(attacked:bool, above_3:bool) -> void:
 	if attacked:
 		#print(target_level," blastfx begun")
 		show_attacked_fx()
@@ -83,10 +87,17 @@ func update_target(attacked:bool) -> void:
 			print("INVALID TARGET LEVEL ATTACKED!")
 			breakpoint
 			reparent(Debug_Collector.ref)
-	
-	sprite.texture = sprite_array[target_level]
-	speed = speed_array[target_level]
-	
+		
+		if above_3:
+			target_level = 3
+			update_target(false,false)
+			
+			Target_Collector.ref.reparent_extra_target_to_path(3,progress_ratio,-.01)
+				
+	if not above_3:
+		sprite.texture = sprite_array[target_level]
+		speed = speed_array[target_level]
+
 func show_attacked_fx() -> void:
 	var randfx: int = randi_range(0,2)
 	sprite_blastfx.texture = blastfx_array[randfx]
@@ -109,8 +120,7 @@ func reparent_to_collector() -> void:
 	progress = 0.
 	Messenger.target_removed_from_path.emit(self)
 
-	process_mode = PROCESS_MODE_DISABLED
-	
+	process_mode = PROCESS_MODE_DISABLED	
 
 func _on_target_frozen(target) -> void:
 	if target == self:
