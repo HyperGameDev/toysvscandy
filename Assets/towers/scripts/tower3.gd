@@ -67,6 +67,8 @@ func _ready() -> void:
 	else: #is an actual tower
 		Messenger.tower_spawned.emit(self)
 		
+		attack_moment.connect(_on_attack_moment)
+		
 		cursor_target = get_tree().get_current_scene().get_node("%Cursor_Target")
 		visible_radius = %Visible_Radius
 		tower_area = $Area3D
@@ -166,6 +168,14 @@ func set_tower_stats():
 			return
 	
 	animation.set("parameters/TimeScale/scale", attack_animation_speed)
+	
+func _on_attack_moment() -> void:
+	pass
+	
+func do_attack(target:PathFollow3D) -> void:
+	target.take_single_damage()
+	#print("Attack Done! ",Engine.get_physics_frames())
+	#print("------------------")
 	
 func _on_tower_placed(tower) -> void:
 	if tower == self:

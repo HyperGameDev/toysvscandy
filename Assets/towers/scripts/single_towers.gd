@@ -1,11 +1,7 @@
 class_name Single_Towers extends Tower3
 
 var is_attacking: bool = false
-
-func _ready() -> void:
-	super._ready()
 	
-	attack_moment.connect(_on_attack_moment)
 	
 func _on_attack_moment() -> void:
 	#print("+++++++++++++++++++++")
@@ -37,12 +33,7 @@ func prepare_attack(target:PathFollow3D) -> void:
 	aim_at_target(target)
 	animation.set("parameters/attack/request", 1)
 	
-	do_attack(target)	
-
-func do_attack(target:PathFollow3D) -> void:
-	target.take_single_damage()
-	#print("Attack Done! ",Engine.get_physics_frames())
-	#print("------------------")
+	do_attack(target)
 	
 func aim_at_target(target_to_attack : Node3D) -> void:
 	var target_direction : Vector3 = (target_to_attack.global_position - global_position).normalized()

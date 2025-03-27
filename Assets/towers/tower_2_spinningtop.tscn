@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://w2ffngwoj7g6"]
 
 [ext_resource type="PackedScene" uid="uid://ccvnnfkx3ckng" path="res://Assets/towers/tower_2_spinningtop.blend" id="1_scsal"]
-[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://Assets/towers/scripts/tower.gd" id="2_kw80a"]
+[ext_resource type="Script" uid="uid://nm7a4m4kpptl" path="res://Assets/towers/scripts/tower_tack.gd" id="2_syw3k"]
 [ext_resource type="Shader" uid="uid://cjudevm07c2ov" path="res://Shaders/outline2.gdshader" id="3_kw80a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5nkns"]
@@ -202,7 +202,9 @@ _data = {
 radius = 2.562
 
 [node name="tower_2_spinningtop" instance=ExtResource("1_scsal")]
-script = ExtResource("2_kw80a")
+script = ExtResource("2_syw3k")
+tower_type = 1
+aim_type = 1
 
 [node name="Top" parent="." index="0"]
 transform = Transform3D(0.866025, 0.330656, 0.375056, 0, 0.750111, -0.661312, -0.5, 0.572713, 0.649615, 0, 0, 0)
