@@ -4,7 +4,8 @@ signal attack_moment
 
 var detected_targets: Array[PathFollow3D] = []
 
-
+var upgraded_range: bool = false
+var upgraded_speed: bool = false
 
 #WARNING DON'T DO @ONREADYS
 var cursor_target: Node3D
@@ -42,7 +43,7 @@ var radius_6: float = 16.83
 
 @export var attack_animation_speed: float = 1.
 var attack_animation_speed_2: float = 1.5
-var attack_animation_speed_3: float = 2.75
+var attack_animation_speed_3: float = 2.5
 
 var attack_interval: float
 @export var attack_timer_length: float = 1.

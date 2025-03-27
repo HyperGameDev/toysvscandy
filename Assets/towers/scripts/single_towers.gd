@@ -29,15 +29,20 @@ func _on_attack_moment() -> void:
 		if target_to_attack != null:
 			is_attacking = true
 			#print("Attacking ", target_to_attack," at ", target_to_attack.get_parent().name)
-			do_attack(target_to_attack)
-	
-func do_attack(target) -> void:
+			prepare_attack(target_to_attack)
+			
+			is_attacking = false
+
+func prepare_attack(target:PathFollow3D) -> void:
 	aim_at_target(target)
 	animation.set("parameters/attack/request", 1)
+	
+	do_attack(target)	
+
+func do_attack(target:PathFollow3D) -> void:
 	target.take_single_damage()
 	#print("Attack Done! ",Engine.get_physics_frames())
 	#print("------------------")
-	is_attacking = false
 	
 func aim_at_target(target_to_attack : Node3D) -> void:
 	var target_direction : Vector3 = (target_to_attack.global_position - global_position).normalized()

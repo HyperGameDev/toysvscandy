@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bdtqrdgv6fb3g"]
 
 [ext_resource type="PackedScene" uid="uid://dtpwvoj8qwfm0" path="res://Assets/towers/tower_1_toysoldier.blend" id="1_0srtc"]
-[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://Assets/towers/scripts/tower.gd" id="2_vgkiq"]
+[ext_resource type="Script" uid="uid://18y1dclhcqh" path="res://Assets/towers/scripts/single_towers.gd" id="2_0srtc"]
 [ext_resource type="Material" uid="uid://b01aeyvc4acnd" path="res://Textures/camo_soldier.tres" id="3_0srtc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0srtc"]
@@ -45,7 +45,7 @@ node_connections = [&"TimeScale", 0, &"attack", &"attack", 0, &"Animation", &"at
 radius = 2.749
 
 [node name="tower_5_supersoldier" instance=ExtResource("1_0srtc")]
-script = ExtResource("2_vgkiq")
+script = ExtResource("2_0srtc")
 tower_type = 4
 
 [node name="base_002 Remeshed Remeshed" parent="." index="0"]

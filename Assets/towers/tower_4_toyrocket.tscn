@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=3 uid="uid://b017hkmjytd2r"]
 
 [ext_resource type="PackedScene" uid="uid://ccmys7n1kr5dj" path="res://Assets/towers/tower_4_toyrocket.blend" id="1_7b58c"]
-[ext_resource type="Script" uid="uid://dlogweeik4k1b" path="res://Assets/towers/scripts/tower.gd" id="2_dsn6p"]
+[ext_resource type="Script" uid="uid://jbm1ooh05tl0" path="res://Assets/towers/scripts/tower_bomb.gd" id="2_8xdud"]
 [ext_resource type="Shader" uid="uid://cjudevm07c2ov" path="res://Shaders/outline2.gdshader" id="3_q312u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gd3mv"]
@@ -141,7 +141,7 @@ _data = {
 }
 
 [node name="tower_4_toyrocket" instance=ExtResource("1_7b58c")]
-script = ExtResource("2_dsn6p")
+script = ExtResource("2_8xdud")
 tower_type = 3
 
 [node name="Pad" parent="." index="0"]
