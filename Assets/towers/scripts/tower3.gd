@@ -148,7 +148,6 @@ func set_tower_stats():
 		tower_types.DART:
 			attack_timer_length = attack_speed_3
 			detection_radius = radius_3
-			
 		tower_types.TACK:
 			attack_timer_length = attack_speed_2
 			detection_radius = radius_1

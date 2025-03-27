@@ -458,6 +458,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_66tet")
 [node name="HSplitContainer" type="HSplitContainer" parent="HUD/Bottom_UI"]
 layout_mode = 2
 split_offset = 1235
+dragging_enabled = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Bottom_UI/HSplitContainer"]
 z_index = 1
@@ -516,7 +517,6 @@ script = ExtResource("12_5smuj")
 
 [node name="tower_2_spinningtop" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2" instance=ExtResource("14_42l1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 126)
-mesh_only = true
 
 [node name="SubViewport_Tower_2" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2" instance=ExtResource("15_vimvf")]
 unique_name_in_owner = true
@@ -553,7 +553,6 @@ script = ExtResource("12_5smuj")
 
 [node name="tower_3_snowglobe" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3" instance=ExtResource("15_2jcla")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 137)
-mesh_only = true
 
 [node name="SubViewport_Tower_3" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3" instance=ExtResource("17_ghshe")]
 unique_name_in_owner = true
@@ -753,6 +752,7 @@ grow_horizontal = 2
 layout_mode = 2
 theme_override_constants/separation = 15
 split_offset = 1225
+dragging_enabled = false
 
 [node name="HBox_Top_Left" type="HBoxContainer" parent="HUD/Top_UI/HSplit"]
 layout_mode = 2

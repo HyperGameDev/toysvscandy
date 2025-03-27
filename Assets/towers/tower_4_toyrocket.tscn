@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b017hkmjytd2r"]
+[gd_scene load_steps=29 format=3 uid="uid://b017hkmjytd2r"]
 
 [ext_resource type="PackedScene" uid="uid://ccmys7n1kr5dj" path="res://Assets/towers/tower_4_toyrocket.blend" id="1_7b58c"]
 [ext_resource type="Script" uid="uid://jbm1ooh05tl0" path="res://Assets/towers/scripts/tower_bomb.gd" id="2_8xdud"]
@@ -117,6 +117,7 @@ animation = &"idle"
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_w77r1"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_k0g4d"]
+graph_offset = Vector2(-370, 279)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_hpysq")
 nodes/Animation/position = Vector2(-160, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_q16b7")
@@ -124,18 +125,85 @@ nodes/Animation/position = Vector2(-160, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_q312u")
 nodes/TimeScale/position = Vector2(200, 100)
 nodes/attack/node = SubResource("AnimationNodeOneShot_w77r1")
-nodes/attack/position = Vector2(36.7521, 216.687)
+nodes/attack/position = Vector2(40, 140)
 nodes/output/position = Vector2(400, 100)
 node_connections = [&"TimeScale", 0, &"attack", &"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"TimeScale"]
 
 [sub_resource type="Animation" id="Animation_dvesp"]
 resource_name = "attack"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rocket:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rocket:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_gd3mv"]
 resource_name = "idle"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rocket:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8xdud"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rocket:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rocket:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ah61t"]
 _data = {
+&"RESET": SubResource("Animation_8xdud"),
 &"attack": SubResource("Animation_dvesp"),
 &"idle": SubResource("Animation_gd3mv")
 }
@@ -192,9 +260,9 @@ unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_k0g4d")
 anim_player = NodePath("../AnimationPlayer")
-parameters/TimeScale/scale = 0.0
-parameters/attack/active = true
-parameters/attack/internal_active = true
+parameters/TimeScale/scale = 1.0
+parameters/attack/active = false
+parameters/attack/internal_active = false
 parameters/attack/request = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]

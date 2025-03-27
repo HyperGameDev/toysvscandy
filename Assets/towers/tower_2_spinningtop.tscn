@@ -203,8 +203,6 @@ radius = 2.562
 
 [node name="tower_2_spinningtop" instance=ExtResource("1_scsal")]
 script = ExtResource("2_kw80a")
-tower_type = 1
-aim_type = 1
 
 [node name="Top" parent="." index="0"]
 transform = Transform3D(0.866025, 0.330656, 0.375056, 0, 0.750111, -0.661312, -0.5, 0.572713, 0.649615, 0, 0, 0)

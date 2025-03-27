@@ -274,8 +274,6 @@ radius = 1.545
 
 [node name="tower_3_snowglobe" instance=ExtResource("1_6r33o")]
 script = ExtResource("2_ckecl")
-tower_type = 2
-aim_type = 1
 
 [node name="Snowglobe" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.720257, 0)
