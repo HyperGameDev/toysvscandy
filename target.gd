@@ -1,5 +1,7 @@
 class_name Target extends PathFollow3D
 
+@onready var timer_frozen: Timer = %Timer_Frozen
+
 const sprite_array: Array[CompressedTexture2D] = [
 	preload("res://Assets/targets/target_1_brownie.png"),
 	preload("res://Assets/targets/target_2_donut.png"),
@@ -41,33 +43,49 @@ func _ready() -> void:
 	
 	timer_blastfx.timeout.connect(_on_timer_blastfx_timeout)
 
+	Messenger.target_frozen.connect(_on_target_frozen)
+	
+	timer_frozen.timeout.connect(_on_timer_frozen_timeout)
+
+	
+func _process(_delta: float) -> void:
+	if progress_ratio >= .99:
+		reparent_to_collector()
+
 func _physics_process(delta: float) -> void:
 	progress += speed * delta
 	
 func _on_target_added_to_path():
 	update_target(false)
 
+	
+func take_single_damage() -> void:
+	target_level -= 1
+	#print(target_level," got damaged!")
+	
+	if target_level > -1:
+		#print(target_level," survived damage")
+		update_target(true)
+	elif target_level == -1:
+		update_target(true)
+		#print(target_level," would be unvisibled")
+		sprite.visible = false
+	else:
+		print("INVALID TARGET LEVEL")
+		breakpoint
+
 func update_target(attacked:bool) -> void:
 	if attacked:
+		#print(target_level," blastfx begun")
 		show_attacked_fx()
 		
-		if target_level < 0:
+		if target_level < -1:
 			print("INVALID TARGET LEVEL ATTACKED!")
 			breakpoint
 			reparent(Debug_Collector.ref)
-
-			
 	
 	sprite.texture = sprite_array[target_level]
 	speed = speed_array[target_level]
-
-func reparent_to_collector() -> void:
-	reparent(Target_Collector.ref)
-	position = Vector3.ZERO
-	progress = 0.
-	Messenger.target_removed_from_path.emit(self)
-
-	process_mode = PROCESS_MODE_DISABLED
 	
 func show_attacked_fx() -> void:
 	var randfx: int = randi_range(0,2)
@@ -75,10 +93,40 @@ func show_attacked_fx() -> void:
 	sprite_blastfx.visible = true
 	timer_blastfx.start(.1)
 	
-	
 func _on_timer_blastfx_timeout() -> void:
 	sprite_blastfx.visible = false
 	
+	#print(target_level," blast fx'ed")
+	
 	if target_level == -1:
+		#print(target_level," reparent initiated by blastfx timeout")
 		reparent_to_collector()
+
+func reparent_to_collector() -> void:
+	#print(target_level," reparenting function run")
+	reparent(Target_Collector.ref)
+	position = Vector3.ZERO
+	progress = 0.
+	Messenger.target_removed_from_path.emit(self)
+
+	process_mode = PROCESS_MODE_DISABLED
+	
+
+func _on_target_frozen(target) -> void:
+	if target == self:
+		timer_frozen.start(3.)
 		
+func _on_timer_frozen_timeout() -> void:
+	frozen = false
+	speed = speed_array[target_level]
+
+
+
+#func mark_me(distance: float) -> void:
+	#marked = true
+	#%Label3D.text = str(distance)
+	#%Label3D.visible = true
+	#
+#func unmark_me() -> void:
+	#%Label3D.visible = false
+	#marked = false

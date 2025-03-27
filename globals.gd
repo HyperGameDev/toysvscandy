@@ -104,9 +104,9 @@ func update_path_targets_array() -> void:
 func add_debug_wave_data():
 	wave_data = {
 		wave_0 = [0,  0,  0,  0,  0,  0],
-		wave_1 = [0, 0, 0, 10, 0, 0],
-		wave_2 = [0, 0, 0, 10, 0, 0],
-		wave_3 = [0, 0, 0, 10, 0, 0],
+		wave_1 = [0, 5, 0, 0, 0, 0],
+		wave_2 = [0, 0, 5, 0, 0, 0],
+		wave_3 = [0, 5, 0, 0, 0, 0],
 		wave_4 = [0, 0, 0, 10, 0, 0],
 		wave_5 = [0, 0, 0, 0, 10, 0],
 		wave_6 = [0, 0, 0, 10, 0, 0],
