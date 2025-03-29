@@ -19,7 +19,7 @@ func _on_attack_moment() -> void:
 				target_to_attack = target
 				#print("Marked targets' level: ",target_to_attack.target_level)
 				if target_to_attack.target_level < 0:
-					print("SINGLE_TOWERS: dead target temporarily targeted")
+					#print("SINGLE_TOWERS: dead target temporarily targeted")
 					return
 			
 		if target_to_attack != null:

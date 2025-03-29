@@ -5,5 +5,9 @@ func _on_attack_moment() -> void:
 	
 func do_attack(_target) -> void:
 	for target in detected_targets:
-		target.take_single_damage()
+		if target.target_level < 0:
+			#print("TACK_TOWER: dead target temporarily targeted")
+			return
+		else:
+			target.take_single_damage()
 	
