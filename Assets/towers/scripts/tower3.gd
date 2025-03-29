@@ -78,6 +78,8 @@ func _ready() -> void:
 		Messenger.tower_hovered.connect(_on_tower_hovered)
 		Messenger.tower_selected.connect(_on_tower_selected)
 		
+		Messenger.tower_unheld.connect(_on_tower_unheld)
+		
 		Messenger.target_added_to_path.connect(_on_target_added_to_path)
 		Messenger.target_removed_from_path.connect(_on_target_removed_from_path)
 		
@@ -127,6 +129,10 @@ func i_am_placeable() -> bool:
 		return cursor_tower_currently_held == self
 	else:
 		return false
+		
+func _on_tower_unheld():
+	if is_held:
+		queue_free()
 
 func follow_cursor_pos() -> void:
 	global_position = cursor_target.global_position

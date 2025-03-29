@@ -131,7 +131,7 @@ fadein_time = 0.5
 fadeout_time = 0.5
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yqg5y"]
-graph_offset = Vector2(-422.008, 9.364)
+graph_offset = Vector2(-361, 159)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_kw80a")
 nodes/Animation/position = Vector2(-260, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_scsal")
@@ -139,8 +139,8 @@ nodes/Animation/position = Vector2(-260, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_syw3k")
 nodes/TimeScale/position = Vector2(320, 260)
 nodes/attack/node = SubResource("AnimationNodeOneShot_scsal")
-nodes/attack/position = Vector2(120, 260)
-nodes/output/position = Vector2(540, 220)
+nodes/attack/position = Vector2(80, 240)
+nodes/output/position = Vector2(540, 280)
 node_connections = [&"TimeScale", 0, &"attack", &"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"TimeScale"]
 
 [sub_resource type="Animation" id="Animation_scsal"]

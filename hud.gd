@@ -83,6 +83,12 @@ func _ready() -> void:
 #func _physics_process(delta: float) -> void:
 	#print("UI Hovered ",side_ui_hovered)
 	
+func _input(event: InputEvent) -> void:
+	if menu_state == menu_states.HOLDING:
+		if Input.is_action_just_pressed("Cancel") or Input.is_action_just_pressed("Action2"):
+			Messenger.tower_unheld.emit()
+			held_tower_unheld()
+	
 func update_menu_state(state):
 	menu_state = state
 	%"Animation_Menu-States".play("menu_state_change")
@@ -126,6 +132,9 @@ func _on_tower_spawned(_tower):
 		update_menu_state(menu_states.HOLDING)
 	
 func _on_tower_placed(_tower):
+	held_tower_unheld()
+		
+func held_tower_unheld():
 	if menu_state != menu_states.DEFAULT and side_ui_hovered == false:
 		animation_bottom_ui.play("show_bottom_ui")
 		
