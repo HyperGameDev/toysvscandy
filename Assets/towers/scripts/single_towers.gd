@@ -13,14 +13,12 @@ func _on_attack_moment() -> void:
 		var highest_ratio: float = -INF
 		
 		for target in detected_targets:
-			#print(target.get_parent().name," has ",target.name)
+			if target.target_level < 0:
+				#print("SINGLE_TOWERS: dead target temporarily targeted")
+				continue
 			if target.progress_ratio > highest_ratio:
 				highest_ratio = target.progress_ratio
 				target_to_attack = target
-				#print("Marked targets' level: ",target_to_attack.target_level)
-				if target_to_attack.target_level < 0:
-					#print("SINGLE_TOWERS: dead target temporarily targeted")
-					return
 			
 		if target_to_attack != null:
 			is_attacking = true
