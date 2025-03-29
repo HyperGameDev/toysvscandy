@@ -1,6 +1,9 @@
 class_name Target extends PathFollow3D
 
 @onready var timer_frozen: Timer = %Timer_Frozen
+@onready var timer_freeze_history: Timer = %Timer_Freeze_History
+
+var freeze_tower_history: Array[Node3D] = []
 
 const sprite_array: Array[CompressedTexture2D] = [
 	preload("res://Assets/targets/target_1_brownie.png"),
@@ -43,9 +46,8 @@ func _ready() -> void:
 	
 	timer_blastfx.timeout.connect(_on_timer_blastfx_timeout)
 
-	Messenger.target_frozen.connect(_on_target_frozen)
-	
 	timer_frozen.timeout.connect(_on_timer_frozen_timeout)
+	timer_freeze_history.timeout.connect(_on_timer_freeze_history_timeout)
 
 	
 func _process(_delta: float) -> void:
@@ -134,16 +136,24 @@ func calculate_neighbor_distance(neighbor_ratio) -> float:
 	return abs(progress_ratio - neighbor_ratio)
 	
 
-func _on_target_frozen(target) -> void:
+func _on_target_frozen(target,tower) -> void:
 	if target == self:
-		timer_frozen.start(3.)
+		print(freeze_tower_history)
+		if not freeze_tower_history.has(tower):
+			tower.animate_attack()
+			speed = 0
+			frozen = true
+			timer_frozen.start(3.)
+			timer_freeze_history.start(10.)
+			freeze_tower_history.append(tower)
 		
 func _on_timer_frozen_timeout() -> void:
 	frozen = false
 	speed = speed_array[target_level]
 
-
-
+func _on_timer_freeze_history_timeout() -> void:
+	freeze_tower_history.clear()
+	
 #func mark_me(distance: float) -> void:
 	#marked = true
 	#%Label3D.text = str(distance)

@@ -98,6 +98,8 @@ func _input(event: InputEvent) -> void:
 			pass
 		interact_states.NONE:
 			pass
+			
+#WARNING DON'T ADD PHYSICS PROCESSS WITHOUT ADJUSTING CHILD PHYSICS PROCESS	
 	
 func _process(delta: float) -> void:
 	if not mesh_only:
@@ -119,6 +121,8 @@ func _process(delta: float) -> void:
 					stop_attack_timer()
 				
 			find_nearby_targets()				
+
+#WARNING DON'T ADD PHYSICS PROCESSS WITHOUT ADJUSTING CHILD PHYSICS PROCESS	
 
 #region Placing
 func i_am_placeable() -> bool:

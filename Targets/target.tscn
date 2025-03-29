@@ -43,3 +43,6 @@ outline_size = 127
 
 [node name="Timer_Blast-fx" type="Timer" parent="."]
 unique_name_in_owner = true
+
+[node name="Timer_Freeze_History" type="Timer" parent="."]
+unique_name_in_owner = true

@@ -127,11 +127,11 @@ animation = &"idle"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_syw3k"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_scsal"]
-fadein_time = 0.5
+fadein_time = 0.1
 fadeout_time = 0.5
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yqg5y"]
-graph_offset = Vector2(-361, 159)
+graph_offset = Vector2(-461, 185)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_kw80a")
 nodes/Animation/position = Vector2(-260, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_scsal")
