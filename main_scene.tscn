@@ -273,6 +273,7 @@ _data = {
 }
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_84odl"]
+viewport_path = NodePath("HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1/SubViewport_Tower_1")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ak604"]
 bg_color = Color(0.729412, 0.141176, 0.219608, 1)
@@ -676,7 +677,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 69.0
 offset_right = 253.0
-offset_bottom = -148.0
+offset_bottom = -132.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -715,23 +716,48 @@ layout_mode = 2
 texture = SubResource("ViewportTexture_84odl")
 expand_mode = 4
 
-[node name="Button_Sell" type="Button" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button_Sell" type="Button" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_nfk4m")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ak604")
 text = "SELL"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("17_7th4q")
+text = "+"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("28_o7u2a")
+expand_mode = 3
+
+[node name="Label_Sell_Amount" type="Label" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("17_7th4q")
+text = "???"
+horizontal_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer"]
+[node name="VBox_Upgrade1" type="VBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button_Upgrade_Left" type="Button" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Button_Upgrade_Left" type="Button" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade1"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
@@ -744,26 +770,28 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade1"]
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade1/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("28_o7u2a")
 expand_mode = 3
 
-[node name="Label_Upgrade_Left_Cost" type="Label" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label_Upgrade_Left_Cost" type="Label" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade1/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("17_7th4q")
 text = "400"
 horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer"]
+[node name="VBox_Upgrade2" type="VBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Button_Upgrade_Right" type="Button" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Button_Upgrade_Right" type="Button" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
@@ -776,16 +804,17 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade2"]
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade2/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("28_o7u2a")
 expand_mode = 3
 
-[node name="Label_Upgrade_Right_Cost" type="Label" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="Label_Upgrade_Right_Cost" type="Label" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade2/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("17_7th4q")
 text = "200"

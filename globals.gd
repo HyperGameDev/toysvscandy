@@ -76,52 +76,77 @@ var wave_data = {
 
 const tower_data = {
 	DART = {
-		toy_name = "Toy Soldier",
+		tower_name = "Toy Soldier",
 		icon = "%SubViewport_Tower_1",
-		upgrade_has2 = true,
-		upgrade1_name = "DOUBLE",
-		upgrade1_cost = 210,
-		upgrade2_name = "RANGE",
-		upgrade2_cost = 100
 		
+		has_2_upgrades = true,
+		
+		upgrade1_name = "DOUBLE",
+		upgrade1_icon = preload("res://Assets/ui/upgrade_double.png"),
+		upgrade1_cost = 210,
+		
+		upgrade2_name = "RANGE",
+		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
+		upgrade2_cost = 100
 	},
 	TACK = {
-		toy_name = "Spinning Top",
+		tower_name = "Spinning Top",
 		icon = "%SubViewport_Tower_2",
-		upgrade_has2 = true,
+		
+		has_2_upgrades = true,
+		
 		upgrade1_name = "FASTER",
+		upgrade1_icon = preload("res://Assets/ui/upgrade_speed.png"),
 		upgrade1_cost = 250,
+		
 		upgrade2_name = "RANGE",
+		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
 		upgrade2_cost = 150
 	},
 	FREEZE = {
-		toy_name = "Snowglobe",
+		tower_name = "Snowglobe",
 		icon = "%SubViewport_Tower_3",
-		upgrade_has2 = true,
+		
+		has_2_upgrades = true,
+		
 		upgrade1_name = "+ TIME",
+		upgrade1_icon = preload("res://Assets/ui/upgrade_time.png"),
 		upgrade1_cost = 450,
+		
 		upgrade2_name = "RANGE",
+		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
 		upgrade2_cost = 300
 	},
 	BOMB = {
-		toy_name = "Rocket",
+		tower_name = "Rocket",
 		icon = "%SubViewport_Tower_4",
-		upgrade_has2 = true,
+		
+		has_2_upgrades = true,
+		
 		upgrade1_name = "BIGGER",
+		upgrade1_icon = preload("res://Assets/ui/upgrade_blast.png"),
 		upgrade1_cost = 650,
+		
 		upgrade2_name = "RANGE",
+		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
 		upgrade2_cost = 250
 	},
 	SUPER = {
-		toy_name = "Super Soldier",
+		tower_name = "Super Soldier",
 		icon = "%SubViewport_Tower_5",
-		upgrade_has2 = false,
+		
+		has_2_upgrades = false,
+		
 		upgrade1_name = "RANGE",
-		upgrade1_cost = 210,
+		upgrade1_icon = preload("res://Assets/ui/upgrade_range.png"),
+		upgrade1_cost = 2400,
+		
 		upgrade2_name = "",
-		upgrade2_cost = 2400
+		upgrade2_icon = "",
+		upgrade2_cost = 0
 	}
 }
+
 func _ready() -> void:
 	#TODO:remove
 	print("Change wave_data to a constant and remove debug stuff!")

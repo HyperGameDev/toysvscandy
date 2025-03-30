@@ -141,7 +141,6 @@ fadein_time = 0.1
 fadeout_time = 0.5
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yqg5y"]
-graph_offset = Vector2(-360.025, 75.7541)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_kw80a")
 nodes/Animation/position = Vector2(-260, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_scsal")
@@ -155,6 +154,21 @@ node_connections = [&"TimeScale", 0, &"attack", &"attack", 0, &"Animation", &"at
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_syw3k"]
 radius = 2.562
+
+[sub_resource type="Animation" id="Animation_jp0fh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top/Spin_Sparks:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_uwmyy"]
 resource_name = "show_sparks"
@@ -172,21 +186,6 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_jp0fh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Top/Spin_Sparks:mesh:material:albedo_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xvd6c"]
 _data = {
 &"RESET": SubResource("Animation_jp0fh"),
@@ -199,7 +198,7 @@ tower_type = 1
 aim_type = 1
 
 [node name="Top" parent="." index="0"]
-transform = Transform3D(0.935544, 0, 0.35321, 0, 1, 0, -0.35321, 0, 0.935544, 0, 0, 0)
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 0)
 lod_bias = 128.0
 surface_material_override/0 = SubResource("StandardMaterial3D_scsal")
 surface_material_override/1 = SubResource("StandardMaterial3D_kw80a")

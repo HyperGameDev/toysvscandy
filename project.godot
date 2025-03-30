@@ -25,6 +25,10 @@ Messenger="*res://messenger.gd"
 window/size/viewport_width=1024
 window/size/viewport_height=768
 
+[gui]
+
+theme/custom_font="uid://bwnc5npiiaoqd"
+
 [input]
 
 Action={

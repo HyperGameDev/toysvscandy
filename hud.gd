@@ -6,6 +6,7 @@ static var ref
 @onready var cursor_target: Node3D = %Cursor_Target
 
 @onready var tower_preview: TextureRect = %"TextureRect_Tower-Preview"
+@onready var tower_name: Label = %"Label_Tower-Name"
 
 var tower_last_selected: Node3D
 
@@ -20,8 +21,15 @@ var side_ui_hovered: bool = false
 
 @onready var side_ui: MarginContainer = %Side_UI
 @onready var button_sell: Button = %Button_Sell
+
+@onready var upgrade_2_vbox: VBoxContainer = %VBox_Upgrade2
+
 @onready var button_upgrade_left: Button = %Button_Upgrade_Left
 @onready var button_upgrade_right: Button = %Button_Upgrade_Right
+
+@onready var upgrade_left_cost: Label = %Label_Upgrade_Left_Cost
+@onready var upgrade_right_cost: Label = %Label_Upgrade_Right_Cost
+
 
 @onready var animation_bottom_ui: AnimationPlayer = %Animation_Bottom_UI
 @onready var animation_side_ui: AnimationPlayer = %Animation_Side_UI
@@ -191,7 +199,27 @@ func _on_tower_selected(tower):
 
 func setup_tower_ui(tower) -> void:
 	var tower_dictionary: Dictionary = Globals.tower_data[str(tower.tower_types.keys()[tower.tower_type])]
+	
 	tower_preview.texture.viewport_path = tower_dictionary["icon"]
+	tower_name.text = tower_dictionary["tower_name"]
+	
+	button_upgrade_left.text = tower_dictionary["upgrade1_name"]
+	button_upgrade_left.icon = tower_dictionary["upgrade1_icon"]
+	upgrade_left_cost.text = str(tower_dictionary["upgrade1_cost"])
+	
+	var has_2_upgrades: bool = tower_dictionary["has_2_upgrades"]
+	
+	if has_2_upgrades:
+		button_upgrade_right.text = tower_dictionary["upgrade2_name"]
+		button_upgrade_right.icon = tower_dictionary["upgrade2_icon"]
+		upgrade_right_cost.text = str(tower_dictionary["upgrade2_cost"])
+		if upgrade_2_vbox.visible == false:
+			upgrade_2_vbox.visible = true
+	else:
+		upgrade_2_vbox.visible = false
+		
+		
+	
 
 func hide_side_ui():
 	if side_menu_side == side_menu_sides.LEFT:
