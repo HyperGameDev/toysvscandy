@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=73 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://5lsyn0xb4cjs" path="res://Towers/subviewport_tower_5.tscn" id="20_fv2he"]
 [ext_resource type="PackedScene" uid="uid://cffpr8fppyjp6" path="res://Towers/subviewport_tower_4.tscn" id="20_y5ved"]
 [ext_resource type="Texture2D" uid="uid://crdctfuvyvcfv" path="res://Assets/ui/upgrade_range.png" id="22_vimvf"]
+[ext_resource type="Texture2D" uid="uid://btj1mn54u6qq7" path="res://UI/icons/ui_brownie_points.png" id="28_o7u2a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c62f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -274,6 +275,9 @@ _data = {
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ak604"]
 bg_color = Color(0.729412, 0.141176, 0.219608, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijoax"]
+texture = ExtResource("28_o7u2a")
 
 [sub_resource type="Animation" id="Animation_ghshe"]
 length = 0.001
@@ -749,6 +753,9 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 61.0
 grow_horizontal = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
 
 [node name="HSplit" type="HSplitContainer" parent="HUD/Top_UI"]
 layout_mode = 2
@@ -760,11 +767,12 @@ dragging_enabled = false
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Icon_Lives" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+[node name="Icon_Health" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="Label_Lives" type="Label" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+[node name="Label_Health" type="Label" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_nfk4m")
 text = "40"
@@ -774,11 +782,13 @@ modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="Icon_Money" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
-custom_minimum_size = Vector2(50, 50)
+[node name="Icon_Points" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ijoax")
 
-[node name="Label_Money" type="Label" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+[node name="Label_Points" type="Label" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_nfk4m")
 text = "100"

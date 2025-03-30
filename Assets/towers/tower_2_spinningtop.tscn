@@ -212,7 +212,7 @@ surface_material_override/7 = SubResource("StandardMaterial3D_mlbhg")
 
 [node name="Spin_Sparks" type="MeshInstance3D" parent="Top" index="0"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.6, 0)
+transform = Transform3D(1, 0, -1.77636e-15, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.6, 0)
 mesh = SubResource("QuadMesh_xvd6c")
 
 [node name="Visible_Radius" type="MeshInstance3D" parent="." index="1"]

@@ -52,6 +52,7 @@ func _ready() -> void:
 	
 func _process(_delta: float) -> void:
 	if progress_ratio >= .99:
+		Messenger.target_missed.emit(target_level)
 		reparent_to_collector()
 
 func _physics_process(delta: float) -> void:
@@ -83,12 +84,13 @@ func take_single_damage() -> void:
 func update_target(attacked:bool, above_3:bool) -> void:
 	if attacked:
 		#print(target_level," blastfx begun")
+		Messenger.target_attacked.emit()
 		show_attacked_fx()
 		
 		if target_level < -1:
 			print("INVALID TARGET LEVEL ATTACKED!")
-			breakpoint
-			reparent(Debug_Collector.ref)
+			#breakpoint
+			#reparent(Debug_Collector.ref)
 		
 		if above_3:
 			target_level = 3

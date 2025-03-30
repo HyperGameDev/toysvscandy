@@ -9,7 +9,6 @@ static var ref
 
 var tower_last_selected: Node3D
 
-
 var menu_state: menu_states
 enum menu_states {DEFAULT,HOLDING,SELECTED}
 
@@ -26,6 +25,11 @@ var side_ui_hovered: bool = false
 
 @onready var animation_bottom_ui: AnimationPlayer = %Animation_Bottom_UI
 @onready var animation_side_ui: AnimationPlayer = %Animation_Side_UI
+
+@onready var label_points: Label = %Label_Points
+@onready var label_health: Label = %Label_Health
+
+
 
 var side_ui_visible: bool = false
 
@@ -52,6 +56,7 @@ func _init() -> void:
 	ref = self
 
 func _ready() -> void:
+	update_ui_values()
 	update_menu_state(menu_states.DEFAULT)
 	update_side_menu_state(side_menu_sides.RIGHT)
 	
@@ -69,8 +74,12 @@ func _ready() -> void:
 	Messenger.tower_placed.connect(_on_tower_placed)
 	Messenger.tower_selected.connect(_on_tower_selected)
 	
+	Messenger.updated_health.connect(_on_updated_health)
+	Messenger.updated_points.connect(_on_updated_points)
+	
+	
 	button_start_wave.pressed.connect(_on_button_start_wave_pressed)
-	Messenger.path_empty.connect(_on_path_empty)
+	Messenger.wave_ended.connect(_on_wave_ended)
 	
 	button_sell.pressed.connect(_on_button_sell_pressed)
 	
@@ -83,7 +92,7 @@ func _ready() -> void:
 #func _physics_process(delta: float) -> void:
 	#print("UI Hovered ",side_ui_hovered)
 	
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if menu_state == menu_states.HOLDING:
 		if Input.is_action_just_pressed("Cancel") or Input.is_action_just_pressed("Action2"):
 			Messenger.tower_unheld.emit()
@@ -121,7 +130,15 @@ func _on_button_upgrade_right_hover() -> void:
 func _on_button_upgrade_right_unhover() -> void:
 	set_side_ui_hover_bool(false)
 	
-
+func update_ui_values() -> void:
+	_on_updated_health()
+	_on_updated_points()
+	
+func _on_updated_health() -> void:
+	label_health.text = str(Globals.health)
+	
+func _on_updated_points() -> void:
+	label_points.text = str(Globals.points)
 	
 func _on_tower_spawned(_tower):	
 	if menu_state != menu_states.HOLDING and side_ui_hovered == false:
@@ -181,14 +198,16 @@ func hide_side_ui():
 		animation_side_ui.play("hide_side_ui_left")
 	else:
 		animation_side_ui.play("hide_side_ui_right")
+	
+	
+		
+func _on_wave_ended() -> void:
+	button_start_wave.disabled = false
 
 func _on_button_start_wave_pressed() -> void:
 	Messenger.start_next_wave.emit()
 	label_wave.text = str(Globals.wave_number)
 	button_start_wave.disabled = true
-	
-func _on_path_empty() -> void:
-	button_start_wave.disabled = false
 	
 func _on_button_sell_pressed() -> void:
 	tower_last_selected.queue_free()

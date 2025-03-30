@@ -7,10 +7,13 @@ signal start_next_wave
 signal target_added_to_path
 signal target_removed_from_path ##arg1: PathFollow3D = self
 
-signal target_destroyed ##arg1: PathFollow3D = self
+signal wave_ended
 
-signal path_empty
+signal target_missed ##arg1: int = target_level
+signal target_attacked
 
+signal updated_health
+signal updated_points
 
 signal target_frozen ##arg1: PathFollow3D = target frozen
 

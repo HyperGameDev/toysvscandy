@@ -82,14 +82,12 @@ func _ready() -> void:
 		
 		Messenger.target_added_to_path.connect(_on_target_added_to_path)
 		Messenger.target_removed_from_path.connect(_on_target_removed_from_path)
-		
-		Messenger.target_destroyed.connect(_on_target_destroyed)
 
 		
 		set_tower_stats()
 		_upgrade_radius(detection_radius)
 		
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	match interact_state:
 		interact_states.HOVERED:
 			if Input.is_action_just_pressed("Action"):
@@ -252,10 +250,6 @@ func find_nearby_targets() -> void:
 					start_attack_timer()
 			else:
 				detected_targets.erase(target)
-
-func _on_target_destroyed(target) -> void:
-	#print(target," removed from array!")
-	detected_targets.erase(target)
 		
 func calculate_distance_to_target(target: Node3D) -> float:
 	var target_xy: Vector2 = Vector2(target.global_position.x,target.global_position.z)

@@ -1,14 +1,17 @@
 extends Node
 var debug: bool = true
 var wave_number: int = 0
+var health: int = 40
+var points: int = 650
+
+var wave_active: bool = false
+var targets_left_in_wave: int
 
 var targets_on_path: Variant = []:
 	get: 
 		return targets_on_path
 	set(value):
 		targets_on_path = value
-		if targets_on_path.size() <= 0:
-			Messenger.path_empty.emit()
 		
 
 var upgraded_explode_range: bool = false
@@ -94,10 +97,21 @@ func _ready() -> void:
 	Messenger.target_added_to_path.connect(_on_target_added_to_path)
 	Messenger.target_removed_from_path.connect(_on_target_removed_from_path)
 	
+	Messenger.wave_ended.connect(_on_wave_ended)
+	
+	Messenger.target_missed.connect(_on_target_missed)
+	Messenger.target_attacked.connect(_on_target_attacked)
+	
 	if debug:
 		add_debug_wave_data()
+		
+func _physics_process(_delta: float) -> void:
+	targets_left_in_wave = Target_Collector.ref.current_wave_array.size() + targets_on_path.size()
+	if wave_active and targets_left_in_wave <= 0:
+		Messenger.wave_ended.emit()
 	
 func _on_start_next_wave():
+	wave_active = true
 	wave_number += 1
 	
 func _on_target_added_to_path() -> void:
@@ -111,15 +125,35 @@ func _on_target_removed_from_path(_target) -> void:
 func update_path_targets_array() -> void:
 	targets_on_path = Path.ref.get_children()
 
+func _on_target_missed(level) -> void:
+	var health_lost: int = converted_target_value(level)
+	health -= health_lost
+	Messenger.updated_health.emit()
+	
+func _on_target_attacked() -> void:
+	points += 1
+	Messenger.updated_points.emit()
+	
+func _on_wave_ended() -> void:
+	wave_active = false
+	var wave_factor = wave_number - 1
+	points += 100 - wave_factor
+	Messenger.updated_points.emit()
+	
+func converted_target_value(level) -> int:
+	if level > 3:
+		return 9
+	else:
+		return level + 1
 	
 
 func add_debug_wave_data():
 	wave_data = {
 		wave_0 = [0, 0, 0, 0, 0, 0],
 		wave_1 = [1, 1, 1, 0, 0, 0],
-		wave_2 = [5, 20, 5, 5, 5, 5],
+		wave_2 = [1, 1, 1, 0, 0, 0],
 		wave_3 = [5, 20, 5, 5, 5, 5],
-		wave_4 = [0, 0, 0, 0, 0, 1],
+		wave_4 = [5, 20, 5, 5, 5, 5],
 		wave_5 = [0, 0, 0, 0, 1, 0],
 		wave_6 = [0, 0, 0, 0, 0, 1],
 		wave_7 = [0, 0, 0, 0, 1, 0],

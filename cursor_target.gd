@@ -29,7 +29,7 @@ func _ready() -> void:
 	
 	planeToMoveOn = Plane(Vector3(0,1,0), ground.global_position.y)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	follow_cursor_pos()
 	match cursor_state:
 		cursor_states.SELECT:
