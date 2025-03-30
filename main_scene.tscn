@@ -273,7 +273,6 @@ _data = {
 }
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_84odl"]
-viewport_path = NodePath("HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1/SubViewport_Tower_1")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ak604"]
 bg_color = Color(0.729412, 0.141176, 0.219608, 1)

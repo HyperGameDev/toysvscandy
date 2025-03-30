@@ -29,3 +29,5 @@ func animate_attack() -> void:
 func unanimate_attack() -> void:
 	animation.set("parameters/attack/request", 3)
 	
+	animation_sparks.stop()
+	
