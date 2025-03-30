@@ -3,6 +3,7 @@ var debug: bool = true
 var wave_number: int = 0
 var health: int = 40
 var points: int = 650
+var points_debug: int = 24000
 
 var wave_active: bool = false
 var targets_left_in_wave: int
@@ -75,19 +76,50 @@ var wave_data = {
 
 const tower_data = {
 	DART = {
-		icon = "%SubViewport_Tower_1"
+		toy_name = "Toy Soldier",
+		icon = "%SubViewport_Tower_1",
+		upgrade_has2 = true,
+		upgrade1_name = "DOUBLE",
+		upgrade1_cost = 210,
+		upgrade2_name = "RANGE",
+		upgrade2_cost = 100
+		
 	},
 	TACK = {
-		icon = "%SubViewport_Tower_2"
+		toy_name = "Spinning Top",
+		icon = "%SubViewport_Tower_2",
+		upgrade_has2 = true,
+		upgrade1_name = "FASTER",
+		upgrade1_cost = 250,
+		upgrade2_name = "RANGE",
+		upgrade2_cost = 150
 	},
 	FREEZE = {
-		icon = "%SubViewport_Tower_3"
+		toy_name = "Snowglobe",
+		icon = "%SubViewport_Tower_3",
+		upgrade_has2 = true,
+		upgrade1_name = "+ TIME",
+		upgrade1_cost = 450,
+		upgrade2_name = "RANGE",
+		upgrade2_cost = 300
 	},
 	BOMB = {
-		icon = "%SubViewport_Tower_4"
+		toy_name = "Rocket",
+		icon = "%SubViewport_Tower_4",
+		upgrade_has2 = true,
+		upgrade1_name = "BIGGER",
+		upgrade1_cost = 650,
+		upgrade2_name = "RANGE",
+		upgrade2_cost = 250
 	},
 	SUPER = {
-		icon = "%SubViewport_Tower_5"
+		toy_name = "Super Soldier",
+		icon = "%SubViewport_Tower_5",
+		upgrade_has2 = false,
+		upgrade1_name = "RANGE",
+		upgrade1_cost = 210,
+		upgrade2_name = "",
+		upgrade2_cost = 2400
 	}
 }
 func _ready() -> void:
@@ -104,6 +136,7 @@ func _ready() -> void:
 	
 	if debug:
 		add_debug_wave_data()
+		points = points_debug
 		
 func _physics_process(_delta: float) -> void:
 	targets_left_in_wave = Target_Collector.ref.current_wave_array.size() + targets_on_path.size()

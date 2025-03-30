@@ -7,7 +7,7 @@ spacing_glyph = 2
 
 [resource]
 Button/constants/outline_size = 15
-Button/font_sizes/font_size = 23
+Button/font_sizes/font_size = 21
 Button/fonts/font = SubResource("FontVariation_ymboa")
 Label/constants/outline_size = 18
 Label/font_sizes/font_size = 29
