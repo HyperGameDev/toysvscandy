@@ -72,10 +72,14 @@ func _ready() -> void:
 	side_ui.mouse_exited.connect(_on_side_ui_unhover)
 	button_sell.mouse_entered.connect(_on_button_sell_hover)
 	button_sell.mouse_exited.connect(_on_button_sell_unhover)
+	
 	button_upgrade_left.mouse_entered.connect(_on_button_upgrade_left_hover)
 	button_upgrade_left.mouse_exited.connect(_on_button_upgrade_left_unhover)
+	button_upgrade_left.pressed.connect(_on_button_upgrade_left_pressed)
+	
 	button_upgrade_right.mouse_entered.connect(_on_button_upgrade_right_hover)
 	button_upgrade_right.mouse_exited.connect(_on_button_upgrade_right_unhover)
+	button_upgrade_right.pressed.connect(_on_button_upgrade_right_pressed)
 	
 	
 	Messenger.tower_spawned.connect(_on_tower_spawned)
@@ -115,6 +119,26 @@ func update_side_menu_state(state):
 	side_menu_side = state
 	%"Label_Side-Menu-States".text = "Side Menu: " + str(side_menu_sides.keys()[side_menu_side])
 	
+func _on_button_upgrade_left_pressed() -> void:
+	upgrade_tower(tower_last_selected,1)
+
+func _on_button_upgrade_right_pressed() -> void:
+	upgrade_tower(tower_last_selected,2)
+	
+func upgrade_tower(tower:Node3D,upgrade_number:int) -> void:
+	var tower_dictionary: Dictionary = Globals.tower_data[str(tower.tower_types.keys()[tower.tower_type])]
+	
+	var upgrade_cost: int = tower_dictionary["upgrade" + str(upgrade_number) + "_cost"]
+	var upgrade_name: String = tower_dictionary["upgrade" + str(upgrade_number) + "_name"]
+	
+	if upgrade_cost < Globals.points:
+		Globals.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade" + str(upgrade_number) + "_upgraded"] = true
+		Messenger.points_spent.emit(upgrade_cost)
+		Messenger.tower_upgraded.emit(upgrade_name) 
+		setup_tower_ui(tower_last_selected)
+	
+	
+	
 func set_side_ui_hover_bool(hover_bool:bool) -> void:
 	side_ui_hovered = hover_bool
 	
@@ -146,8 +170,36 @@ func _on_updated_health() -> void:
 	label_health.text = str(Globals.health)
 	
 func _on_updated_points() -> void:
-	label_points.text = str(Globals.points)
+	var current_points: int = Globals.points
+	label_points.text = str(current_points)
+	update_tower_buttons(current_points)
 	
+func update_tower_buttons(points):
+	if points < 250:
+		button_tower_1.disabled = true
+	else:
+		button_tower_1.disabled = false
+	
+	if points < 400:
+		button_tower_2.disabled = true
+	else:
+		button_tower_2.disabled = false
+		
+	if points < 850:
+		button_tower_3.disabled = true
+	else:
+		button_tower_3.disabled = false
+		
+	if points < 900:
+		button_tower_4.disabled = true
+	else:
+		button_tower_4.disabled = false
+		
+	if points < 4000:
+		button_tower_5.disabled = true
+	else:
+		button_tower_5.disabled = false
+
 func _on_tower_spawned(_tower):	
 	if menu_state != menu_states.HOLDING and side_ui_hovered == false:
 		animation_bottom_ui.play("hide_bottom_ui")
@@ -203,14 +255,24 @@ func setup_tower_ui(tower) -> void:
 	tower_preview.texture.viewport_path = tower_dictionary["icon"]
 	tower_name.text = tower_dictionary["tower_name"]
 	
-	button_upgrade_left.text = tower_dictionary["upgrade1_name"]
+	
+	if Globals.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade1_upgraded"] == false:
+		button_upgrade_left.text = tower_dictionary["upgrade1_name"]
+	else:
+		button_upgrade_left.disabled = true
+		button_upgrade_left.text = "BOUGHT"
+
 	button_upgrade_left.icon = tower_dictionary["upgrade1_icon"]
 	upgrade_left_cost.text = str(tower_dictionary["upgrade1_cost"])
 	
 	var has_2_upgrades: bool = tower_dictionary["has_2_upgrades"]
 	
 	if has_2_upgrades:
-		button_upgrade_right.text = tower_dictionary["upgrade2_name"]
+		if Globals.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade2_upgraded"] == false:
+			button_upgrade_right.text = tower_dictionary["upgrade2_name"]
+		else:
+			button_upgrade_right.disabled = true
+			button_upgrade_right.text = "BOUGHT"
 		button_upgrade_right.icon = tower_dictionary["upgrade2_icon"]
 		upgrade_right_cost.text = str(tower_dictionary["upgrade2_cost"])
 		if upgrade_2_vbox.visible == false:
@@ -218,16 +280,11 @@ func setup_tower_ui(tower) -> void:
 	else:
 		upgrade_2_vbox.visible = false
 		
-		
-	
-
 func hide_side_ui():
 	if side_menu_side == side_menu_sides.LEFT:
 		animation_side_ui.play("hide_side_ui_left")
 	else:
-		animation_side_ui.play("hide_side_ui_right")
-	
-	
+		animation_side_ui.play("hide_side_ui_right")	
 		
 func _on_wave_ended() -> void:
 	button_start_wave.disabled = false
@@ -246,23 +303,28 @@ func _on_tower_1_pressed() -> void:
 	if cursor_target.cursor_available:
 		var tower_1_spawn: Node3D = tower_1_scene.instantiate()
 		tower_collector.add_child(tower_1_spawn)
+		Messenger.points_spent.emit(250)
 	
 func _on_tower_2_pressed() -> void:
 	if cursor_target.cursor_available:
 		var tower_2_spawn: Node3D = tower_2_scene.instantiate()
 		tower_collector.add_child(tower_2_spawn)
+		Messenger.points_spent.emit(400)
 	
 func _on_tower_3_pressed() -> void:
 	if cursor_target.cursor_available:
 		var tower_3_spawn: Node3D = tower_3_scene.instantiate()
 		tower_collector.add_child(tower_3_spawn)
+		Messenger.points_spent.emit(850)
 		
 func _on_tower_4_pressed() -> void:
 	if cursor_target.cursor_available:
 		var tower_4_spawn: Node3D = tower_4_scene.instantiate()
 		tower_collector.add_child(tower_4_spawn)
+		Messenger.points_spent.emit(900)
 	
 func _on_tower_5_pressed() -> void:
 	if cursor_target.cursor_available:
 		var tower_5_spawn: Node3D = tower_5_scene.instantiate()
 		tower_collector.add_child(tower_5_spawn)
+		Messenger.points_spent.emit(4000)

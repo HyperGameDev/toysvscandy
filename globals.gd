@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = true
+var debug: bool = false
 var wave_number: int = 0
 var health: int = 40
 var points: int = 650
@@ -15,7 +15,6 @@ var targets_on_path: Variant = []:
 		targets_on_path = value
 		
 
-var upgraded_explode_range: bool = false
 var explode_range: float = .05
 		 
 		
@@ -74,10 +73,33 @@ var wave_data = {
 	wave_50 = [0, 0, 0, 0, 99, 100],
 }
 
+var towers_upgraded = {
+	DART = {
+		upgrade1_upgraded = false,
+		upgrade2_upgraded = false,
+	},
+	TACK = {
+		upgrade1_upgraded = false,
+		upgrade2_upgraded = false,
+	},
+	FREEZE = {
+		upgrade1_upgraded = false,
+		upgrade2_upgraded = false,
+	},
+	BOMB = {
+		upgrade1_upgraded = false,
+		upgrade2_upgraded = false,
+	},
+	SUPER = {
+		upgrade1_upgraded = false,
+	}
+}
+
 const tower_data = {
 	DART = {
 		tower_name = "Toy Soldier",
 		icon = "%SubViewport_Tower_1",
+		tower_cost = 250,
 		
 		has_2_upgrades = true,
 		
@@ -87,11 +109,13 @@ const tower_data = {
 		
 		upgrade2_name = "RANGE",
 		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
-		upgrade2_cost = 100
+		upgrade2_cost = 100,
+		upgrade_radius_factor = 1.5
 	},
 	TACK = {
 		tower_name = "Spinning Top",
 		icon = "%SubViewport_Tower_2",
+		tower_cost = 400,
 		
 		has_2_upgrades = true,
 		
@@ -101,11 +125,13 @@ const tower_data = {
 		
 		upgrade2_name = "RANGE",
 		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
-		upgrade2_cost = 150
+		upgrade2_cost = 150,
+		upgrade_radius_factor = 1.3
 	},
 	FREEZE = {
 		tower_name = "Snowglobe",
 		icon = "%SubViewport_Tower_3",
+		tower_cost = 850,
 		
 		has_2_upgrades = true,
 		
@@ -115,11 +141,13 @@ const tower_data = {
 		
 		upgrade2_name = "RANGE",
 		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
-		upgrade2_cost = 300
+		upgrade2_cost = 300,
+		upgrade_radius_factor = 1.3
 	},
 	BOMB = {
 		tower_name = "Rocket",
 		icon = "%SubViewport_Tower_4",
+		tower_cost = 900,
 		
 		has_2_upgrades = true,
 		
@@ -129,23 +157,23 @@ const tower_data = {
 		
 		upgrade2_name = "RANGE",
 		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
-		upgrade2_cost = 250
+		upgrade2_cost = 250,
+		upgrade_radius_factor = 1.4
 	},
 	SUPER = {
 		tower_name = "Super Soldier",
 		icon = "%SubViewport_Tower_5",
+		tower_cost = 4000,
 		
 		has_2_upgrades = false,
 		
 		upgrade1_name = "RANGE",
 		upgrade1_icon = preload("res://Assets/ui/upgrade_range.png"),
 		upgrade1_cost = 2400,
-		
-		upgrade2_name = "",
-		upgrade2_icon = "",
-		upgrade2_cost = 0
+		upgrade_radius_factor = 2.
 	}
 }
+
 
 func _ready() -> void:
 	#TODO:remove
@@ -158,6 +186,9 @@ func _ready() -> void:
 	
 	Messenger.target_missed.connect(_on_target_missed)
 	Messenger.target_attacked.connect(_on_target_attacked)
+	
+	Messenger.points_spent.connect(_on_points_spent)
+	Messenger.points_earned.connect(_on_points_earned)
 	
 	if debug:
 		add_debug_wave_data()
@@ -188,6 +219,14 @@ func _on_target_missed(level) -> void:
 	health -= health_lost
 	Messenger.updated_health.emit()
 	
+func _on_points_spent(amount) -> void:
+	points -= amount
+	Messenger.updated_points.emit()
+	
+func _on_points_earned(amount) -> void:
+	points += amount
+	Messenger.updated_points.emit()
+		
 func _on_target_attacked() -> void:
 	points += 1
 	Messenger.updated_points.emit()

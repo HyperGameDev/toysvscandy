@@ -4,9 +4,6 @@ signal attack_moment
 
 var detected_targets: Array[PathFollow3D] = []
 
-var upgraded_range: bool = false
-var upgraded_speed: bool = false
-
 #WARNING DON'T DO @ONREADYS
 var cursor_target: Node3D
 var animation: AnimationTree
@@ -43,15 +40,15 @@ var radius_6: float = 16.83
 
 @export var attack_animation_speed: float = 1.
 var attack_animation_speed_2: float = 1.5
-var attack_animation_speed_3: float = 2.5
+var attack_animation_speed_3: float = 3.
 
 var attack_interval: float
 @export var attack_timer_length: float = 1.
 var attack_timer_running: bool = false
 
-var attack_speed_1: float = 1.
-var attack_speed_2: float = .7
-var attack_speed_3: float = .5
+var attack_speed_1: float = 1.6
+var attack_speed_2: float = 1.3
+var attack_speed_3: float = 1.
 #var attack_speed_4: float = .1
 
 var targets_on_path: Variant  = []
@@ -79,6 +76,8 @@ func _ready() -> void:
 		Messenger.tower_selected.connect(_on_tower_selected)
 		
 		Messenger.tower_unheld.connect(_on_tower_unheld)
+		
+		Messenger.tower_upgraded.connect(_on_tower_upgraded)
 		
 		Messenger.target_added_to_path.connect(_on_target_added_to_path)
 		Messenger.target_removed_from_path.connect(_on_target_removed_from_path)
@@ -213,6 +212,16 @@ func _on_tower_selected(tower) -> void:
 		else:
 			interact_state = interact_states.NONE
 			visible_radius.visible = false
+			
+func _on_tower_upgraded(upgrade:String) -> void:
+	var tower_dictionary: Dictionary = Globals.tower_data[str(self.tower_types.keys()[self.tower_type])]
+	var radius: float = visible_radius.mesh.radius
+	
+	if upgrade == "RANGE":
+		var radius_to_upgrade_to: float = radius * tower_dictionary["upgrade_radius_factor"]
+		
+		_upgrade_radius(radius_to_upgrade_to)
+		detection_radius = radius_to_upgrade_to
 	
 func _upgrade_radius(radius: float) -> void:
 	visible_radius.mesh.radius = radius

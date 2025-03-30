@@ -12,6 +12,11 @@ signal wave_ended
 signal target_missed ##arg1: int = target_level
 signal target_attacked
 
+signal tower_upgraded ##arg1: String = "upgrade name"; RANGE,DOUBLE,FASTER,+ TIME,BIGGER
+
+signal points_spent ##arg1: int = spent amount
+signal points_earned ##arg1: int = tower sold for amount
+
 signal updated_health
 signal updated_points
 

@@ -15,7 +15,7 @@ var reparent_timer_running: bool = false
 
 var reparent_timer_length: float
 @export var density: float = 1.
-@export var density_scalar: float = .95
+@export var density_scalar: float = .96
 
 var current_wave_array: Array[int] = []
 
