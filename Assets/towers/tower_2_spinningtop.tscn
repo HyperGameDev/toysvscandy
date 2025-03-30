@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://w2ffngwoj7g6"]
+[gd_scene load_steps=35 format=3 uid="uid://w2ffngwoj7g6"]
 
 [ext_resource type="PackedScene" uid="uid://ccvnnfkx3ckng" path="res://Assets/towers/tower_2_spinningtop.blend" id="1_scsal"]
 [ext_resource type="Script" uid="uid://nm7a4m4kpptl" path="res://Assets/towers/scripts/tower_tack.gd" id="2_syw3k"]
 [ext_resource type="Shader" uid="uid://cjudevm07c2ov" path="res://Shaders/outline2.gdshader" id="3_kw80a"]
+[ext_resource type="Texture2D" uid="uid://dm1k2fkinrsu4" path="res://Assets/towers/textures/spinning_top_sparks3.png" id="4_uwmyy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5nkns"]
 render_priority = 1
@@ -106,6 +107,15 @@ shader_parameter/fade_end = 100.0
 next_pass = SubResource("ShaderMaterial_71cfi")
 albedo_color = Color(1, 0.529412, 1, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jp0fh"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = ExtResource("4_uwmyy")
+
+[sub_resource type="QuadMesh" id="QuadMesh_xvd6c"]
+material = SubResource("StandardMaterial3D_jp0fh")
+size = Vector2(9.7, 9.7)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qwutr"]
 resource_local_to_scene = true
 transparency = 1
@@ -131,7 +141,7 @@ fadein_time = 0.1
 fadeout_time = 0.5
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yqg5y"]
-graph_offset = Vector2(-461, 185)
+graph_offset = Vector2(-360.025, 75.7541)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_kw80a")
 nodes/Animation/position = Vector2(-260, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_scsal")
@@ -143,63 +153,45 @@ nodes/attack/position = Vector2(80, 240)
 nodes/output/position = Vector2(540, 280)
 node_connections = [&"TimeScale", 0, &"attack", &"attack", 0, &"Animation", &"attack", 1, &"Animation 2", &"output", 0, &"TimeScale"]
 
-[sub_resource type="Animation" id="Animation_scsal"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_syw3k"]
+radius = 2.562
+
+[sub_resource type="Animation" id="Animation_uwmyy"]
+resource_name = "show_sparks"
+length = 1.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top/Spin_Sparks:mesh:material:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9, 1.23333),
+"transitions": PackedFloat32Array(1.7411, 1, 0.466516, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jp0fh"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Top:rotation")
+tracks/0/path = NodePath("Top/Spin_Sparks:mesh:material:albedo_color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.722566, 0.523599, 0)]
+"values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_k3gx5"]
-resource_name = "attack"
-length = 3.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Top:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.566667, 0.96, 1.41, 1.79, 2.16667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.722566, 0.523599, 0), Vector3(0.289725, 1.29154, 0), Vector3(0.359538, 2.67734, 0), Vector3(0.439823, 4.08058, 0), Vector3(0.507891, 5.59553, 0), Vector3(0.575959, 6.28319, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_yqg5y"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Top:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.722566, 0.523599, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5tyf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvd6c"]
 _data = {
-&"RESET": SubResource("Animation_scsal"),
-&"attack": SubResource("Animation_k3gx5"),
-&"idle": SubResource("Animation_yqg5y")
+&"RESET": SubResource("Animation_jp0fh"),
+&"show_sparks": SubResource("Animation_uwmyy")
 }
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_syw3k"]
-radius = 2.562
 
 [node name="tower_2_spinningtop" instance=ExtResource("1_scsal")]
 script = ExtResource("2_syw3k")
@@ -207,7 +199,7 @@ tower_type = 1
 aim_type = 1
 
 [node name="Top" parent="." index="0"]
-transform = Transform3D(0.866025, 0.330656, 0.375056, 0, 0.750111, -0.661312, -0.5, 0.572713, 0.649615, 0, 0, 0)
+transform = Transform3D(0.935544, 0, 0.35321, 0, 1, 0, -0.35321, 0, 0.935544, 0, 0, 0)
 lod_bias = 128.0
 surface_material_override/0 = SubResource("StandardMaterial3D_scsal")
 surface_material_override/1 = SubResource("StandardMaterial3D_kw80a")
@@ -217,6 +209,11 @@ surface_material_override/4 = SubResource("StandardMaterial3D_k3gx5")
 surface_material_override/5 = SubResource("StandardMaterial3D_u5tyf")
 surface_material_override/6 = SubResource("StandardMaterial3D_a2p0c")
 surface_material_override/7 = SubResource("StandardMaterial3D_mlbhg")
+
+[node name="Spin_Sparks" type="MeshInstance3D" parent="Top" index="0"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.6, 0)
+mesh = SubResource("QuadMesh_xvd6c")
 
 [node name="Visible_Radius" type="MeshInstance3D" parent="." index="1"]
 unique_name_in_owner = true
@@ -237,17 +234,18 @@ parameters/attack/active = false
 parameters/attack/internal_active = false
 parameters/attack/request = 0
 
-[node name="AnimationPlayer_old" type="AnimationPlayer" parent="." index="4"]
-libraries = {
-&"": SubResource("AnimationLibrary_u5tyf")
-}
-
-[node name="Area3D" type="Area3D" parent="." index="6"]
+[node name="Area3D" type="Area3D" parent="." index="5"]
 collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("SphereShape3D_syw3k")
 
-[node name="WeaponTimer" type="Timer" parent="." index="7"]
+[node name="WeaponTimer" type="Timer" parent="." index="6"]
 unique_name_in_owner = true
+
+[node name="AnimationPlayer_Sparks" type="AnimationPlayer" parent="." index="7"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_xvd6c")
+}

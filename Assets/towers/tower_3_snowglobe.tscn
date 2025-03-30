@@ -93,7 +93,7 @@ animation = &"idle"
 fadeout_time = 0.4
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ckecl"]
-graph_offset = Vector2(-546.448, 103.138)
+graph_offset = Vector2(-449.448, 228.138)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ckecl")
 nodes/Animation/position = Vector2(-400, 160)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_if0uw")

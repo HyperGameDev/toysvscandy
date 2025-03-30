@@ -1,0 +1,15 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://c6vjcyobfp3st"]
+
+[resource]
+particle_flag_rotate_y = true
+angle_min = -672.1
+angle_max = -648.3
+direction = Vector3(1, 0, 1)
+spread = 40.13
+flatness = 1.0
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+angular_velocity_min = 433.37
+angular_velocity_max = 433.37
+tangential_accel_min = 100.0
+tangential_accel_max = 100.0
