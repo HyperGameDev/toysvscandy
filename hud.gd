@@ -132,9 +132,9 @@ func upgrade_tower(tower:Node3D,upgrade_number:int) -> void:
 	var upgrade_name: String = tower_dictionary["upgrade" + str(upgrade_number) + "_name"]
 	
 	if upgrade_cost <= Globals.points:
-		Globals.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade" + str(upgrade_number) + "_upgraded"] = true
+		tower.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade" + str(upgrade_number) + "_upgraded"] = true
 		Messenger.points_spent.emit(upgrade_cost)
-		Messenger.tower_upgraded.emit(upgrade_name) 
+		Messenger.tower_upgraded.emit(tower,upgrade_name) 
 		setup_tower_ui(tower_last_selected)
 	
 	
@@ -224,7 +224,7 @@ func _on_tower_selected(tower):
 			update_menu_state(menu_states.DEFAULT)
 	else:  # An actual tower is selected
 		tower_last_selected = tower
-		setup_tower_ui(tower)
+		setup_tower_ui(tower_last_selected)
 		var selected_tower_on_right: bool = tower.global_position.z <= 0  # Determine if the tower is on the right side
 
 		if menu_state != menu_states.SELECTED and side_ui_hovered == false:
@@ -256,11 +256,12 @@ func setup_tower_ui(tower) -> void:
 	tower_name.text = tower_dictionary["tower_name"]
 	
 	
-	if Globals.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade1_upgraded"] == false:
+	if tower.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade1_upgraded"] == false:
+		button_upgrade_left.disabled = false
 		button_upgrade_left.text = tower_dictionary["upgrade1_name"]
 	else:
 		button_upgrade_left.disabled = true
-		button_upgrade_left.text = "BOUGHT"
+		button_upgrade_left.text = "OWNED"
 
 	button_upgrade_left.icon = tower_dictionary["upgrade1_icon"]
 	upgrade_left_cost.text = str(tower_dictionary["upgrade1_cost"])
@@ -268,11 +269,12 @@ func setup_tower_ui(tower) -> void:
 	var has_2_upgrades: bool = tower_dictionary["has_2_upgrades"]
 	
 	if has_2_upgrades:
-		if Globals.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade2_upgraded"] == false:
+		if tower.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade2_upgraded"] == false:
+			button_upgrade_right.disabled = false
 			button_upgrade_right.text = tower_dictionary["upgrade2_name"]
 		else:
 			button_upgrade_right.disabled = true
-			button_upgrade_right.text = "BOUGHT"
+			button_upgrade_right.text = "OWNED"
 		button_upgrade_right.icon = tower_dictionary["upgrade2_icon"]
 		upgrade_right_cost.text = str(tower_dictionary["upgrade2_cost"])
 		if upgrade_2_vbox.visible == false:

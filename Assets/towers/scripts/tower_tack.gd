@@ -11,11 +11,12 @@ func _upgrade_radius(radius:float) -> void:
 	super._upgrade_radius(radius)
 	spin_sparks.mesh.size = Vector2(radius*2,radius*2)
 	
-func _on_tower_upgraded(upgrade:String):
-	super._on_tower_upgraded(upgrade)
-
-	if upgrade == "FASTER":
-		attack_timer_length = attack_timer_length * upgraded_speed_factor 
+func _on_tower_upgraded(tower:Node3D,upgrade:String) -> void:
+	super._on_tower_upgraded(tower,upgrade)
+	
+	if tower == self:
+		if upgrade == "FASTER":
+			attack_timer_length = attack_timer_length * upgraded_speed_factor 
 
 func _on_attack_moment() -> void:
 	do_attack(null)

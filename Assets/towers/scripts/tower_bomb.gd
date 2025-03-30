@@ -12,11 +12,12 @@ func lockdown_launchpad() -> void:
 	%Wing_R.top_level = true
 	
 
-func _on_tower_upgraded(upgrade:String):
-	super._on_tower_upgraded(upgrade)
-
-	if upgrade == "BIGGER":
-		Globals.explode_range = Globals.explode_range * upgraded_blast_factor 
+func _on_tower_upgraded(tower:Node3D,upgrade:String):
+	super._on_tower_upgraded(tower,upgrade)
+	
+	if tower == self:
+		if upgrade == "BIGGER":
+			Globals.explode_range = Globals.explode_range * upgraded_blast_factor 
 
 func do_attack(target:PathFollow3D) -> void:
 	for neighbor in target.neighbors_to_explode():

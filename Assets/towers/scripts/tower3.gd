@@ -4,6 +4,28 @@ signal attack_moment
 
 var detected_targets: Array[PathFollow3D] = []
 
+var towers_upgraded = {
+	DART = {
+		upgrade1_upgraded = false,
+		upgrade2_upgraded = false,
+	},
+	TACK = {
+		upgrade1_upgraded = false,
+		upgrade2_upgraded = false,
+	},
+	FREEZE = {
+		upgrade1_upgraded = false,
+		upgrade2_upgraded = false,
+	},
+	BOMB = {
+		upgrade1_upgraded = false,
+		upgrade2_upgraded = false,
+	},
+	SUPER = {
+		upgrade1_upgraded = false,
+	}
+}
+
 #WARNING DON'T DO @ONREADYS
 var cursor_target: Node3D
 var animation: AnimationTree
@@ -46,7 +68,7 @@ var attack_interval: float
 @export var attack_timer_length: float = 1.
 var attack_timer_running: bool = false
 
-var attack_speed_1: float = 1.6
+var attack_speed_1: float = 1.3
 var attack_speed_2: float = 1.3
 var attack_speed_3: float = 1.
 #var attack_speed_4: float = .1
@@ -213,16 +235,16 @@ func _on_tower_selected(tower) -> void:
 			interact_state = interact_states.NONE
 			visible_radius.visible = false
 			
-func _on_tower_upgraded(upgrade:String) -> void:
-	print(upgrade)
-	var tower_dictionary: Dictionary = Globals.tower_data[str(self.tower_types.keys()[self.tower_type])]
-	
-	if upgrade == "RANGE":
-		var radius: float = visible_radius.mesh.radius
-		var radius_to_upgrade_to: float = radius * tower_dictionary["upgrade_radius_factor"]
+func _on_tower_upgraded(tower:Node3D,upgrade:String) -> void:
+	if tower == self:
+		var tower_dictionary: Dictionary = Globals.tower_data[str(self.tower_types.keys()[self.tower_type])]
 		
-		_upgrade_radius(radius_to_upgrade_to)
-		detection_radius = radius_to_upgrade_to
+		if upgrade == "RANGE":
+			var radius: float = visible_radius.mesh.radius
+			var radius_to_upgrade_to: float = radius * tower_dictionary["upgrade_radius_factor"]
+			
+			_upgrade_radius(radius_to_upgrade_to)
+			detection_radius = radius_to_upgrade_to
 	
 func _upgrade_radius(radius: float) -> void:
 	visible_radius.mesh.radius = radius

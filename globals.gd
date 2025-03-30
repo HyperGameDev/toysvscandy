@@ -73,28 +73,6 @@ var wave_data = {
 	wave_50 = [0, 0, 0, 0, 99, 100],
 }
 
-var towers_upgraded = {
-	DART = {
-		upgrade1_upgraded = false,
-		upgrade2_upgraded = false,
-	},
-	TACK = {
-		upgrade1_upgraded = false,
-		upgrade2_upgraded = false,
-	},
-	FREEZE = {
-		upgrade1_upgraded = false,
-		upgrade2_upgraded = false,
-	},
-	BOMB = {
-		upgrade1_upgraded = false,
-		upgrade2_upgraded = false,
-	},
-	SUPER = {
-		upgrade1_upgraded = false,
-	}
-}
-
 const tower_data = {
 	DART = {
 		tower_name = "Toy Soldier",
@@ -247,7 +225,7 @@ func converted_target_value(level) -> int:
 func add_debug_wave_data():
 	wave_data = {
 		wave_0 = [0, 0, 0, 0, 0, 0],
-		wave_1 = [1, 1, 100, 50, 10, 10],
+		wave_1 = [100, 1, 1, 1, 1, 100],
 		wave_2 = [1, 1, 1, 0, 0, 0],
 		wave_3 = [5, 20, 5, 5, 5, 5],
 		wave_4 = [5, 20, 5, 5, 5, 5],

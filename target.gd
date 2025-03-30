@@ -141,8 +141,7 @@ func calculate_neighbor_distance(neighbor_ratio) -> float:
 	
 
 func _on_target_frozen(target,tower) -> void:
-	if target == self:
-		#print(freeze_tower_history)
+	if target == self and not target_level == 5:
 		if not freeze_tower_history.has(tower):
 			tower.animate_attack()
 			speed = 0
