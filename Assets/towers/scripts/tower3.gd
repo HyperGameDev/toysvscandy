@@ -180,7 +180,7 @@ func _on_attack_moment() -> void:
 	pass
 	
 func do_attack(target:PathFollow3D) -> void:
-	target.take_single_damage()
+	target.take_single_damage(target)
 	#print("Attack Done! ",Engine.get_physics_frames())
 	#print("------------------")
 	
@@ -214,10 +214,11 @@ func _on_tower_selected(tower) -> void:
 			visible_radius.visible = false
 			
 func _on_tower_upgraded(upgrade:String) -> void:
+	print(upgrade)
 	var tower_dictionary: Dictionary = Globals.tower_data[str(self.tower_types.keys()[self.tower_type])]
-	var radius: float = visible_radius.mesh.radius
 	
 	if upgrade == "RANGE":
+		var radius: float = visible_radius.mesh.radius
 		var radius_to_upgrade_to: float = radius * tower_dictionary["upgrade_radius_factor"]
 		
 		_upgrade_radius(radius_to_upgrade_to)
@@ -230,7 +231,7 @@ func _upgrade_radius(radius: float) -> void:
 func fetch_targets_on_path() -> void:
 	targets_on_path = Globals.targets_on_path
 	
-func _on_target_added_to_path() -> void:
+func _on_target_added_to_path(_target) -> void:
 	fetch_targets_on_path()
 	
 func _on_target_removed_from_path(target) -> void:

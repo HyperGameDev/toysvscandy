@@ -58,28 +58,30 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	progress += speed * delta
 	
-func _on_target_added_to_path():
-	update_target(false,false)
+func _on_target_added_to_path(target):
+	if target == self:
+		update_target(false,false)
 
 	
-func take_single_damage() -> void:
-	if target_level > 3:
-		update_target(true,true)
-		
-	else:
-		target_level -= 1
-		#print(target_level," got damaged!")
-		
-		if target_level > -1: # Target survived damaged
-			#print(target_level," survived damage")
-			update_target(true,false)
-		elif target_level == -1: # Target died due to damage
-			update_target(true,false)
-			#print(target_level," would be unvisibled")
-			sprite.visible = false
+func take_single_damage(target) -> void:
+	if target == self:
+		if target_level > 3:
+			update_target(true,true)
+			
 		else:
-			print("INVALID TARGET LEVEL")
-			breakpoint
+			target_level -= 1
+			#print(target_level," got damaged!")
+			
+			if target_level > -1: # Target survived damaged
+				#print(target_level," survived damage")
+				update_target(true,false)
+			elif target_level == -1: # Target died due to damage
+				update_target(true,false)
+				#print(target_level," would be unvisibled")
+				sprite.visible = false
+			else:
+				print("INVALID TARGET LEVEL")
+				breakpoint
 
 func update_target(attacked:bool, above_3:bool) -> void:
 	if attacked:
@@ -140,18 +142,20 @@ func calculate_neighbor_distance(neighbor_ratio) -> float:
 
 func _on_target_frozen(target,tower) -> void:
 	if target == self:
-		print(freeze_tower_history)
+		#print(freeze_tower_history)
 		if not freeze_tower_history.has(tower):
 			tower.animate_attack()
 			speed = 0
 			frozen = true
-			timer_frozen.start(3.)
-			timer_freeze_history.start(10.)
+			timer_frozen.start(Globals.frozen_time_length)
+			#print("frozened with ",timer_frozen.wait_time)
+			timer_freeze_history.start(6.)
 			freeze_tower_history.append(tower)
 		
 func _on_timer_frozen_timeout() -> void:
 	frozen = false
 	speed = speed_array[target_level]
+	#print("unfrozen at ",Engine.get_physics_frames())
 
 func _on_timer_freeze_history_timeout() -> void:
 	freeze_tower_history.clear()

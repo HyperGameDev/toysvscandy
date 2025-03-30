@@ -131,7 +131,7 @@ func upgrade_tower(tower:Node3D,upgrade_number:int) -> void:
 	var upgrade_cost: int = tower_dictionary["upgrade" + str(upgrade_number) + "_cost"]
 	var upgrade_name: String = tower_dictionary["upgrade" + str(upgrade_number) + "_name"]
 	
-	if upgrade_cost < Globals.points:
+	if upgrade_cost <= Globals.points:
 		Globals.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade" + str(upgrade_number) + "_upgraded"] = true
 		Messenger.points_spent.emit(upgrade_cost)
 		Messenger.tower_upgraded.emit(upgrade_name) 

@@ -15,7 +15,7 @@ var reparent_timer_running: bool = false
 
 var reparent_timer_length: float
 @export var density: float = 1.
-@export var density_scalar: float = .96
+@export var density_scalar: float = .93
 
 var current_wave_array: Array[int] = []
 
@@ -50,14 +50,13 @@ func _process(delta: float) -> void:
 			targets_in_current_wave += 1
 			reparent_target_to_path()
 			start_reparent_timer()
-			Messenger.target_added_to_path.emit()
 	
 func spawn_targets() -> void:
 	var target_to_spawn: PathFollow3D = target.instantiate()
 	add_child(target_to_spawn)
 	
 func _on_start_next_wave() -> void:
-	#density *= density_scalar
+	density *= density_scalar
 	targets_in_current_wave = 0
 	assign_target_counts()
 	
@@ -122,6 +121,8 @@ func reparent_target_to_path() -> void:
 	
 	target_to_reparent.reparent(path_3d)
 	
+	Messenger.target_added_to_path.emit(target_to_reparent)
+	
 func reparent_extra_target_to_path(level:int,progress_ratio:float,offset:float):
 	var available_targets: Array = get_children()
 	
@@ -140,5 +141,5 @@ func reparent_extra_target_to_path(level:int,progress_ratio:float,offset:float):
 	target_to_reparent.reparent(path_3d)
 	target_to_reparent.progress_ratio = progress_ratio + offset
 	
-	Messenger.target_added_to_path.emit()
+	Messenger.target_added_to_path.emit(target_to_reparent)
 	

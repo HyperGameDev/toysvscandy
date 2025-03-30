@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = false
+var debug: bool = true
 var wave_number: int = 0
 var health: int = 40
 var points: int = 650
@@ -15,8 +15,8 @@ var targets_on_path: Variant = []:
 		targets_on_path = value
 		
 
-var explode_range: float = .05
-		 
+var explode_range: float = .035
+var frozen_time_length: float = 3.
 		
 
 var wave_data = {
@@ -203,7 +203,7 @@ func _on_start_next_wave():
 	wave_active = true
 	wave_number += 1
 	
-func _on_target_added_to_path() -> void:
+func _on_target_added_to_path(_target) -> void:
 	#print("targets added")
 	update_path_targets_array()
 	
@@ -247,7 +247,7 @@ func converted_target_value(level) -> int:
 func add_debug_wave_data():
 	wave_data = {
 		wave_0 = [0, 0, 0, 0, 0, 0],
-		wave_1 = [1, 1, 1, 0, 0, 0],
+		wave_1 = [1, 1, 100, 50, 10, 10],
 		wave_2 = [1, 1, 1, 0, 0, 0],
 		wave_3 = [5, 20, 5, 5, 5, 5],
 		wave_4 = [5, 20, 5, 5, 5, 5],
