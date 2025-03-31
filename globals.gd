@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = false
+var debug: bool = true
 
 var game_overed: bool = false
 
@@ -199,6 +199,7 @@ func _ready() -> void:
 	if debug:
 		add_debug_wave_data()
 		points = points_debug
+		health = 1000000
 		
 func _physics_process(_delta: float) -> void:
 	targets_left_in_wave = Target_Collector.ref.current_wave_array.size() + targets_on_path.size()

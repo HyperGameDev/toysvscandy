@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://cvidyc0xv51bd"]
+
+[ext_resource type="PackedScene" uid="uid://7j614hjg2c81" path="res://Assets/path/baby_01_00.blend" id="1_dd2q1"]
+[ext_resource type="Script" uid="uid://djxg83nfhxwyc" path="res://Assets/path/baby.gd" id="2_0le8e"]
+[ext_resource type="Shader" uid="uid://cjudevm07c2ov" path="res://Shaders/outline2.gdshader" id="2_c7gcs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0le8e"]
+render_priority = 1
+shader = ExtResource("2_c7gcs")
+shader_parameter/outline_color = Color(0.24, 0.24, 0.24, 1)
+shader_parameter/outline_width = 3.008
+shader_parameter/fade_start = 100.0
+shader_parameter/fade_end = 100.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnm7i"]
+next_pass = SubResource("ShaderMaterial_0le8e")
+albedo_color = Color(0.952941, 0.941176, 0.901961, 1)
+metallic = 0.73
+metallic_specular = 0.42
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0i223"]
+render_priority = 3
+shader = ExtResource("2_c7gcs")
+shader_parameter/outline_color = Color(0.126546, 0.0771556, 0.0235576, 1)
+shader_parameter/outline_width = 3.008
+shader_parameter/fade_start = 100.0
+shader_parameter/fade_end = 100.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4vd1m"]
+next_pass = SubResource("ShaderMaterial_0i223")
+shading_mode = 2
+diffuse_mode = 3
+albedo_color = Color(0.5, 0.367, 0.215, 1)
+metallic_specular = 0.46
+roughness = 0.83
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vnm7i"]
+animation = &"eating"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0i223"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_4vd1m"]
+fadein_time = 0.1
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_oay0s"]
+graph_offset = Vector2(-335, 133)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_0i223")
+nodes/Animation/position = Vector2(-120, 140)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_vnm7i")
+"nodes/Animation 2/position" = Vector2(-120, 320)
+nodes/eat/node = SubResource("AnimationNodeOneShot_4vd1m")
+nodes/eat/position = Vector2(120, 180)
+nodes/output/position = Vector2(320, 200)
+node_connections = [&"eat", 0, &"Animation", &"eat", 1, &"Animation 2", &"output", 0, &"eat"]
+
+[node name="baby_01_00" instance=ExtResource("1_dd2q1")]
+script = ExtResource("2_0le8e")
+
+[node name="Baby" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.989889, 0, 0, 0, 1, 0, 0, 0)
+lod_bias = 128.0
+surface_material_override/0 = SubResource("StandardMaterial3D_vnm7i")
+surface_material_override/1 = SubResource("StandardMaterial3D_4vd1m")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+unique_name_in_owner = true
+tree_root = SubResource("AnimationNodeBlendTree_oay0s")
+anim_player = NodePath("../AnimationPlayer")
+parameters/eat/active = false
+parameters/eat/internal_active = false
+parameters/eat/request = 0
