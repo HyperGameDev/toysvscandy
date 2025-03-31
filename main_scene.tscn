@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=76 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -13,6 +13,7 @@
 [ext_resource type="Gradient" uid="uid://dj72fx45gaaji" path="res://Colors/ui_colors/hud_01.tres" id="6_hq1ik"]
 [ext_resource type="Script" uid="uid://dberpdrjbjji6" path="res://target_collectors.gd" id="7_66tet"]
 [ext_resource type="Theme" uid="uid://xwraynlxvb7d" path="res://Themes/ui_01.tres" id="7_nfk4m"]
+[ext_resource type="Script" uid="uid://blrqva8qkwv6j" path="res://menus.gd" id="11_j8kkg"]
 [ext_resource type="Script" uid="uid://b8pxs1hrwkp7i" path="res://UI/tower_button.gd" id="12_5smuj"]
 [ext_resource type="PackedScene" uid="uid://cfetiahnml574" path="res://Towers/subviewport_tower_1.tscn" id="13_ak604"]
 [ext_resource type="Script" uid="uid://d0l008crncmg6" path="res://projctile_collector.gd" id="13_mo76n"]
@@ -95,6 +96,14 @@ point_count = 28
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_m35m6"]
 
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nfk4m"]
+gradient = ExtResource("6_hq1ik")
+fill_from = Vector2(0.512821, 1)
+fill_to = Vector2(0.525641, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66tet"]
+texture = SubResource("GradientTexture2D_nfk4m")
+
 [sub_resource type="Animation" id="Animation_u0ygc"]
 length = 0.001
 tracks/0/type = "value"
@@ -146,14 +155,6 @@ _data = {
 &"hide_bottom_ui": SubResource("Animation_m35m6"),
 &"show_bottom_ui": SubResource("Animation_7th4q")
 }
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nfk4m"]
-gradient = ExtResource("6_hq1ik")
-fill_from = Vector2(0.512821, 1)
-fill_to = Vector2(0.525641, 0)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66tet"]
-texture = SubResource("GradientTexture2D_nfk4m")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fv2he"]
 viewport_path = NodePath(".")
@@ -440,10 +441,56 @@ shape = SubResource("WorldBoundaryShape3D_m35m6")
 transform = Transform3D(-4.37114e-08, -0.208885, 0.97794, -1, 9.13064e-09, -4.27471e-08, 0, -0.97794, -0.208885, -6.98806, 5, 24.1809)
 shape = SubResource("WorldBoundaryShape3D_m35m6")
 
+[node name="Menus" type="CanvasLayer" parent="."]
+layer = 2
+script = ExtResource("11_j8kkg")
+
+[node name="Center_UI" type="MarginContainer" parent="Menus"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -294.0
+offset_top = -177.0
+offset_right = 294.0
+offset_bottom = 177.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Menus/Center_UI"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_66tet")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menus/Center_UI"]
+layout_mode = 2
+theme_override_constants/margin_top = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menus/Center_UI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label_GameOver" type="Label" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+theme_override_font_sizes/font_size = 81
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="Button_GameOver_Restart" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+theme_override_font_sizes/font_size = 71
+text = "Restart"
+
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_7ycvg")
 
 [node name="Bottom_UI" type="MarginContainer" parent="HUD"]
+unique_name_in_owner = true
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0

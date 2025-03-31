@@ -19,6 +19,7 @@ enum side_menu_sides {RIGHT,LEFT}
 
 var side_ui_hovered: bool = false
 
+@onready var bottom_ui: MarginContainer = %Bottom_UI
 @onready var side_ui: MarginContainer = %Side_UI
 
 @onready var button_sell: Button = %Button_Sell
@@ -170,7 +171,7 @@ func update_ui_values() -> void:
 	_on_updated_points()
 	
 func _on_updated_health() -> void:
-	label_health.text = str(Globals.health)
+	label_health.text = str(clamp(Globals.health,0,40))
 	
 func _on_updated_points() -> void:
 	var current_points: int = Globals.points

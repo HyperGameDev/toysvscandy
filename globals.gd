@@ -1,22 +1,36 @@
 extends Node
-var debug: bool = false
+var debug: bool = true
+
+var game_overed: bool = false
+
+const WAVE_ACTIVE: bool = false
+const WAVE_NUMBER: int = 0
+const HEALTH: int = 40
+const POINTS: int = 650
+const POINTS_DEBUG: int = 24000
+
+const EXPLODE_RANGE: float = .035
+const FROZEN_TIME_LENGTH: float = 3.
+
+const TARGETS_LEFT_IN_WAVE: int = 0
+
+
+var wave_active: bool = false
 var wave_number: int = 0
 var health: int = 40
 var points: int = 650
 var points_debug: int = 24000
 
-var wave_active: bool = false
-var targets_left_in_wave: int
+var explode_range: float = .035
+var frozen_time_length: float = 3.
+
+var targets_left_in_wave: int = 0
 
 var targets_on_path: Variant = []:
 	get: 
 		return targets_on_path
 	set(value):
 		targets_on_path = value
-		
-
-var explode_range: float = .035
-var frozen_time_length: float = 3.
 		
 
 var wave_data = {
@@ -203,12 +217,21 @@ func _on_target_removed_from_path(_target) -> void:
 	#print("targets removed")
 	update_path_targets_array()
 	
+	if health <= 0:
+		health = 0
+		game_over()
+	
 func update_path_targets_array() -> void:
 	targets_on_path = Path.ref.get_children()
 
 func _on_target_missed(level) -> void:
 	var health_lost: int = converted_target_value(level)
-	health -= health_lost
+	
+	if health <= 0:
+		health = 0
+	else:
+		health -= health_lost
+		
 	Messenger.updated_health.emit()
 	
 func _on_points_spent(amount) -> void:
@@ -225,15 +248,44 @@ func _on_target_attacked() -> void:
 	
 func _on_wave_ended() -> void:
 	wave_active = false
-	var wave_factor = wave_number - 1
-	points += 100 - wave_factor
-	Messenger.updated_points.emit()
+	
+	if health <= 0:
+		pass
+	else:
+		var wave_factor = wave_number - 1
+		points += 100 - wave_factor
+		Messenger.updated_points.emit()
 	
 func converted_target_value(level) -> int:
 	if level > 3:
 		return 9
 	else:
 		return level + 1
+		
+func game_over():
+	if not game_overed:
+		game_overed = true
+		Menus.ref.center_ui.visible = true
+		HUD.ref.bottom_ui.visible = false
+		HUD.ref.side_ui.visible = false
+		
+func reload():
+	game_overed = false
+	
+	wave_active = WAVE_ACTIVE
+	wave_number = WAVE_NUMBER
+	health = HEALTH
+	points = POINTS
+	points_debug = POINTS_DEBUG
+
+	explode_range = EXPLODE_RANGE
+	frozen_time_length = FROZEN_TIME_LENGTH
+	
+	targets_left_in_wave = TARGETS_LEFT_IN_WAVE
+	
+	targets_on_path.clear()
+	
+	get_tree().call_deferred("change_scene_to_file", "res://main_scene.tscn")
 	
 
 func add_debug_wave_data():
