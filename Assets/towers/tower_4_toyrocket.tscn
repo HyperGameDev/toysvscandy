@@ -210,7 +210,13 @@ _data = {
 
 [node name="tower_4_toyrocket" instance=ExtResource("1_7b58c")]
 script = ExtResource("2_8xdud")
+upgraded_blast_factor = null
+upgraded_shot_amount = null
+mesh_only = null
 tower_type = 3
+aim_type = null
+attack_animation_speed = null
+attack_timer_length = null
 
 [node name="Pad" parent="." index="0"]
 unique_name_in_owner = true

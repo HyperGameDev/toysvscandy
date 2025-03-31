@@ -23,6 +23,7 @@ var towers_upgraded = {
 	},
 	SUPER = {
 		upgrade1_upgraded = false,
+		upgrade2_upgraded = false,
 	}
 }
 

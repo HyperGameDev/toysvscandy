@@ -20,7 +20,10 @@ enum side_menu_sides {RIGHT,LEFT}
 var side_ui_hovered: bool = false
 
 @onready var side_ui: MarginContainer = %Side_UI
+
 @onready var button_sell: Button = %Button_Sell
+@onready var sell_amount: Label = %Label_Sell_Amount
+
 
 @onready var upgrade_2_vbox: VBoxContainer = %VBox_Upgrade2
 
@@ -255,6 +258,7 @@ func setup_tower_ui(tower) -> void:
 	tower_preview.texture.viewport_path = tower_dictionary["icon"]
 	tower_name.text = tower_dictionary["tower_name"]
 	
+	sell_amount.text = str(calculate_sold_amount(tower))
 	
 	if tower.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade1_upgraded"] == false:
 		button_upgrade_left.disabled = false
@@ -297,9 +301,36 @@ func _on_button_start_wave_pressed() -> void:
 	button_start_wave.disabled = true
 	
 func _on_button_sell_pressed() -> void:
-	tower_last_selected.queue_free()
+	var tower_sold: Node3D = tower_last_selected
+	tower_sold.queue_free()
+	Messenger.points_earned.emit(calculate_sold_amount(tower_sold))
 	hide_side_ui()
 	update_menu_state(menu_states.DEFAULT)
+	
+func calculate_sold_amount(tower) -> int:
+	var upgrade1_upgraded: bool = tower.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade1_upgraded"] 
+	var upgrade2_upgraded: bool = tower.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade2_upgraded"] 
+	
+	var tower_base_worth: int = Globals.tower_data[str(tower.tower_types.keys()[tower.tower_type])]["tower_cost"]
+	var upgrade1_worth: int
+	var upgrade2_worth: int
+	
+	if upgrade1_upgraded:
+		upgrade1_worth = Globals.tower_data[str(tower.tower_types.keys()[tower.tower_type])]["upgrade1_cost"]
+	else:
+		upgrade1_worth = 0
+	
+	if upgrade2_upgraded:
+		upgrade2_worth = Globals.tower_data[str(tower.tower_types.keys()[tower.tower_type])]["upgrade2_cost"]
+	else:
+		upgrade2_worth = 0
+		
+	var gross_sell_value: int = tower_base_worth + upgrade1_worth + upgrade2_worth
+	var net_sell_value: int = ceili(gross_sell_value * .8)
+	
+	return net_sell_value
+		
+	
 
 func _on_tower_1_pressed() -> void:
 	if cursor_target.cursor_available:

@@ -46,7 +46,12 @@ radius = 2.749
 
 [node name="tower_5_supersoldier" instance=ExtResource("1_0srtc")]
 script = ExtResource("2_0srtc")
+upgraded_shot_amount = null
+mesh_only = null
 tower_type = 4
+aim_type = null
+attack_animation_speed = null
+attack_timer_length = null
 
 [node name="base_002 Remeshed Remeshed" parent="." index="0"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1.00089, 0, 1, 0, -4.37114e-08, 0, 0, 0)
