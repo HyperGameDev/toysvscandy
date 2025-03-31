@@ -201,10 +201,9 @@ func set_tower_stats():
 func _on_attack_moment() -> void:
 	pass
 	
-func do_attack(target:PathFollow3D) -> void:
-	target.take_single_damage(target)
-	#print("Attack Done! ",Engine.get_physics_frames())
-	#print("------------------")
+func do_attack(_target:PathFollow3D) -> void:
+	pass
+	
 	
 func _on_tower_placed(tower) -> void:
 	if tower == self:
