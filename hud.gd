@@ -260,27 +260,40 @@ func setup_tower_ui(tower) -> void:
 	
 	sell_amount.text = str(calculate_sold_amount(tower))
 	
+	var upgrade1_cost: int = tower_dictionary["upgrade1_cost"]
+	
 	if tower.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade1_upgraded"] == false:
 		button_upgrade_left.disabled = false
 		button_upgrade_left.text = tower_dictionary["upgrade1_name"]
+		if upgrade1_cost > Globals.points:
+			button_upgrade_left.icon = tower_dictionary["upgrade1_icon_x"]
+		else:
+			button_upgrade_left.icon = tower_dictionary["upgrade1_icon"]
+			
 	else:
 		button_upgrade_left.disabled = true
 		button_upgrade_left.text = "OWNED"
 
-	button_upgrade_left.icon = tower_dictionary["upgrade1_icon"]
-	upgrade_left_cost.text = str(tower_dictionary["upgrade1_cost"])
+	upgrade_left_cost.text = str(upgrade1_cost)
 	
 	var has_2_upgrades: bool = tower_dictionary["has_2_upgrades"]
 	
 	if has_2_upgrades:
+		var upgrade2_cost: int = tower_dictionary["upgrade2_cost"]
 		if tower.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade2_upgraded"] == false:
 			button_upgrade_right.disabled = false
 			button_upgrade_right.text = tower_dictionary["upgrade2_name"]
+			
+			if upgrade2_cost > Globals.points:
+				button_upgrade_right.icon = tower_dictionary["upgrade2_icon_x"]
+			else:
+				button_upgrade_right.icon = tower_dictionary["upgrade2_icon"]
+				
 		else:
 			button_upgrade_right.disabled = true
 			button_upgrade_right.text = "OWNED"
-		button_upgrade_right.icon = tower_dictionary["upgrade2_icon"]
-		upgrade_right_cost.text = str(tower_dictionary["upgrade2_cost"])
+			
+		upgrade_right_cost.text = str(upgrade2_cost)
 		if upgrade_2_vbox.visible == false:
 			upgrade_2_vbox.visible = true
 	else:

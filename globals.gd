@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = true
+var debug: bool = false
 var wave_number: int = 0
 var health: int = 40
 var points: int = 650
@@ -83,10 +83,12 @@ const tower_data = {
 		
 		upgrade1_name = "DOUBLE",
 		upgrade1_icon = preload("res://Assets/ui/upgrade_double.png"),
+		upgrade1_icon_x = preload("res://Assets/ui/upgrade_double_x.png"),
 		upgrade1_cost = 210,
 		
 		upgrade2_name = "RANGE",
 		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
+		upgrade2_icon_x = preload("res://Assets/ui/upgrade_range_x.png"),
 		upgrade2_cost = 100,
 		upgrade_radius_factor = 1.5
 	},
@@ -99,10 +101,12 @@ const tower_data = {
 		
 		upgrade1_name = "FASTER",
 		upgrade1_icon = preload("res://Assets/ui/upgrade_speed.png"),
+		upgrade1_icon_x = preload("res://Assets/ui/upgrade_speed_x.png"),
 		upgrade1_cost = 250,
 		
 		upgrade2_name = "RANGE",
 		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
+		upgrade2_icon_x = preload("res://Assets/ui/upgrade_range_x.png"),
 		upgrade2_cost = 150,
 		upgrade_radius_factor = 1.3
 	},
@@ -115,10 +119,12 @@ const tower_data = {
 		
 		upgrade1_name = "+ TIME",
 		upgrade1_icon = preload("res://Assets/ui/upgrade_time.png"),
+		upgrade1_icon_x = preload("res://Assets/ui/upgrade_time_x.png"),
 		upgrade1_cost = 450,
 		
 		upgrade2_name = "RANGE",
 		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
+		upgrade2_icon_x = preload("res://Assets/ui/upgrade_range_x.png"),
 		upgrade2_cost = 300,
 		upgrade_radius_factor = 1.3
 	},
@@ -131,10 +137,12 @@ const tower_data = {
 		
 		upgrade1_name = "BIGGER",
 		upgrade1_icon = preload("res://Assets/ui/upgrade_blast.png"),
+		upgrade1_icon_x = preload("res://Assets/ui/upgrade_blast_x.png"),
 		upgrade1_cost = 650,
 		
 		upgrade2_name = "RANGE",
 		upgrade2_icon = preload("res://Assets/ui/upgrade_range.png"),
+		upgrade2_icon_x = preload("res://Assets/ui/upgrade_range_x.png"),
 		upgrade2_cost = 250,
 		upgrade_radius_factor = 1.4
 	},
@@ -147,8 +155,14 @@ const tower_data = {
 		
 		upgrade1_name = "RANGE",
 		upgrade1_icon = preload("res://Assets/ui/upgrade_range.png"),
+		upgrade1_icon_x = preload("res://Assets/ui/upgrade_range_x.png"),
 		upgrade1_cost = 2400,
-		upgrade_radius_factor = 2.
+		upgrade_radius_factor = 2.,
+		
+		upgrade2_name = "",
+		upgrade2_icon = "",
+		upgrade2_icon_x = "",
+		upgrade2_cost = 0
 	}
 }
 
