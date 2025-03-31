@@ -19,6 +19,10 @@ enum side_menu_sides {RIGHT,LEFT}
 
 var side_ui_hovered: bool = false
 
+@onready var popup_ui: MarginContainer = %Popup_UI
+
+@onready var popup_cost: Label = %Label_Popup_Cost
+
 @onready var bottom_ui: MarginContainer = %Bottom_UI
 @onready var side_ui: MarginContainer = %Side_UI
 
@@ -93,7 +97,6 @@ func _ready() -> void:
 	Messenger.updated_health.connect(_on_updated_health)
 	Messenger.updated_points.connect(_on_updated_points)
 	
-	
 	button_start_wave.pressed.connect(_on_button_start_wave_pressed)
 	Messenger.wave_ended.connect(_on_wave_ended)
 	
@@ -104,6 +107,18 @@ func _ready() -> void:
 	button_tower_3.pressed.connect(_on_tower_3_pressed)
 	button_tower_4.pressed.connect(_on_tower_4_pressed)
 	button_tower_5.pressed.connect(_on_tower_5_pressed)
+	
+	button_tower_1.mouse_entered.connect(_on_tower_1_hovered)
+	button_tower_2.mouse_entered.connect(_on_tower_2_hovered)
+	button_tower_3.mouse_entered.connect(_on_tower_3_hovered)
+	button_tower_4.mouse_entered.connect(_on_tower_4_hovered)
+	button_tower_5.mouse_entered.connect(_on_tower_5_hovered)
+	
+	button_tower_1.mouse_exited.connect(_on_tower_1_unhovered)
+	button_tower_2.mouse_exited.connect(_on_tower_2_unhovered)
+	button_tower_3.mouse_exited.connect(_on_tower_3_unhovered)
+	button_tower_4.mouse_exited.connect(_on_tower_4_unhovered)
+	button_tower_5.mouse_exited.connect(_on_tower_5_unhovered)
 	
 #func _physics_process(delta: float) -> void:
 	#print("UI Hovered ",side_ui_hovered)
@@ -312,6 +327,7 @@ func _on_wave_ended() -> void:
 func _on_button_start_wave_pressed() -> void:
 	Messenger.start_next_wave.emit()
 	label_wave.text = str(Globals.wave_number)
+	button_start_wave.text = " Start Wave " + str(clamp((Globals.wave_number + 1),1,50)) + " "
 	button_start_wave.disabled = true
 	
 func _on_button_sell_pressed() -> void:
@@ -343,8 +359,6 @@ func calculate_sold_amount(tower) -> int:
 	var net_sell_value: int = ceili(gross_sell_value * .8)
 	
 	return net_sell_value
-		
-	
 
 func _on_tower_1_pressed() -> void:
 	if cursor_target.cursor_available:
@@ -375,3 +389,37 @@ func _on_tower_5_pressed() -> void:
 		var tower_5_spawn: Node3D = tower_5_scene.instantiate()
 		tower_collector.add_child(tower_5_spawn)
 		Messenger.points_spent.emit(4000)
+		
+func show_tower_hover_data(tower) -> void:
+	popup_cost.text = "COST: " + str(Globals.tower_data[tower]["tower_cost"])
+	
+
+func _on_tower_1_hovered() -> void:
+	show_tower_hover_data("DART")
+	popup_ui.visible = true
+func _on_tower_1_unhovered() -> void:
+	popup_ui.visible = false
+	
+func _on_tower_2_hovered() -> void:
+	show_tower_hover_data("TACK")
+	popup_ui.visible = true
+func _on_tower_2_unhovered() -> void:
+	popup_ui.visible = false
+	
+func _on_tower_3_hovered() -> void:
+	show_tower_hover_data("FREEZE")
+	popup_ui.visible = true
+func _on_tower_3_unhovered() -> void:
+	popup_ui.visible = false
+	
+func _on_tower_4_hovered() -> void:
+	show_tower_hover_data("BOMB")
+	popup_ui.visible = true
+func _on_tower_4_unhovered() -> void:
+	popup_ui.visible = false
+	
+func _on_tower_5_hovered() -> void:
+	show_tower_hover_data("SUPER")
+	popup_ui.visible = true
+func _on_tower_5_unhovered() -> void:
+	popup_ui.visible = false

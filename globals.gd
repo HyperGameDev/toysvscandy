@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = true
+var debug: bool = false
 
 var game_overed: bool = false
 

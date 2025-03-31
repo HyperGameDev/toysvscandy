@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=78 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -103,6 +103,14 @@ fill_to = Vector2(0.525641, 0)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66tet"]
 texture = SubResource("GradientTexture2D_nfk4m")
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j8kkg"]
+gradient = ExtResource("6_hq1ik")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 0.13)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yh4yk"]
+texture = SubResource("GradientTexture2D_j8kkg")
 
 [sub_resource type="Animation" id="Animation_u0ygc"]
 length = 0.001
@@ -489,6 +497,36 @@ text = "Restart"
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_7ycvg")
 
+[node name="Popup_UI" type="MarginContainer" parent="HUD"]
+unique_name_in_owner = true
+visible = false
+offset_top = 591.0
+offset_right = 1024.0
+offset_bottom = 724.0
+theme_override_constants/margin_bottom = 85
+
+[node name="Panel" type="Panel" parent="HUD/Popup_UI"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_yh4yk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Popup_UI"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Popup_UI/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("28_o7u2a")
+expand_mode = 3
+
+[node name="Label_Popup_Cost" type="Label" parent="HUD/Popup_UI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 31
+text = "COST: "
+
 [node name="Bottom_UI" type="MarginContainer" parent="HUD"]
 unique_name_in_owner = true
 anchors_preset = 12
@@ -518,7 +556,7 @@ dragging_enabled = false
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/Bottom_UI/HSplitContainer"]
 z_index = 1
 layout_mode = 2
-theme_override_constants/separation = 65
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="Button_Tower_1" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
@@ -713,7 +751,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_nfk4m")
-text = "Start Wave"
+text = " Start Wave "
 
 [node name="Side_UI" type="MarginContainer" parent="HUD"]
 unique_name_in_owner = true
@@ -872,8 +910,8 @@ anchor_right = 1.0
 offset_bottom = 61.0
 grow_horizontal = 2
 theme_override_constants/margin_left = 13
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 3
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 35
 
 [node name="HSplit" type="HSplitContainer" parent="HUD/Top_UI"]
 layout_mode = 2
@@ -884,6 +922,7 @@ dragging_enabled = false
 [node name="HBox_Top_Left" type="HBoxContainer" parent="HUD/Top_UI/HSplit"]
 layout_mode = 2
 theme_override_constants/separation = 15
+alignment = 2
 
 [node name="Icon_Health" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
 custom_minimum_size = Vector2(60, 60)
@@ -913,6 +952,7 @@ theme = ExtResource("7_nfk4m")
 text = "100"
 
 [node name="HBox_Top_Right" type="HBoxContainer" parent="HUD/Top_UI/HSplit"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 
