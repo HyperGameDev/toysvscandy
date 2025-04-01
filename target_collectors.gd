@@ -118,7 +118,7 @@ func reparent_target_to_path() -> void:
 	#target_to_reparent.sprite.render_priority = 126 - ((targets_in_current_wave - 1) % 126)
 	
 	#print("Target's level: ",target_to_reparent.target_level)
-	
+	target_to_reparent.sprite.visible = true
 	target_to_reparent.reparent(path_3d)
 	
 	Messenger.target_added_to_path.emit(target_to_reparent)
@@ -137,6 +137,8 @@ func reparent_extra_target_to_path(level:int,progress_ratio:float,offset:float):
 	var sprite_priority: int = 126
 	target_to_reparent.sprite.render_priority = sprite_priority
 	target_to_reparent.sprite_blastfx.render_priority = sprite_priority + 1
+	
+	target_to_reparent.sprite.visible = true
 	
 	target_to_reparent.reparent(path_3d)
 	target_to_reparent.progress_ratio = progress_ratio + offset

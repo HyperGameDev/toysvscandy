@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = false
+var debug: bool = true
 
 var game_overed: bool = false
 
@@ -147,7 +147,7 @@ const tower_data = {
 		tower_name = "Rocket",
 		icon = "%SubViewport_Tower_4",
 		tower_cost = 900,
-		tower_desc = "Single shot that hits multiple.",
+		tower_desc = "Single shot that explodes.",
 		
 		has_2_upgrades = true,
 		
@@ -201,7 +201,7 @@ func _ready() -> void:
 	
 	if debug:
 		add_debug_wave_data()
-		points = 5000
+		points = 24000
 		health = 40
 		
 func _physics_process(_delta: float) -> void:
@@ -271,6 +271,7 @@ func game_over():
 		game_overed = true
 		Menus.ref.center_ui.visible = true
 		Menus.ref.label_center_ui.text = "GAME OVER"
+		Menus.ref.button_continue.visible = false
 		HUD.ref.bottom_ui.visible = false
 		HUD.ref.side_ui.visible = false
 		
