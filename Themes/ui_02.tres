@@ -1,7 +1,10 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://csp1g1jbl0ipm"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://csp1g1jbl0ipm"]
 
 [sub_resource type="FontVariation" id="FontVariation_ymboa"]
 spacing_glyph = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cou5w"]
+bg_color = Color(0.0639114, 6.31716e-05, 0.20184, 0.67451)
 
 [sub_resource type="FontVariation" id="FontVariation_hq1ik"]
 
@@ -9,6 +12,7 @@ spacing_glyph = 2
 Button/constants/outline_size = 15
 Button/font_sizes/font_size = 21
 Button/fonts/font = SubResource("FontVariation_ymboa")
+Button/styles/normal = SubResource("StyleBoxFlat_cou5w")
 Label/constants/outline_size = 18
 Label/font_sizes/font_size = 29
 Label/fonts/font = SubResource("FontVariation_hq1ik")
