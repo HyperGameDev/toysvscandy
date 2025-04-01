@@ -194,15 +194,11 @@ _data = {
 
 [node name="tower_2_spinningtop" instance=ExtResource("1_scsal")]
 script = ExtResource("2_syw3k")
-upgraded_speed_factor = null
-mesh_only = null
 tower_type = 1
 aim_type = 1
-attack_animation_speed = null
-attack_timer_length = null
 
 [node name="Top" parent="." index="0"]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0, 0)
+transform = Transform3D(0.844193, 0, 0.536039, 0, 1, 0, -0.536039, 0, 0.844193, 0, 0, 0)
 lod_bias = 128.0
 surface_material_override/0 = SubResource("StandardMaterial3D_scsal")
 surface_material_override/1 = SubResource("StandardMaterial3D_kw80a")

@@ -7,6 +7,11 @@ class_name Tower_Tack extends Area_Towers
 
 var one_shot: bool = false
 
+func _ready() -> void:
+	super._ready()
+	if mesh_only:
+		spin_sparks.visible = false
+
 func _upgrade_radius(radius:float) -> void:
 	super._upgrade_radius(radius)
 	spin_sparks.mesh.size = Vector2(radius*2,radius*2)

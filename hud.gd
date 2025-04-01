@@ -22,9 +22,15 @@ var side_ui_hovered: bool = false
 @onready var popup_ui: MarginContainer = %Popup_UI
 
 @onready var popup_cost: Label = %Label_Popup_Cost
+@onready var popup_name: Label = %Label_Tower_Name
+@onready var popup_desc: Label = %Label_Tower_Desc
+
 
 @onready var bottom_ui: MarginContainer = %Bottom_UI
 @onready var side_ui: MarginContainer = %Side_UI
+
+@onready var button_settings: Button = %Button_Settings
+
 
 @onready var button_sell: Button = %Button_Sell
 @onready var sell_amount: Label = %Label_Sell_Amount
@@ -99,6 +105,8 @@ func _ready() -> void:
 	
 	Messenger.updated_health.connect(_on_updated_health)
 	Messenger.updated_points.connect(_on_updated_points)
+	
+	button_settings.pressed.connect(_on_button_settings_pressed)
 	
 	button_start_wave.pressed.connect(_on_button_start_wave_pressed)
 	Messenger.wave_ended.connect(_on_wave_ended)
@@ -330,6 +338,10 @@ func hide_side_ui():
 		
 func _on_wave_ended() -> void:
 	button_start_wave.disabled = false
+	
+func _on_button_settings_pressed() -> void:
+	Menus.ref.center_ui.visible = !Menus.ref.center_ui.visible
+	Menus.ref.label_center_ui.text = "MENU"
 
 func _on_button_start_wave_pressed() -> void:
 	Messenger.start_next_wave.emit()
@@ -398,7 +410,9 @@ func _on_tower_5_pressed() -> void:
 		Messenger.points_spent.emit(4000)
 		
 func show_tower_hover_data(tower) -> void:
+	popup_name.text = str(Globals.tower_data[tower]["tower_name"])
 	popup_cost.text = "COST: " + str(Globals.tower_data[tower]["tower_cost"])
+	popup_desc.text = str(Globals.tower_data[tower]["tower_desc"])
 	
 
 func _on_tower_1_hovered() -> void:

@@ -1,5 +1,5 @@
 extends Node
-var debug: bool = true
+var debug: bool = false
 
 var game_overed: bool = false
 
@@ -90,6 +90,7 @@ const tower_data = {
 		tower_name = "Toy Soldier",
 		icon = "%SubViewport_Tower_1",
 		tower_cost = 250,
+		tower_desc = "Shoots one at a time.",
 		
 		has_2_upgrades = true,
 		
@@ -108,6 +109,7 @@ const tower_data = {
 		tower_name = "Spinning Top",
 		icon = "%SubViewport_Tower_2",
 		tower_cost = 400,
+		tower_desc = "Does area damage.",
 		
 		has_2_upgrades = true,
 		
@@ -126,6 +128,7 @@ const tower_data = {
 		tower_name = "Snowglobe",
 		icon = "%SubViewport_Tower_3",
 		tower_cost = 850,
+		tower_desc = "Freezes in an area.",
 		
 		has_2_upgrades = true,
 		
@@ -144,6 +147,7 @@ const tower_data = {
 		tower_name = "Rocket",
 		icon = "%SubViewport_Tower_4",
 		tower_cost = 900,
+		tower_desc = "Single shot that hits multiple.",
 		
 		has_2_upgrades = true,
 		
@@ -162,6 +166,7 @@ const tower_data = {
 		tower_name = "Super Soldier",
 		icon = "%SubViewport_Tower_5",
 		tower_cost = 4000,
+		tower_desc = "Extremely fast shooter.",
 		
 		has_2_upgrades = false,
 		
@@ -196,7 +201,7 @@ func _ready() -> void:
 	
 	if debug:
 		add_debug_wave_data()
-		points = 24000
+		points = 5000
 		health = 40
 		
 func _physics_process(_delta: float) -> void:
@@ -265,6 +270,7 @@ func game_over():
 	if not game_overed:
 		game_overed = true
 		Menus.ref.center_ui.visible = true
+		Menus.ref.label_center_ui.text = "GAME OVER"
 		HUD.ref.bottom_ui.visible = false
 		HUD.ref.side_ui.visible = false
 		

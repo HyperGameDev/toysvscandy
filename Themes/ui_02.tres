@@ -1,18 +1,36 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://csp1g1jbl0ipm"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://csp1g1jbl0ipm"]
 
 [sub_resource type="FontVariation" id="FontVariation_ymboa"]
 spacing_glyph = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ntjrs"]
+bg_color = Color(0.1344, 0.104, 0.2, 0.443137)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cou5w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56uls"]
+bg_color = Color(0.114, 0.095, 0.38, 0.67451)
+border_color = Color(0, 0, 0, 0)
+shadow_color = Color(0.541176, 0.780392, 0.976471, 1)
+shadow_size = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cou5w"]
 bg_color = Color(0.0639114, 6.31716e-05, 0.20184, 0.67451)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cl6g"]
+bg_color = Color(0.984314, 0.686275, 1, 1)
 
 [sub_resource type="FontVariation" id="FontVariation_hq1ik"]
 
 [resource]
-Button/constants/outline_size = 15
+Button/colors/font_pressed_color = Color(0.129412, 0.156863, 0.376471, 1)
 Button/font_sizes/font_size = 21
 Button/fonts/font = SubResource("FontVariation_ymboa")
+Button/styles/disabled = SubResource("StyleBoxFlat_ntjrs")
+Button/styles/focus = SubResource("StyleBoxEmpty_cou5w")
+Button/styles/hover = SubResource("StyleBoxFlat_56uls")
 Button/styles/normal = SubResource("StyleBoxFlat_cou5w")
+Button/styles/pressed = SubResource("StyleBoxFlat_4cl6g")
 Label/constants/outline_size = 18
 Label/font_sizes/font_size = 29
 Label/fonts/font = SubResource("FontVariation_hq1ik")

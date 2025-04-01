@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=102 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://crdctfuvyvcfv" path="res://Assets/ui/upgrade_range.png" id="22_vimvf"]
 [ext_resource type="Texture2D" uid="uid://q6jxl8fdntc3" path="res://UI/icons/ui_health.png" id="28_ijoax"]
 [ext_resource type="Texture2D" uid="uid://btj1mn54u6qq7" path="res://UI/icons/ui_brownie_points.png" id="28_o7u2a"]
+[ext_resource type="Texture2D" uid="uid://dpvo220w75d7h" path="res://UI/icons/ui_settings.png" id="30_o4fqm"]
 [ext_resource type="Shader" uid="uid://c8m1xsdd6y4d" path="res://text_bounce.gdshader" id="31_p8s74"]
 [ext_resource type="PackedScene" uid="uid://cvidyc0xv51bd" path="res://Assets/path/baby_01_00.tscn" id="31_yh4yk"]
 
@@ -106,14 +107,6 @@ fill_to = Vector2(0.525641, 0)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66tet"]
 texture = SubResource("GradientTexture2D_nfk4m")
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_j8kkg"]
-gradient = ExtResource("6_hq1ik")
-fill_from = Vector2(0.5, 0)
-fill_to = Vector2(0.5, 0.13)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yh4yk"]
-texture = SubResource("GradientTexture2D_j8kkg")
-
 [sub_resource type="Animation" id="Animation_u0ygc"]
 length = 0.001
 tracks/0/type = "value"
@@ -131,7 +124,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%Popup_UI:position")
+tracks/1/path = NodePath("Popup_UI:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -158,7 +151,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%Popup_UI:position")
+tracks/1/path = NodePath("Popup_UI:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -185,7 +178,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%Popup_UI:position")
+tracks/1/path = NodePath("Popup_UI:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -207,7 +200,7 @@ viewport_path = NodePath(".")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jcla"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wr18j"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p8s74"]
 
 [sub_resource type="Gradient" id="Gradient_2jcla"]
 interpolation_mode = 1
@@ -225,11 +218,29 @@ texture = SubResource("GradientTexture2D_m35m6")
 [sub_resource type="ViewportTexture" id="ViewportTexture_5smuj"]
 viewport_path = NodePath(".")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wr18j"]
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_y5ved"]
 viewport_path = NodePath(".")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ghshe"]
 viewport_path = NodePath(".")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8s74"]
+bg_color = Color(1, 0, 0.933333, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_color = Color(0.0475577, 0.0475577, 0.0475576, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j8kkg"]
+gradient = ExtResource("6_hq1ik")
+fill = 1
+fill_from = Vector2(0.5, -0.69)
+fill_to = Vector2(0.517094, 0.876068)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yh4yk"]
+texture = SubResource("GradientTexture2D_j8kkg")
 
 [sub_resource type="Animation" id="Animation_6jybn"]
 length = 0.001
@@ -319,18 +330,32 @@ _data = {
 &"show_side_ui_right": SubResource("Animation_ak604")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8s74"]
-bg_color = Color(1, 0, 0.933333, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.0475577, 0.0475577, 0.0475576, 1)
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_84odl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ak604"]
 bg_color = Color(0.729412, 0.141176, 0.219608, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gfmxp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4fqm"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0.603922)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+shadow_color = Color(0.8613, 0.89133, 0.99, 1)
+shadow_size = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1n88h"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j8kkg"]
 texture = ExtResource("28_ijoax")
@@ -719,7 +744,11 @@ offset_bottom = 177.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="Menus/Center_UI"]
+[node name="PanelContainer" type="PanelContainer" parent="Menus/Center_UI"]
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+
+[node name="Panel" type="Panel" parent="Menus/Center_UI/PanelContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_66tet")
 
@@ -731,7 +760,8 @@ theme_override_constants/margin_top = 25
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Label_GameOver" type="Label" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+[node name="Label_Center_Menu" type="Label" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_nfk4m")
 theme_override_font_sizes/font_size = 81
@@ -741,42 +771,13 @@ horizontal_alignment = 1
 [node name="Button_GameOver_Restart" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("7_nfk4m")
+theme = ExtResource("17_7th4q")
+theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 71
 text = "Restart"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_7ycvg")
-
-[node name="Popup_UI" type="MarginContainer" parent="HUD"]
-unique_name_in_owner = true
-visible = false
-offset_top = 591.0
-offset_right = 1024.0
-offset_bottom = 724.0
-theme_override_constants/margin_bottom = 85
-
-[node name="Panel" type="Panel" parent="HUD/Popup_UI"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_yh4yk")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Popup_UI"]
-layout_mode = 2
-theme_override_constants/separation = 15
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="HUD/Popup_UI/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("28_o7u2a")
-expand_mode = 3
-
-[node name="Label_Popup_Cost" type="Label" parent="HUD/Popup_UI/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("7_nfk4m")
-theme_override_constants/outline_size = 15
-theme_override_font_sizes/font_size = 31
-text = "COST: "
 
 [node name="Bottom_UI" type="MarginContainer" parent="HUD"]
 unique_name_in_owner = true
@@ -795,7 +796,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_6jybn")
 }
 
-[node name="Panel" type="Panel" parent="HUD/Bottom_UI"]
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Bottom_UI"]
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI/PanelContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_66tet")
 
@@ -810,26 +815,32 @@ layout_mode = 2
 theme_override_constants/separation = 50
 alignment = 1
 
-[node name="Button_Tower_1" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+[node name="MarginContainer_Tower1" type="MarginContainer" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="Button_Tower_1" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower1"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme = ExtResource("7_nfk4m")
 theme_override_icons/icon = SubResource("ViewportTexture_fv2he")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_p8s74")
 action_mode = 0
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("12_5smuj")
 
-[node name="tower_1_toysoldier" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1" instance=ExtResource("5_mo76n")]
+[node name="tower_1_toysoldier" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower1/Button_Tower_1" instance=ExtResource("5_mo76n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 118.8)
 mesh_only = true
 
-[node name="SubViewport_Tower_1" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1" instance=ExtResource("13_ak604")]
+[node name="SubViewport_Tower_1" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower1/Button_Tower_1" instance=ExtResource("13_ak604")]
 unique_name_in_owner = true
 
-[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_1"]
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower1/Button_Tower_1"]
 z_index = -1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
@@ -847,10 +858,16 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_2jcla")
 
-[node name="Button_Tower_2" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+[node name="MarginContainer_Tower2" type="MarginContainer" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="Button_Tower_2" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme = ExtResource("7_nfk4m")
 theme_override_icons/icon = SubResource("ViewportTexture_5smuj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
@@ -859,14 +876,17 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("12_5smuj")
 
-[node name="tower_2_spinningtop" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2" instance=ExtResource("14_42l1d")]
+[node name="tower_2_spinningtop" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower2/Button_Tower_2" instance=ExtResource("14_42l1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 126)
+upgraded_speed_factor = 0.75
 mesh_only = true
+attack_animation_speed = 1.0
+attack_timer_length = 1.0
 
-[node name="SubViewport_Tower_2" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2" instance=ExtResource("15_vimvf")]
+[node name="SubViewport_Tower_2" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower2/Button_Tower_2" instance=ExtResource("15_vimvf")]
 unique_name_in_owner = true
 
-[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_2"]
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower2/Button_Tower_2"]
 z_index = -1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
@@ -884,10 +904,16 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_2jcla")
 
-[node name="Button_Tower_3" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+[node name="MarginContainer_Tower3" type="MarginContainer" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="Button_Tower_3" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme = ExtResource("7_nfk4m")
 theme_override_icons/icon = SubResource("ViewportTexture_y5ved")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
@@ -896,14 +922,14 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("12_5smuj")
 
-[node name="tower_3_snowglobe" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3" instance=ExtResource("15_2jcla")]
+[node name="tower_3_snowglobe" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower3/Button_Tower_3" instance=ExtResource("15_2jcla")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 137)
 mesh_only = true
 
-[node name="SubViewport_Tower_3" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3" instance=ExtResource("17_ghshe")]
+[node name="SubViewport_Tower_3" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower3/Button_Tower_3" instance=ExtResource("17_ghshe")]
 unique_name_in_owner = true
 
-[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_3"]
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower3/Button_Tower_3"]
 z_index = -1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
@@ -921,10 +947,16 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_2jcla")
 
-[node name="Button_Tower_4" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+[node name="MarginContainer_Tower4" type="MarginContainer" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="Button_Tower_4" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower4"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme = ExtResource("7_nfk4m")
 theme_override_icons/icon = SubResource("ViewportTexture_ghshe")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
@@ -933,14 +965,14 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("12_5smuj")
 
-[node name="tower_4_toyrocket" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_4" instance=ExtResource("19_5smuj")]
+[node name="tower_4_toyrocket" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower4/Button_Tower_4" instance=ExtResource("19_5smuj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 158)
 mesh_only = true
 
-[node name="SubViewport_Tower_4" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_4" instance=ExtResource("20_y5ved")]
+[node name="SubViewport_Tower_4" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower4/Button_Tower_4" instance=ExtResource("20_y5ved")]
 unique_name_in_owner = true
 
-[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_4"]
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower4/Button_Tower_4"]
 z_index = -1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
@@ -958,10 +990,16 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_2jcla")
 
-[node name="Button_Tower_5" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+[node name="MarginContainer_Tower5" type="MarginContainer" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="Button_Tower_5" type="Button" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower5"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme = ExtResource("7_nfk4m")
 theme_override_icons/icon = SubResource("ViewportTexture_ghshe")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2jcla")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
@@ -970,14 +1008,14 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("12_5smuj")
 
-[node name="tower_5_supersoldier" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_5" instance=ExtResource("19_ghshe")]
+[node name="tower_5_supersoldier" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower5/Button_Tower_5" instance=ExtResource("19_ghshe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 149)
 mesh_only = true
 
-[node name="SubViewport_Tower_5" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_5" instance=ExtResource("20_fv2he")]
+[node name="SubViewport_Tower_5" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower5/Button_Tower_5" instance=ExtResource("20_fv2he")]
 unique_name_in_owner = true
 
-[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/Button_Tower_5"]
+[node name="Panel" type="Panel" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower5/Button_Tower_5"]
 z_index = -1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
@@ -1011,6 +1049,60 @@ theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 31
 text = " Start Wave 1 "
 
+[node name="Popup_UI" type="MarginContainer" parent="HUD"]
+unique_name_in_owner = true
+visible = false
+offset_top = 591.0
+offset_right = 1024.0
+offset_bottom = 724.0
+mouse_filter = 2
+theme_override_constants/margin_bottom = 85
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Popup_UI"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8s74")
+
+[node name="Panel" type="Panel" parent="HUD/Popup_UI/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_yh4yk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Popup_UI"]
+layout_mode = 2
+theme_override_constants/separation = 85
+alignment = 1
+
+[node name="Label_Tower_Name" type="Label" parent="HUD/Popup_UI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 31
+text = "Spinning TOp"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Popup_UI/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Popup_UI/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("28_o7u2a")
+expand_mode = 3
+
+[node name="Label_Popup_Cost" type="Label" parent="HUD/Popup_UI/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 31
+text = "COST: 300"
+
+[node name="Label_Tower_Desc" type="Label" parent="HUD/Popup_UI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 31
+text = "Slowly attacks in an area."
+
 [node name="Side_UI" type="MarginContainer" parent="HUD"]
 unique_name_in_owner = true
 anchors_preset = 11
@@ -1031,7 +1123,7 @@ libraries = {
 
 [node name="PanelContainer" type="PanelContainer" parent="HUD/Side_UI"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_p8s74")
+theme = ExtResource("7_nfk4m")
 
 [node name="Panel" type="Panel" parent="HUD/Side_UI/PanelContainer"]
 layout_mode = 2
@@ -1140,7 +1232,7 @@ layout_mode = 2
 [node name="Button_Sell" type="Button" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("7_nfk4m")
+theme = ExtResource("17_7th4q")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ak604")
 text = "SELL"
 
@@ -1173,12 +1265,11 @@ offset_bottom = 61.0
 grow_horizontal = 2
 theme_override_constants/margin_left = 13
 theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 35
 
 [node name="HSplit_Topbar" type="HSplitContainer" parent="HUD/Top_UI"]
 layout_mode = 2
 theme_override_constants/separation = 15
-split_offset = 530
+split_offset = 595
 dragging_enabled = false
 
 [node name="HBox_Settings" type="HBoxContainer" parent="HUD/Top_UI/HSplit_Topbar"]
@@ -1200,9 +1291,16 @@ custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 theme = ExtResource("7_nfk4m")
 
-[node name="Icon_Settings" type="Panel" parent="HUD/Top_UI/HSplit_Topbar/HBox_Settings"]
-custom_minimum_size = Vector2(50, 50)
+[node name="Button_Settings" type="Button" parent="HUD/Top_UI/HSplit_Topbar/HBox_Settings"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
+theme = ExtResource("7_nfk4m")
+theme_override_icons/icon = ExtResource("30_o4fqm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gfmxp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o4fqm")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1n88h")
+expand_icon = true
 
 [node name="HSplit_Stats" type="HSplitContainer" parent="HUD/Top_UI/HSplit_Topbar"]
 layout_mode = 2
