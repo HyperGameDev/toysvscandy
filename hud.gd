@@ -43,7 +43,10 @@ var side_ui_hovered: bool = false
 @onready var animation_side_ui: AnimationPlayer = %Animation_Side_UI
 
 @onready var label_points: Label = %Label_Points
+@onready var animation_points: AnimationTree = %Animation_Points
+
 @onready var label_health: Label = %Label_Health
+@onready var animation_health: AnimationTree = %Animation_Health
 
 
 
@@ -186,9 +189,13 @@ func update_ui_values() -> void:
 	_on_updated_points()
 	
 func _on_updated_health() -> void:
+	animation_health.set("parameters/bounce/request", 1)
+	
 	label_health.text = str(clamp(Globals.health,0,40))
 	
 func _on_updated_points() -> void:
+	animation_points.set("parameters/bounce/request", 1)
+	
 	var current_points: int = Globals.points
 	label_points.text = str(current_points)
 	update_tower_buttons(current_points)

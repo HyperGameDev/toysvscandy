@@ -7,7 +7,6 @@ const WAVE_ACTIVE: bool = false
 const WAVE_NUMBER: int = 0
 const HEALTH: int = 40
 const POINTS: int = 650
-const POINTS_DEBUG: int = 24000
 
 const EXPLODE_RANGE: float = .035
 const FROZEN_TIME_LENGTH: float = 3.
@@ -19,7 +18,6 @@ var wave_active: bool = false
 var wave_number: int = 0
 var health: int = 40
 var points: int = 650
-var points_debug: int = 24000
 
 var explode_range: float = .035
 var frozen_time_length: float = 3.
@@ -198,8 +196,8 @@ func _ready() -> void:
 	
 	if debug:
 		add_debug_wave_data()
-		points = points_debug
-		health = 1000000
+		points = 24000
+		health = 40
 		
 func _physics_process(_delta: float) -> void:
 	targets_left_in_wave = Target_Collector.ref.current_wave_array.size() + targets_on_path.size()
@@ -277,7 +275,6 @@ func reload():
 	wave_number = WAVE_NUMBER
 	health = HEALTH
 	points = POINTS
-	points_debug = POINTS_DEBUG
 
 	explode_range = EXPLODE_RANGE
 	frozen_time_length = FROZEN_TIME_LENGTH

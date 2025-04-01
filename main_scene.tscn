@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=96 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://crdctfuvyvcfv" path="res://Assets/ui/upgrade_range.png" id="22_vimvf"]
 [ext_resource type="Texture2D" uid="uid://q6jxl8fdntc3" path="res://UI/icons/ui_health.png" id="28_ijoax"]
 [ext_resource type="Texture2D" uid="uid://btj1mn54u6qq7" path="res://UI/icons/ui_brownie_points.png" id="28_o7u2a"]
+[ext_resource type="Shader" uid="uid://c8m1xsdd6y4d" path="res://text_bounce.gdshader" id="31_p8s74"]
 [ext_resource type="PackedScene" uid="uid://cvidyc0xv51bd" path="res://Assets/path/baby_01_00.tscn" id="31_yh4yk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2c62f"]
@@ -290,8 +291,213 @@ bg_color = Color(0.729412, 0.141176, 0.219608, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j8kkg"]
 texture = ExtResource("28_ijoax")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p8s74"]
+shader = ExtResource("31_p8s74")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = false
+shader_parameter/quantize_to = 1.0
+shader_parameter/sine_amplitude = Vector2(0, 0)
+shader_parameter/sine_speed = Vector2(0, 0)
+shader_parameter/scale_factor = 1.0
+shader_parameter/center_position_x = 0.0
+shader_parameter/center_position_y = 26.0
+
+[sub_resource type="Animation" id="Animation_o4fqm"]
+resource_name = "bounce"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Label_Health:material:shader_parameter/sine_amplitude")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Label_Health:material:shader_parameter/sine_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Label_Health:material:shader_parameter/scale_factor")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.133333, 0.322752),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.7, 0.7, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Label_Health:material:shader_parameter/center_position_y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0550155, 0.133333, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [26.0, 100.0, 100.0, 26.0]
+}
+
+[sub_resource type="Animation" id="Animation_p8s74"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Label_Health:material:shader_parameter/sine_amplitude")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Label_Health:material:shader_parameter/sine_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Label_Health:material:shader_parameter/scale_factor")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Label_Health:material:shader_parameter/center_position_y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [26.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gfmxp"]
+_data = {
+&"RESET": SubResource("Animation_p8s74"),
+&"bounce": SubResource("Animation_o4fqm")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o4fqm"]
+animation = &"bounce"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gfmxp"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_1n88h"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_opjno"]
+graph_offset = Vector2(-549.818, 11.2727)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_gfmxp")
+nodes/Animation/position = Vector2(-120, 140)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_o4fqm")
+"nodes/Animation 2/position" = Vector2(-113.74, 290.4)
+nodes/bounce/node = SubResource("AnimationNodeOneShot_1n88h")
+nodes/bounce/position = Vector2(100, 200)
+node_connections = [&"bounce", 0, &"Animation", &"bounce", 1, &"Animation 2", &"output", 0, &"bounce"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o4fqm"]
+shader = ExtResource("31_p8s74")
+shader_parameter/do_abs = false
+shader_parameter/do_quantize = false
+shader_parameter/quantize_to = 1.0
+shader_parameter/sine_amplitude = Vector2(0, 0)
+shader_parameter/sine_speed = Vector2(0, 0)
+shader_parameter/scale_factor = 1.0
+shader_parameter/center_position_x = 0.0
+shader_parameter/center_position_y = 26.0
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijoax"]
 texture = ExtResource("28_o7u2a")
+
+[sub_resource type="Animation" id="Animation_1n88h"]
+resource_name = "bounce"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Label_Points:material:shader_parameter/scale_factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.3, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_opjno"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Label_Points:material:shader_parameter/scale_factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_meb7l"]
+_data = {
+&"RESET": SubResource("Animation_opjno"),
+&"bounce": SubResource("Animation_1n88h")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w30ff"]
+animation = &"bounce"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xy6fp"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_uws2o"]
+mix_mode = 1
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_iylel"]
+graph_offset = Vector2(-554.303, 24.638)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_xy6fp")
+nodes/Animation/position = Vector2(-100, 120)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_w30ff")
+"nodes/Animation 2/position" = Vector2(-100, 280)
+nodes/bounce/node = SubResource("AnimationNodeOneShot_uws2o")
+nodes/bounce/position = Vector2(100, 140)
+node_connections = [&"bounce", 0, &"Animation", &"bounce", 1, &"Animation 2", &"output", 0, &"bounce"]
 
 [sub_resource type="Animation" id="Animation_ghshe"]
 length = 0.001
@@ -914,76 +1120,109 @@ theme_override_constants/margin_left = 13
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 35
 
-[node name="HSplit" type="HSplitContainer" parent="HUD/Top_UI"]
+[node name="HSplit_Topbar" type="HSplitContainer" parent="HUD/Top_UI"]
 layout_mode = 2
 theme_override_constants/separation = 15
-split_offset = 1225
+split_offset = 530
 dragging_enabled = false
 
-[node name="HBox_Top_Left" type="HBoxContainer" parent="HUD/Top_UI/HSplit"]
+[node name="HBox_Settings" type="HBoxContainer" parent="HUD/Top_UI/HSplit_Topbar"]
 layout_mode = 2
 theme_override_constants/separation = 15
-alignment = 2
 
-[node name="Icon_Health" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_j8kkg")
-
-[node name="Label_Health" type="Label" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("7_nfk4m")
-text = "40"
-
-[node name="VSeparator" type="VSeparator" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="Icon_Points" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_ijoax")
-
-[node name="Label_Points" type="Label" parent="HUD/Top_UI/HSplit/HBox_Top_Left"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("7_nfk4m")
-text = "100"
-
-[node name="HBox_Top_Right" type="HBoxContainer" parent="HUD/Top_UI/HSplit"]
+[node name="HBox_Container" type="HBoxContainer" parent="HUD/Top_UI/HSplit_Topbar/HBox_Settings"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="HBox_Container" type="HBoxContainer" parent="HUD/Top_UI/HSplit/HBox_Top_Right"]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Icon_Wave" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Right/HBox_Container"]
+[node name="Icon_Wave" type="Panel" parent="HUD/Top_UI/HSplit_Topbar/HBox_Settings/HBox_Container"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="Label_Wave" type="Label" parent="HUD/Top_UI/HSplit/HBox_Top_Right/HBox_Container"]
+[node name="Label_Wave" type="Label" parent="HUD/Top_UI/HSplit_Topbar/HBox_Settings/HBox_Container"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(65, 0)
 layout_mode = 2
 theme = ExtResource("7_nfk4m")
 
-[node name="VSeparator" type="VSeparator" parent="HUD/Top_UI/HSplit/HBox_Top_Right"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-
-[node name="Icon_Settings" type="Panel" parent="HUD/Top_UI/HSplit/HBox_Top_Right"]
+[node name="Icon_Settings" type="Panel" parent="HUD/Top_UI/HSplit_Topbar/HBox_Settings"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="VSeparator2" type="VSeparator" parent="HUD/Top_UI/HSplit/HBox_Top_Right"]
-modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(20, 0)
+[node name="HSplit_Stats" type="HSplitContainer" parent="HUD/Top_UI/HSplit_Topbar"]
 layout_mode = 2
+split_offset = 185
+dragging_enabled = false
+dragger_visibility = 1
+
+[node name="HSplit_Health" type="HSplitContainer" parent="HUD/Top_UI/HSplit_Topbar/HSplit_Stats"]
+layout_mode = 2
+theme_override_constants/separation = 15
+split_offset = -1200
+
+[node name="Icon_Health" type="Panel" parent="HUD/Top_UI/HSplit_Topbar/HSplit_Stats/HSplit_Health"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_j8kkg")
+
+[node name="Label_Health" type="Label" parent="HUD/Top_UI/HSplit_Topbar/HSplit_Stats/HSplit_Health"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_p8s74")
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+theme_override_colors/font_outline_color = Color(0.233222, 0.00311783, 0.00816187, 1)
+text = "40"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Top_UI/HSplit_Topbar/HSplit_Stats/HSplit_Health"]
+root_node = NodePath("../../..")
+libraries = {
+&"": SubResource("AnimationLibrary_gfmxp")
+}
+
+[node name="Animation_Health" type="AnimationTree" parent="HUD/Top_UI/HSplit_Topbar/HSplit_Stats/HSplit_Health"]
+unique_name_in_owner = true
+root_node = NodePath("%Animation_Health/../../..")
+tree_root = SubResource("AnimationNodeBlendTree_opjno")
+anim_player = NodePath("../AnimationPlayer")
+parameters/bounce/active = false
+parameters/bounce/internal_active = false
+parameters/bounce/request = 0
+
+[node name="HSplit_Points" type="HSplitContainer" parent="HUD/Top_UI/HSplit_Topbar/HSplit_Stats"]
+material = SubResource("ShaderMaterial_o4fqm")
+layout_mode = 2
+theme_override_constants/separation = 15
+split_offset = -1200
+dragging_enabled = false
+dragger_visibility = 1
+
+[node name="Icon_Points" type="Panel" parent="HUD/Top_UI/HSplit_Topbar/HSplit_Stats/HSplit_Points"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ijoax")
+
+[node name="Label_Points" type="Label" parent="HUD/Top_UI/HSplit_Topbar/HSplit_Stats/HSplit_Points"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_o4fqm")
+layout_mode = 2
+theme = ExtResource("7_nfk4m")
+theme_override_colors/font_outline_color = Color(0.26, 0.143693, 0.1014, 1)
+text = "100"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/Top_UI/HSplit_Topbar/HSplit_Stats/HSplit_Points"]
+root_node = NodePath("../../..")
+libraries = {
+&"": SubResource("AnimationLibrary_meb7l")
+}
+
+[node name="Animation_Points" type="AnimationTree" parent="HUD/Top_UI/HSplit_Topbar/HSplit_Stats/HSplit_Points"]
+unique_name_in_owner = true
+root_node = NodePath("%Animation_Points/../../..")
+tree_root = SubResource("AnimationNodeBlendTree_iylel")
+anim_player = NodePath("../AnimationPlayer")
+parameters/bounce/active = false
+parameters/bounce/internal_active = false
+parameters/bounce/request = 0
 
 [node name="Debug" type="MarginContainer" parent="HUD"]
 visible = false

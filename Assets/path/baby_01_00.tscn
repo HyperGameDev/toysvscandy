@@ -59,7 +59,7 @@ node_connections = [&"eat", 0, &"Animation", &"eat", 1, &"Animation 2", &"output
 script = ExtResource("2_0le8e")
 
 [node name="Baby" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.989889, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.980826, 0, 0, 0, 1, 0, 0, 0)
 lod_bias = 128.0
 surface_material_override/0 = SubResource("StandardMaterial3D_vnm7i")
 surface_material_override/1 = SubResource("StandardMaterial3D_4vd1m")
