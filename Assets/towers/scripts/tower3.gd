@@ -31,8 +31,14 @@ var towers_upgraded = {
 var cursor_target: Node3D
 var animation: AnimationTree
 var visible_radius: MeshInstance3D
+var hover_radius: MeshInstance3D
 var tower_area: Area3D
 var animation_data: AnimationPlayer
+
+var hover_radius_size: float = 1.
+var hover_radius_width: float = .2
+var hover_radius_inner: Color = Color(0.247, 0.318, 0.541, 0.0)
+var hover_radius_outer: Color = Color(0.102, 0.208, 0.451, 0.604)
 	
 var radius_color_state: radius_color_states
 enum radius_color_states {VALID,INVALID}
@@ -91,6 +97,7 @@ func _ready() -> void:
 		
 		cursor_target = get_tree().get_current_scene().get_node("%Cursor_Target")
 		visible_radius = %Visible_Radius
+		hover_radius = %Hover_Radius
 		tower_area = $Area3D
 		animation_data = $AnimationPlayer
 		
@@ -105,6 +112,7 @@ func _ready() -> void:
 		Messenger.target_added_to_path.connect(_on_target_added_to_path)
 		Messenger.target_removed_from_path.connect(_on_target_removed_from_path)
 
+		setup_hover_radius_shader()
 		
 		set_tower_stats()
 		_upgrade_radius(detection_radius)
@@ -175,7 +183,13 @@ func radius_color_red(make_red) -> void:
 		radius_color_state = radius_color_states.VALID
 		visible_radius.mesh.material.albedo_color = radius_color_valid
 
-func set_tower_stats():
+func setup_hover_radius_shader() -> void:
+	hover_radius.mesh.material.set("shader_parameter/size",hover_radius_size)
+	hover_radius.mesh.material.set("shader_parameter/width",hover_radius_width)
+	hover_radius.mesh.material.set("shader_parameter/inner_color",hover_radius_inner)
+	hover_radius.mesh.material.set("shader_parameter/outer_color",hover_radius_outer)
+
+func set_tower_stats() -> void:
 	match tower_type:
 		tower_types.DART:
 			attack_timer_length = attack_speed_3
@@ -221,19 +235,21 @@ func _on_tower_hovered(tower) -> void:
 	if not interact_state == interact_states.SELECTED and side_ui_hover() == false:
 		if tower == self:
 			interact_state = interact_states.HOVERED
-			visible_radius.visible = true
+			hover_radius.visible = true
 		else:
 			interact_state = interact_states.NONE
-			visible_radius.visible = false	
+			hover_radius.visible = false	
 		
 func _on_tower_selected(tower) -> void:
 	if side_ui_hover() == false:
 		if tower == self:
 			interact_state = interact_states.SELECTED
 			visible_radius.visible = true
+			hover_radius.visible = false
 		else:
 			interact_state = interact_states.NONE
 			visible_radius.visible = false
+			hover_radius.visible = false
 			
 func _on_tower_upgraded(tower:Node3D,upgrade:String) -> void:
 	if tower == self:
@@ -248,6 +264,7 @@ func _on_tower_upgraded(tower:Node3D,upgrade:String) -> void:
 	
 func _upgrade_radius(radius: float) -> void:
 	visible_radius.mesh.radius = radius
+	hover_radius.mesh.size = Vector2(radius*2,radius*2)
 #endregion
 
 func fetch_targets_on_path() -> void:

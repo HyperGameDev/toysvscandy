@@ -41,9 +41,11 @@ var side_ui_hovered: bool = false
 @onready var button_upgrade_left: Button = %Button_Upgrade_Left
 @onready var button_upgrade_right: Button = %Button_Upgrade_Right
 
+
+@onready var icon_upgrade_1: TextureRect = %Icon_Upgrade1
+@onready var icon_upgrade_2: TextureRect = %Icon_Upgrade2
 @onready var upgrade_left_cost: Label = %Label_Upgrade_Left_Cost
 @onready var upgrade_right_cost: Label = %Label_Upgrade_Right_Cost
-
 
 @onready var animation_bottom_ui: AnimationPlayer = %Animation_Bottom_UI
 @onready var animation_side_ui: AnimationPlayer = %Animation_Side_UI
@@ -206,6 +208,8 @@ func _on_updated_points() -> void:
 	
 	var current_points: int = Globals.points
 	label_points.text = str(current_points)
+	if not tower_last_selected == null:
+		setup_tower_ui(tower_last_selected)
 	update_tower_buttons(current_points)
 	
 func update_tower_buttons(points):
@@ -295,6 +299,8 @@ func setup_tower_ui(tower) -> void:
 	
 	if tower.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade1_upgraded"] == false:
 		button_upgrade_left.disabled = false
+		upgrade_left_cost.modulate.a = 1.0
+		icon_upgrade_1.modulate.a = 1.0
 		button_upgrade_left.text = tower_dictionary["upgrade1_name"]
 		if upgrade1_cost > Globals.points:
 			button_upgrade_left.icon = tower_dictionary["upgrade1_icon_x"]
@@ -303,6 +309,8 @@ func setup_tower_ui(tower) -> void:
 			
 	else:
 		button_upgrade_left.disabled = true
+		upgrade_left_cost.modulate.a = 0.0
+		icon_upgrade_1.modulate.a = 0.0
 		button_upgrade_left.text = "OWNED"
 
 	upgrade_left_cost.text = str(upgrade1_cost)
@@ -313,6 +321,8 @@ func setup_tower_ui(tower) -> void:
 		var upgrade2_cost: int = tower_dictionary["upgrade2_cost"]
 		if tower.towers_upgraded[str(tower.tower_types.keys()[tower.tower_type])]["upgrade2_upgraded"] == false:
 			button_upgrade_right.disabled = false
+			upgrade_right_cost.modulate.a = 1.0
+			icon_upgrade_2.modulate.a = 1.0
 			button_upgrade_right.text = tower_dictionary["upgrade2_name"]
 			
 			if upgrade2_cost > Globals.points:
@@ -322,6 +332,8 @@ func setup_tower_ui(tower) -> void:
 				
 		else:
 			button_upgrade_right.disabled = true
+			upgrade_right_cost.modulate.a = 0.0
+			icon_upgrade_2.modulate.a = 0.0
 			button_upgrade_right.text = "OWNED"
 			
 		upgrade_right_cost.text = str(upgrade2_cost)
@@ -337,12 +349,20 @@ func hide_side_ui():
 		animation_side_ui.play("hide_side_ui_right")	
 		
 func _on_wave_ended() -> void:
-	button_start_wave.disabled = false
+	if Globals.wave_number >= Globals.WAVE_MAX:
+		Messenger.game_won.emit()
+		Menus.ref.center_ui.visible = true
+		Menus.ref.label_center_ui.text = "YOU WON!"
+		Menus.ref.button_continue.visible = false
+		HUD.ref.bottom_ui.visible = false
+		HUD.ref.side_ui.visible = false
+	else:
+		button_start_wave.disabled = false
 	
 func _on_button_settings_pressed() -> void:
 	Menus.ref.center_ui.visible = !Menus.ref.center_ui.visible
 	Menus.ref.label_center_ui.text = "MENU"
-	if Globals.game_overed:
+	if Globals.game_overed or Globals.game_won:
 		Menus.ref.button_continue.visible = false
 	else:
 		Menus.ref.button_continue.visible = true
@@ -350,8 +370,11 @@ func _on_button_settings_pressed() -> void:
 func _on_button_start_wave_pressed() -> void:
 	Messenger.start_next_wave.emit()
 	label_wave.text = str(Globals.wave_number)
-	button_start_wave.text = " Start Wave " + str(clamp((Globals.wave_number + 1),1,50)) + " "
+	button_start_wave.text = " Start Wave " + str(clamp((Globals.wave_number + 1),1,Globals.WAVE_MAX)) + " "
 	button_start_wave.disabled = true
+	
+	if Globals.wave_number >= Globals.WAVE_MAX:
+		button_start_wave.modulate.a = 0.
 	
 func _on_button_sell_pressed() -> void:
 	var tower_sold: Node3D = tower_last_selected

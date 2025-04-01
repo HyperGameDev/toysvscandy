@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bhcvbk8530le5"]
+[gd_scene load_steps=32 format=3 uid="uid://bhcvbk8530le5"]
 
 [ext_resource type="PackedScene" uid="uid://bvwntpbl6cq1i" path="res://Assets/towers/tower_3_snowglobe.blend" id="1_6r33o"]
 [ext_resource type="Shader" uid="uid://bbvni87enteg7" path="res://Shaders/freeze_aura.gdshader" id="2_7wr5a"]
@@ -69,6 +69,18 @@ albedo_color = Color(0.31, 0.112737, 0.0527, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hp6av"]
 albedo_color = Color(1, 0.95, 0, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvd6c"]
+render_priority = 4
+shader = ExtResource("2_7wr5a")
+shader_parameter/size = 1.01
+shader_parameter/width = 0.07
+shader_parameter/inner_color = Color(0.45, 0.853333, 1, 0)
+shader_parameter/outer_color = Color(0.1035, 0.20745, 0.45, 0.603922)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ouox6"]
+material = SubResource("ShaderMaterial_xvd6c")
+size = Vector2(0, 0)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hbij"]
 resource_local_to_scene = true
 transparency = 1
@@ -93,7 +105,7 @@ animation = &"idle"
 fadeout_time = 0.4
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ckecl"]
-graph_offset = Vector2(-449.448, 228.138)
+graph_offset = Vector2(181.617, 67.5784)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_ckecl")
 nodes/Animation/position = Vector2(-400, 160)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_if0uw")
@@ -274,12 +286,8 @@ radius = 1.545
 
 [node name="tower_3_snowglobe" instance=ExtResource("1_6r33o")]
 script = ExtResource("2_if0uw")
-upgraded_time_factor = null
-mesh_only = null
 tower_type = 2
 aim_type = 1
-attack_animation_speed = null
-attack_timer_length = null
 
 [node name="Snowglobe" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.720257, 0)
@@ -290,16 +298,22 @@ surface_material_override/2 = SubResource("StandardMaterial3D_4ei48")
 surface_material_override/3 = SubResource("StandardMaterial3D_inykd")
 surface_material_override/4 = SubResource("StandardMaterial3D_hp6av")
 
-[node name="Visible_Radius" type="MeshInstance3D" parent="." index="1"]
+[node name="Hover_Radius" type="MeshInstance3D" parent="." index="1"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+visible = false
+mesh = SubResource("QuadMesh_ouox6")
+
+[node name="Visible_Radius" type="MeshInstance3D" parent="." index="2"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 mesh = SubResource("SphereMesh_6r33o")
 
-[node name="Shoot_Point" type="Marker3D" parent="." index="2"]
+[node name="Shoot_Point" type="Marker3D" parent="." index="3"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 8.2, 0.200001)
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
 unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_ckecl")
@@ -309,23 +323,23 @@ parameters/attack/active = false
 parameters/attack/internal_active = false
 parameters/attack/request = 0
 
-[node name="Freeze_Attack" type="MeshInstance3D" parent="." index="4"]
+[node name="Freeze_Attack" type="MeshInstance3D" parent="." index="5"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 mesh = SubResource("QuadMesh_7wr5a")
 surface_material_override/0 = SubResource("ShaderMaterial_if0uw")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 libraries = {
 &"": SubResource("AnimationLibrary_if0uw")
 }
 
-[node name="Area3D" type="Area3D" parent="." index="6"]
+[node name="Area3D" type="Area3D" parent="." index="7"]
 collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("SphereShape3D_if0uw")
 
-[node name="WeaponTimer" type="Timer" parent="." index="7"]
+[node name="WeaponTimer" type="Timer" parent="." index="8"]
 unique_name_in_owner = true
