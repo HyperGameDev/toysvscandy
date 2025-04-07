@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=103 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -69,7 +69,9 @@ gradient = SubResource("Gradient_y5ved")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_d5x1h"]
 noise_type = 2
-frequency = 0.0495
+frequency = 0.0078
+offset = Vector3(-66, -68, 0)
+fractal_type = 0
 fractal_octaves = 1
 cellular_distance_function = 2
 cellular_jitter = 0.0
@@ -85,6 +87,8 @@ albedo_color = Color(0.0383972, 0.0383972, 0.0383972, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hq1ik"]
 next_pass = SubResource("StandardMaterial3D_8mm7a")
 albedo_texture = SubResource("NoiseTexture2D_8mm7a")
+uv1_scale = Vector3(13, 13, 13)
+uv1_world_triplanar = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nfk4m"]
 material = SubResource("StandardMaterial3D_hq1ik")
@@ -212,6 +216,8 @@ fill_to = Vector2(0.525641, 0)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_66tet"]
 texture = SubResource("GradientTexture2D_nfk4m")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o4fqm"]
 
 [sub_resource type="Animation" id="Animation_u0ygc"]
 length = 0.001
@@ -450,10 +456,10 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0, 0, 0, 0.603922)
-corner_radius_top_left = 50
-corner_radius_top_right = 50
-corner_radius_bottom_right = 50
-corner_radius_bottom_left = 50
+corner_radius_top_left = 37
+corner_radius_top_right = 37
+corner_radius_bottom_right = 37
+corner_radius_bottom_left = 37
 expand_margin_left = 10.0
 expand_margin_top = 10.0
 expand_margin_right = 10.0
@@ -1135,7 +1141,7 @@ theme_override_constants/margin_top = 25
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menus/Center_UI/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 5
 
 [node name="Label_Center_Menu" type="Label" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -1567,7 +1573,8 @@ size_flags_horizontal = 3
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade1/HBoxContainer"]
+[node name="Icon_Upgrade1" type="TextureRect" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade1/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("28_o7u2a")
 expand_mode = 3
@@ -1601,7 +1608,8 @@ size_flags_horizontal = 3
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade2/HBoxContainer"]
+[node name="Icon_Upgrade2" type="TextureRect" parent="HUD/Side_UI/Side_UI_Contents/VBoxContainer/HBoxContainer/VBox_Upgrade2/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("28_o7u2a")
 expand_mode = 3

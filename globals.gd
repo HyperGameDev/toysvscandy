@@ -2,6 +2,9 @@ extends Node
 var debug: bool = false
 
 var game_overed: bool = false
+var game_won: bool = false
+
+const WAVE_MAX: int = 50
 
 const WAVE_ACTIVE: bool = false
 const WAVE_NUMBER: int = 0
@@ -147,7 +150,7 @@ const tower_data = {
 		tower_name = "Rocket",
 		icon = "%SubViewport_Tower_4",
 		tower_cost = 900,
-		tower_desc = "Single shot that hits multiple.",
+		tower_desc = "Single shot that explodes.",
 		
 		has_2_upgrades = true,
 		
@@ -187,6 +190,9 @@ const tower_data = {
 func _ready() -> void:
 	#TODO:remove
 	print("Change wave_data to a constant and remove debug stuff!")
+	
+	Messenger.game_won.connect(_on_game_won)
+	
 	Messenger.start_next_wave.connect(_on_start_next_wave)
 	Messenger.target_added_to_path.connect(_on_target_added_to_path)
 	Messenger.target_removed_from_path.connect(_on_target_removed_from_path)
@@ -201,13 +207,17 @@ func _ready() -> void:
 	
 	if debug:
 		add_debug_wave_data()
-		points = 5000
+		points = 24000
 		health = 40
 		
 func _physics_process(_delta: float) -> void:
 	targets_left_in_wave = Target_Collector.ref.current_wave_array.size() + targets_on_path.size()
 	if wave_active and targets_left_in_wave <= 0:
 		Messenger.wave_ended.emit()
+		
+
+func _on_game_won() -> void:
+	game_won = true
 	
 func _on_start_next_wave():
 	wave_active = true
@@ -276,7 +286,7 @@ func game_over():
 		Menus.ref.button_continue.visible = false
 		Menus.ref.button_play.visible = false
 		Menus.ref.button_credits.visible = false
-		
+
 		HUD.ref.bottom_ui.visible = false
 		HUD.ref.side_ui.visible = false
 		
@@ -301,9 +311,9 @@ func reload():
 func add_debug_wave_data():
 	wave_data = {
 		wave_0 = [0, 0, 0, 0, 0, 0],
-		wave_1 = [100, 1, 1, 1, 1, 100],
+		wave_1 = [1, 1, 1, 0, 0, 0],
 		wave_2 = [1, 1, 1, 0, 0, 0],
-		wave_3 = [5, 20, 5, 5, 5, 5],
+		wave_3 = [100, 1, 1, 1, 1, 100],
 		wave_4 = [5, 20, 5, 5, 5, 5],
 		wave_5 = [0, 0, 0, 0, 1, 0],
 		wave_6 = [0, 0, 0, 0, 0, 1],

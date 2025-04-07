@@ -4,6 +4,8 @@ extends Node
 
 signal start_next_wave
 
+signal game_won
+
 signal target_added_to_path ##arg1: PathFollow3d = target_to_reparent
 signal target_removed_from_path ##arg1: PathFollow3D = self
 

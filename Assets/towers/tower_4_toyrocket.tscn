@@ -1,8 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://b017hkmjytd2r"]
+[gd_scene load_steps=32 format=3 uid="uid://b017hkmjytd2r"]
 
 [ext_resource type="PackedScene" uid="uid://ccmys7n1kr5dj" path="res://Assets/towers/tower_4_toyrocket.blend" id="1_7b58c"]
 [ext_resource type="Script" uid="uid://jbm1ooh05tl0" path="res://Assets/towers/scripts/tower_bomb.gd" id="2_8xdud"]
 [ext_resource type="Shader" uid="uid://cjudevm07c2ov" path="res://Shaders/outline2.gdshader" id="3_q312u"]
+[ext_resource type="Shader" uid="uid://bbvni87enteg7" path="res://Shaders/freeze_aura.gdshader" id="4_q16b7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gd3mv"]
 render_priority = 1
@@ -90,6 +91,18 @@ albedo_color = Color(0.236708, 0.2225, 0.25, 1)
 metallic = 0.76
 metallic_specular = 1.0
 roughness = 0.68
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvd6c"]
+render_priority = 4
+shader = ExtResource("4_q16b7")
+shader_parameter/size = 1.01
+shader_parameter/width = 0.07
+shader_parameter/inner_color = Color(0.45, 0.853333, 1, 0)
+shader_parameter/outer_color = Color(0.1035, 0.20745, 0.45, 0.603922)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ouox6"]
+material = SubResource("ShaderMaterial_xvd6c")
+size = Vector2(0, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hbij"]
 resource_local_to_scene = true
@@ -210,13 +223,7 @@ _data = {
 
 [node name="tower_4_toyrocket" instance=ExtResource("1_7b58c")]
 script = ExtResource("2_8xdud")
-upgraded_blast_factor = null
-upgraded_shot_amount = null
-mesh_only = null
 tower_type = 3
-aim_type = null
-attack_animation_speed = null
-attack_timer_length = null
 
 [node name="Pad" parent="." index="0"]
 unique_name_in_owner = true
@@ -242,26 +249,32 @@ unique_name_in_owner = true
 lod_bias = 128.0
 surface_material_override/0 = SubResource("StandardMaterial3D_nygrg")
 
-[node name="Visible_Radius" type="MeshInstance3D" parent="." index="4"]
+[node name="Hover_Radius" type="MeshInstance3D" parent="." index="4"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+visible = false
+mesh = SubResource("QuadMesh_ouox6")
+
+[node name="Visible_Radius" type="MeshInstance3D" parent="." index="5"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 mesh = SubResource("SphereMesh_dsn6p")
 
-[node name="Shoot_Point" type="Marker3D" parent="." index="5"]
+[node name="Shoot_Point" type="Marker3D" parent="." index="6"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0999999, 1.8, 0.200001)
 
-[node name="Area3D" type="Area3D" parent="." index="6"]
+[node name="Area3D" type="Area3D" parent="." index="7"]
 collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("SphereShape3D_8xdud")
 
-[node name="WeaponTimer" type="Timer" parent="." index="7"]
+[node name="WeaponTimer" type="Timer" parent="." index="8"]
 unique_name_in_owner = true
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="8"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="9"]
 unique_name_in_owner = true
 root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_k0g4d")
@@ -271,7 +284,7 @@ parameters/attack/active = false
 parameters/attack/internal_active = false
 parameters/attack/request = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
 libraries = {
 &"": SubResource("AnimationLibrary_ah61t")
 }
