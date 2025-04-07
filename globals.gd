@@ -280,7 +280,7 @@ func game_over():
 	if not game_overed:
 		game_overed = true
 		Menus.ref.center_ui.visible = true
-		Menus.ref.label_center_ui.text = "GAME OVER"
+		Menus.ref.label_center_ui.text = "  GAME OVER  "
 		
 		Menus.ref.button_game_over_restart.visible = true
 		Menus.ref.button_continue.visible = false
@@ -311,7 +311,7 @@ func reload():
 func add_debug_wave_data():
 	wave_data = {
 		wave_0 = [0, 0, 0, 0, 0, 0],
-		wave_1 = [1, 1, 1, 0, 0, 0],
+		wave_1 = [1, 1, 1, 100, 0, 100],
 		wave_2 = [1, 1, 1, 0, 0, 0],
 		wave_3 = [100, 1, 1, 1, 1, 100],
 		wave_4 = [5, 20, 5, 5, 5, 5],

@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7r2ikk5sa7ev"]
+
+[sub_resource type="FontVariation" id="FontVariation_o4fqm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eattv"]
+
+[node name="VBox_Credits_To_Instatiate_csv" type="VBoxContainer"]
+alignment = 2
+
+[node name="Credit_Title_01" type="Label" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Godot Consultant"
+autowrap_mode = 2
+
+[node name="Credit_01" type="Label" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "     Sable Spirit Studio"
+autowrap_mode = 2
+
+[node name="Credit_02" type="Label" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "     Dormouse"
+autowrap_mode = 2
+
+[node name="Credit_Title_01_Separator" type="HSeparator" parent="."]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_eattv")

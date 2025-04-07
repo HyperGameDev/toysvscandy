@@ -25,7 +25,7 @@ var side_ui_hovered: bool = false
 @onready var popup_name: Label = %Label_Tower_Name
 @onready var popup_desc: Label = %Label_Tower_Desc
 
-
+@onready var top_ui: MarginContainer = %Top_UI
 @onready var bottom_ui: MarginContainer = %Bottom_UI
 @onready var side_ui: MarginContainer = %Side_UI
 
@@ -353,14 +353,23 @@ func _on_wave_ended() -> void:
 		Messenger.game_won.emit()
 		Menus.ref.center_ui.visible = true
 		Menus.ref.label_center_ui.text = "YOU WON!"
+		
+		Menus.ref.button_credits.visible = true
+		Menus.ref.button_game_over_restart.visible = true
+		
 		Menus.ref.button_continue.visible = false
+		Menus.ref.button_play.visible = false
+		
 		HUD.ref.bottom_ui.visible = false
 		HUD.ref.side_ui.visible = false
+		
 	else:
 		button_start_wave.disabled = false
 	
 func _on_button_settings_pressed() -> void:
 	Menus.ref.center_ui.visible = !Menus.ref.center_ui.visible
+	bottom_ui.visible = !bottom_ui.visible
+	
 	Menus.ref.label_center_ui.text = "MENU"
 	Menus.ref.button_continue.visible = true
 	Menus.ref.button_game_over_restart.visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=113 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -132,10 +132,10 @@ tracks/0/path = NodePath(".:theme_override_constants/margin_top")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 7),
+"times": PackedFloat32Array(0, 6.95713),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [665, -525]
+"values": [665, -413]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_47t8w"]
@@ -158,7 +158,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(-0.0333333),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1670]
+"values": [1360]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -170,7 +170,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_4xe7c"]
@@ -185,10 +185,10 @@ tracks/0/path = NodePath("..:theme_override_constants/margin_bottom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 23.5135, 24.5135),
+"times": PackedFloat32Array(0, 23.5135, 24.5209),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [1670, 3810, 3810]
+"values": [1360, 3640, 3640]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -218,6 +218,10 @@ fill_to = Vector2(0.525641, 0)
 texture = SubResource("GradientTexture2D_nfk4m")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o4fqm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_opjno"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_meb7l"]
 
 [sub_resource type="Animation" id="Animation_u0ygc"]
 length = 0.001
@@ -804,7 +808,9 @@ size = 36.635
 far = 414.87
 
 [node name="Path" type="Node3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04397, -3.95, -5.37823)
+visible = false
 
 [node name="Path3D" type="Path3D" parent="Path"]
 unique_name_in_owner = true
@@ -862,11 +868,12 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = 8
 theme_override_constants/outline_size = 26
 theme_override_fonts/font = SubResource("FontVariation_mjv82")
-theme_override_font_sizes/font_size = 24
-text = "Code & art & music & SFX & design:
+theme_override_font_sizes/font_size = 26
+text = "Code & art & design:
+     Lyz Lissade
 
-Lyz Lissade
-
+Principal Advisor:
+     Dungeon Martian
 
 
 "
@@ -879,6 +886,7 @@ libraries = {
 
 [node name="Container_Credits_R" type="MarginContainer" parent="Menus"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -888,7 +896,7 @@ offset_bottom = 2845.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 20
-theme_override_constants/margin_bottom = 1670
+theme_override_constants/margin_bottom = 1360
 
 [node name="VBox_Credits" type="VBoxContainer" parent="Menus/Container_Credits_R"]
 layout_mode = 2
@@ -901,10 +909,10 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 25
 text = "Advisors and consultants:
 
-Dungeon Martian"
+Dormouse"
 autowrap_mode = 2
 
 [node name="Credit_03" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -913,8 +921,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "PawnxPawn"
+theme_override_font_sizes/font_size = 25
+text = "camwin"
 autowrap_mode = 2
 
 [node name="Credit_04" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -923,8 +931,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "Dormouse"
+theme_override_font_sizes/font_size = 25
+text = "murvkins"
 autowrap_mode = 2
 
 [node name="Credit_05" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -933,8 +941,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "Precipire"
+theme_override_font_sizes/font_size = 25
+text = "Lord Overflow"
 autowrap_mode = 2
 
 [node name="Credit_06" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -943,8 +951,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "R0fael"
+theme_override_font_sizes/font_size = 25
+text = "rulric"
 autowrap_mode = 2
 
 [node name="Credit_07" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -953,7 +961,7 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 25
 text = "Kieguy"
 autowrap_mode = 2
 
@@ -963,8 +971,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "rulric"
+theme_override_font_sizes/font_size = 25
+text = "Bartsss"
 autowrap_mode = 2
 
 [node name="Credit_09" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -973,8 +981,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "murvkins"
+theme_override_font_sizes/font_size = 25
+text = "Jonas Newhouse"
 autowrap_mode = 2
 
 [node name="Credit_10" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -983,8 +991,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "Shawn S"
+theme_override_font_sizes/font_size = 25
+text = "ThotTee"
 autowrap_mode = 2
 
 [node name="Credit_11" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -993,8 +1001,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "DJ Alexander"
+theme_override_font_sizes/font_size = 25
+text = "PawnxPawn"
 autowrap_mode = 2
 
 [node name="Credit_12" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1003,8 +1011,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "MindSwept"
+theme_override_font_sizes/font_size = 25
+text = "Douglas Allen"
 autowrap_mode = 2
 
 [node name="Credit_13" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1013,8 +1021,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "ZeroLemniscate"
+theme_override_font_sizes/font_size = 25
+text = "Precipire"
 autowrap_mode = 2
 
 [node name="Credit_14" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1023,8 +1031,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "traumatized edgeworth"
+theme_override_font_sizes/font_size = 25
+text = "Roger Random"
 autowrap_mode = 2
 
 [node name="Credit_15" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1033,8 +1041,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "ultimate challenge"
+theme_override_font_sizes/font_size = 25
+text = "nicbah"
 autowrap_mode = 2
 
 [node name="Credit_16" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1043,8 +1051,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "Game Doodle"
+theme_override_font_sizes/font_size = 25
+text = "Mystic Fragments"
 autowrap_mode = 2
 
 [node name="Credit_17" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1053,8 +1061,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "Frank Frodz"
+theme_override_font_sizes/font_size = 25
+text = "PsychonicJoe"
 autowrap_mode = 2
 
 [node name="Credit_18" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1063,8 +1071,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "Candice Siegfried"
+theme_override_font_sizes/font_size = 25
+text = "DJ Alexander"
 autowrap_mode = 2
 
 [node name="Credit_19" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1073,8 +1081,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "Joe Schmoe"
+theme_override_font_sizes/font_size = 25
+text = "Sable Spirit Studio"
 autowrap_mode = 2
 
 [node name="Credit_20" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1083,8 +1091,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "ThotTee"
+theme_override_font_sizes/font_size = 25
+text = "Aditya Budakoti"
 autowrap_mode = 2
 
 [node name="Credit_21" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1093,8 +1101,8 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "miloarty"
+theme_override_font_sizes/font_size = 25
+text = "AndresBamb"
 autowrap_mode = 2
 
 [node name="Credit_22" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
@@ -1103,8 +1111,28 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 21
 theme_override_fonts/font = SubResource("FontVariation_o4fqm")
-theme_override_font_sizes/font_size = 18
-text = "Sable Spirit Studio"
+theme_override_font_sizes/font_size = 25
+text = "Starbit Light"
+autowrap_mode = 2
+
+[node name="Credit_23" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 25
+text = "Pierogigon"
+autowrap_mode = 2
+
+[node name="Credit_24" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 25
+text = "R0fael"
 autowrap_mode = 2
 
 [node name="animation" type="AnimationPlayer" parent="Menus/Container_Credits_R"]
@@ -1120,10 +1148,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -294.0
-offset_top = -177.0
-offset_right = 294.0
-offset_bottom = 177.0
+offset_left = -232.0
+offset_top = -313.0
+offset_right = 232.0
+offset_bottom = 263.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -1143,53 +1171,82 @@ theme_override_constants/margin_top = 25
 layout_mode = 2
 theme_override_constants/separation = 5
 
+[node name="HSep_AboveText" type="HSeparator" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_o4fqm")
+
 [node name="Label_Center_Menu" type="Label" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_nfk4m")
+theme_override_constants/line_spacing = -30
 theme_override_font_sizes/font_size = 81
-text = " Hungry Baby Rescue "
+text = "HUNGRY
+BABY
+RESCUE!"
 horizontal_alignment = 1
 
-[node name="Button_Continue" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="HSep_BelowText" type="HSeparator" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-theme = ExtResource("17_7th4q")
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 71
-text = "Continue"
-
-[node name="Button_GameOver_Restart" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme = ExtResource("17_7th4q")
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 71
-text = "Restart"
+theme_override_styles/separator = SubResource("StyleBoxEmpty_opjno")
 
 [node name="Button_Play" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme = ExtResource("17_7th4q")
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 71
 text = "Play"
 
-[node name="Button_Credits" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+[node name="Button_Continue" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme = ExtResource("17_7th4q")
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 71
+text = "Continue"
+
+[node name="HSep_Between_Buttons" type="HSeparator" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_o4fqm")
+
+[node name="Button_GameOver_Restart" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("17_7th4q")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 71
+text = "Restart"
+
+[node name="HSep_Between_Buttons2" type="HSeparator" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_o4fqm")
+
+[node name="Button_Credits" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("17_7th4q")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 71
 text = "Credits"
+
+[node name="HSep_Below_Buttons" type="HSeparator" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_meb7l")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_7ycvg")
 
 [node name="Bottom_UI" type="MarginContainer" parent="HUD"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -1511,6 +1568,7 @@ text = "Slowly attacks in an area."
 
 [node name="Side_UI" type="MarginContainer" parent="HUD"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -1667,6 +1725,8 @@ text = "???"
 horizontal_alignment = 1
 
 [node name="Top_UI" type="MarginContainer" parent="HUD"]
+unique_name_in_owner = true
+visible = false
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 61.0
@@ -1830,5 +1890,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 visible = false
 mesh = SubResource("CylinderMesh_m35m6")
 
-[node name="baby_01_00" parent="." instance=ExtResource("31_yh4yk")]
+[node name="Baby" parent="." instance=ExtResource("31_yh4yk")]
+unique_name_in_owner = true
 transform = Transform3D(0.998409, -0.0563791, 0, 0.0563791, 0.998409, 0, 0, 0, 1, -22.3, 0.130806, -9.25462)
+visible = false

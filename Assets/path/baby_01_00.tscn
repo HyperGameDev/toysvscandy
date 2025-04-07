@@ -66,6 +66,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_4vd1m")
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeBlendTree_oay0s")
 anim_player = NodePath("../AnimationPlayer")
 parameters/eat/active = false
