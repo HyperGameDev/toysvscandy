@@ -133,8 +133,12 @@ func _ready() -> void:
 	button_tower_4.mouse_exited.connect(_on_tower_4_unhovered)
 	button_tower_5.mouse_exited.connect(_on_tower_5_unhovered)
 	
+	
 #func _physics_process(delta: float) -> void:
 	#print("UI Hovered ",side_ui_hovered)
+	
+func hide_bottom_ui():
+	bottom_ui.visible = false
 	
 func _input(_event: InputEvent) -> void:
 	if menu_state == menu_states.HOLDING:
