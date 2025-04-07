@@ -271,6 +271,12 @@ func game_over():
 		game_overed = true
 		Menus.ref.center_ui.visible = true
 		Menus.ref.label_center_ui.text = "GAME OVER"
+		
+		Menus.ref.button_game_over_restart.visible = true
+		Menus.ref.button_continue.visible = false
+		Menus.ref.button_play.visible = false
+		Menus.ref.button_credits.visible = false
+		
 		HUD.ref.bottom_ui.visible = false
 		HUD.ref.side_ui.visible = false
 		

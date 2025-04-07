@@ -342,6 +342,10 @@ func _on_wave_ended() -> void:
 func _on_button_settings_pressed() -> void:
 	Menus.ref.center_ui.visible = !Menus.ref.center_ui.visible
 	Menus.ref.label_center_ui.text = "MENU"
+	Menus.ref.button_continue.visible = true
+	Menus.ref.button_game_over_restart.visible = true
+	Menus.ref.button_play.visible = false
+	Menus.ref.button_credits.visible = false
 
 func _on_button_start_wave_pressed() -> void:
 	Messenger.start_next_wave.emit()

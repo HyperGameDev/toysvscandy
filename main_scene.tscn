@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://8f32qtkrf2hr"]
+[gd_scene load_steps=110 format=3 uid="uid://8f32qtkrf2hr"]
 
 [ext_resource type="Gradient" uid="uid://cyl2f0w8vvvvn" path="res://Colors/asset_colors/ground_01.tres" id="1_2c62f"]
 [ext_resource type="Script" uid="uid://qit00gfvujxj" path="res://cursor_target.gd" id="1_m35m6"]
@@ -98,6 +98,112 @@ _data = {
 point_count = 28
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_m35m6"]
+
+[sub_resource type="FontVariation" id="FontVariation_mjv82"]
+
+[sub_resource type="Animation" id="Animation_exlpl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_constants/margin_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [665]
+}
+
+[sub_resource type="Animation" id="Animation_mlht3"]
+resource_name = "scroll"
+length = 14.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_constants/margin_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [665, -525]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_47t8w"]
+_data = {
+&"RESET": SubResource("Animation_exlpl"),
+&"scroll": SubResource("Animation_mlht3")
+}
+
+[sub_resource type="FontVariation" id="FontVariation_o4fqm"]
+
+[sub_resource type="Animation" id="Animation_41w2c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme_override_constants/margin_bottom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1670]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4xe7c"]
+resource_name = "scroll"
+length = 25.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme_override_constants/margin_bottom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 23.5135, 24.5135),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1670, 3810, 3810]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 23.5135, 24.1997, 25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rfw4w"]
+_data = {
+&"RESET": SubResource("Animation_41w2c"),
+&"scroll": SubResource("Animation_4xe7c")
+}
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nfk4m"]
 gradient = ExtResource("6_hq1ik")
@@ -371,6 +477,57 @@ shader_parameter/scale_factor = 1.0
 shader_parameter/center_position_x = 0.0
 shader_parameter/center_position_y = 26.0
 
+[sub_resource type="Animation" id="Animation_p8s74"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Label_Health:material:shader_parameter/sine_amplitude")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Label_Health:material:shader_parameter/sine_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Label_Health:material:shader_parameter/scale_factor")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Label_Health:material:shader_parameter/center_position_y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [26.0]
+}
+
 [sub_resource type="Animation" id="Animation_o4fqm"]
 resource_name = "bounce"
 length = 0.4
@@ -423,57 +580,6 @@ tracks/3/keys = {
 "values": [26.0, 100.0, 100.0, 26.0]
 }
 
-[sub_resource type="Animation" id="Animation_p8s74"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%Label_Health:material:shader_parameter/sine_amplitude")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%Label_Health:material:shader_parameter/sine_speed")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("%Label_Health:material:shader_parameter/scale_factor")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("%Label_Health:material:shader_parameter/center_position_y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [26.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gfmxp"]
 _data = {
 &"RESET": SubResource("Animation_p8s74"),
@@ -512,21 +618,6 @@ shader_parameter/center_position_y = 26.0
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ijoax"]
 texture = ExtResource("28_o7u2a")
 
-[sub_resource type="Animation" id="Animation_1n88h"]
-resource_name = "bounce"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("%Label_Points:material:shader_parameter/scale_factor")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [1.0, 1.3, 1.0]
-}
-
 [sub_resource type="Animation" id="Animation_opjno"]
 length = 0.001
 loop_mode = 1
@@ -541,6 +632,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_1n88h"]
+resource_name = "bounce"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Label_Points:material:shader_parameter/scale_factor")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.3, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_meb7l"]
@@ -729,9 +835,280 @@ shape = SubResource("WorldBoundaryShape3D_m35m6")
 layer = 2
 script = ExtResource("11_j8kkg")
 
-[node name="Center_UI" type="MarginContainer" parent="Menus"]
+[node name="Container_Credits_L" type="MarginContainer" parent="Menus"]
 unique_name_in_owner = true
 visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 102.0
+offset_right = -744.0
+offset_bottom = -116.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 665
+
+[node name="Credit_01" type="Label" parent="Menus/Container_Credits_L"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 8
+theme_override_constants/outline_size = 26
+theme_override_fonts/font = SubResource("FontVariation_mjv82")
+theme_override_font_sizes/font_size = 24
+text = "Code & art & music & SFX & design:
+
+Lyz Lissade
+
+
+
+"
+autowrap_mode = 2
+
+[node name="animation" type="AnimationPlayer" parent="Menus/Container_Credits_L"]
+libraries = {
+&"": SubResource("AnimationLibrary_47t8w")
+}
+
+[node name="Container_Credits_R" type="MarginContainer" parent="Menus"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 744.0
+offset_top = -2953.0
+offset_bottom = 2845.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 1670
+
+[node name="VBox_Credits" type="VBoxContainer" parent="Menus/Container_Credits_R"]
+layout_mode = 2
+theme_override_constants/separation = 35
+alignment = 2
+
+[node name="Credit_02" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Advisors and consultants:
+
+Dungeon Martian"
+autowrap_mode = 2
+
+[node name="Credit_03" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "PawnxPawn"
+autowrap_mode = 2
+
+[node name="Credit_04" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Dormouse"
+autowrap_mode = 2
+
+[node name="Credit_05" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Precipire"
+autowrap_mode = 2
+
+[node name="Credit_06" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "R0fael"
+autowrap_mode = 2
+
+[node name="Credit_07" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Kieguy"
+autowrap_mode = 2
+
+[node name="Credit_08" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "rulric"
+autowrap_mode = 2
+
+[node name="Credit_09" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "murvkins"
+autowrap_mode = 2
+
+[node name="Credit_10" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Shawn S"
+autowrap_mode = 2
+
+[node name="Credit_11" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "DJ Alexander"
+autowrap_mode = 2
+
+[node name="Credit_12" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "MindSwept"
+autowrap_mode = 2
+
+[node name="Credit_13" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "ZeroLemniscate"
+autowrap_mode = 2
+
+[node name="Credit_14" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "traumatized edgeworth"
+autowrap_mode = 2
+
+[node name="Credit_15" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "ultimate challenge"
+autowrap_mode = 2
+
+[node name="Credit_16" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Game Doodle"
+autowrap_mode = 2
+
+[node name="Credit_17" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Frank Frodz"
+autowrap_mode = 2
+
+[node name="Credit_18" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Candice Siegfried"
+autowrap_mode = 2
+
+[node name="Credit_19" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Joe Schmoe"
+autowrap_mode = 2
+
+[node name="Credit_20" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "ThotTee"
+autowrap_mode = 2
+
+[node name="Credit_21" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "miloarty"
+autowrap_mode = 2
+
+[node name="Credit_22" type="Label" parent="Menus/Container_Credits_R/VBox_Credits"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 21
+theme_override_fonts/font = SubResource("FontVariation_o4fqm")
+theme_override_font_sizes/font_size = 18
+text = "Sable Spirit Studio"
+autowrap_mode = 2
+
+[node name="animation" type="AnimationPlayer" parent="Menus/Container_Credits_R"]
+root_node = NodePath("../VBox_Credits")
+libraries = {
+&"": SubResource("AnimationLibrary_rfw4w")
+}
+
+[node name="Center_UI" type="MarginContainer" parent="Menus"]
+unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -765,8 +1142,16 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_nfk4m")
 theme_override_font_sizes/font_size = 81
-text = "GAME OVER"
+text = " Hungry Baby Rescue "
 horizontal_alignment = 1
+
+[node name="Button_Continue" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("17_7th4q")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 71
+text = "Continue"
 
 [node name="Button_GameOver_Restart" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -775,6 +1160,24 @@ theme = ExtResource("17_7th4q")
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 71
 text = "Restart"
+
+[node name="Button_Play" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("17_7th4q")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 71
+text = "Play"
+
+[node name="Button_Credits" type="Button" parent="Menus/Center_UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("17_7th4q")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 71
+text = "Credits"
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("5_7ycvg")
@@ -878,10 +1281,7 @@ script = ExtResource("12_5smuj")
 
 [node name="tower_2_spinningtop" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower2/Button_Tower_2" instance=ExtResource("14_42l1d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 126)
-upgraded_speed_factor = 0.75
 mesh_only = true
-attack_animation_speed = 1.0
-attack_timer_length = 1.0
 
 [node name="SubViewport_Tower_2" parent="HUD/Bottom_UI/HSplitContainer/HBoxContainer/MarginContainer_Tower2/Button_Tower_2" instance=ExtResource("15_vimvf")]
 unique_name_in_owner = true

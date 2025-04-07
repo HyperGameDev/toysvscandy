@@ -6,7 +6,13 @@ static var ref
 
 @onready var label_center_ui: Label = %Label_Center_Menu
 
+
+@onready var button_continue: Button = %Button_Continue
 @onready var button_game_over_restart: Button = %Button_GameOver_Restart
+
+
+@onready var button_play: Button = %Button_Play
+@onready var button_credits: Button = %Button_Credits
 
 
 func _init() -> void:
