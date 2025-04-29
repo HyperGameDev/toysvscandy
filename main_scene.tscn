@@ -1133,7 +1133,9 @@ text = "AndresBamb"
 [node name="@Label@41373" parent="Menus/CanvasLayer_CreditsList/Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List/VBox_Labels" index="54" instance=ExtResource("14_w30ff")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 52
-text = "Upgrades"
+text = "
+
+Upgrades"
 
 [node name="@Control@41374" parent="Menus/CanvasLayer_CreditsList/Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List/VBox_Labels" index="55" instance=ExtResource("15_xy6fp")]
 layout_mode = 2
