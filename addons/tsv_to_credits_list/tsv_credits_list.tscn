@@ -1,0 +1,181 @@
+[gd_scene load_steps=12 format=3 uid="uid://cutt13xj1h074"]
+
+[ext_resource type="Script" uid="uid://bce6p8e75fctp" path="res://addons/tsv_to_credits_list/tsv_credits_list.gd" id="1_k7r22"]
+[ext_resource type="PackedScene" uid="uid://dupjitbvvnx8t" path="res://addons/tsv_to_credits_list/label_credit_1.tscn" id="2_vcash"]
+[ext_resource type="PackedScene" uid="uid://dfom8l4ub25vq" path="res://addons/tsv_to_credits_list/title_separator.tscn" id="3_a5mea"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2hnh"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+shadow_color = Color(0, 0, 0, 0.282353)
+shadow_size = 4
+shadow_offset = Vector2(4, 3)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vcash"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xklmk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a5mea"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tuldi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vcash"]
+bg_color = Color(0.4, 0.204, 0.207267, 1)
+border_width_left = 5
+border_width_bottom = 3
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xklmk"]
+bg_color = Color(0.151337, 9.20501e-07, 0.00255947, 1)
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a5mea"]
+bg_color = Color(0.151337, 9.20501e-07, 0.00255947, 1)
+border_width_left = 5
+border_width_bottom = 3
+corner_radius_bottom_left = 20
+
+[node name="CanvasLayer_CreditsList" type="CanvasLayer"]
+script = ExtResource("1_k7r22")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -399.0
+offset_top = -215.0
+offset_right = 309.0
+offset_bottom = 213.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k2hnh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 45
+
+[node name="ScrollContainer_Credits" type="ScrollContainer" parent="Control/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 420)
+layout_mode = 2
+mouse_filter = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vcash")
+scroll_vertical = 565
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Credits_List" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xklmk")
+
+[node name="VBox_Labels" type="VBoxContainer" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="Label_Credit2" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 52
+text = "
+
+Credits List Credits"
+
+[node name="Title_Separator" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("3_a5mea")]
+layout_mode = 2
+
+[node name="Label_Credit3" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+text = "Lýz Lissade"
+
+[node name="Label_Credit11" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+text = "PawnxPawn"
+
+[node name="Label_Credit4" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+text = "murvkins"
+
+[node name="Label_Credit5" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+text = "rulric"
+
+[node name="Label_Credit7" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+text = "Timeless"
+
+[node name="Label_Credit8" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+text = "Kieguy"
+
+[node name="Label_Credit10" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+text = "Dungeon Martian"
+
+[node name="Label_Credit9" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+text = "Precipire"
+
+[node name="Label_Credit6" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+text = "PKGameDev"
+
+[node name="HSeparator" type="HSeparator" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_a5mea")
+
+[node name="Label_Credit1" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List" instance=ExtResource("2_vcash")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "Thanks for playing!"
+
+[node name="HSeparator2" type="HSeparator" parent="Control/PanelContainer/VBoxContainer/ScrollContainer_Credits/Credits_List"]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_xklmk")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 640
+theme_override_constants/margin_bottom = 366
+
+[node name="Button_Close" type="Button" parent="Control/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tuldi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_vcash")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xklmk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a5mea")
+text = "X"
+icon_alignment = 1
+
+[node name="Credits_Tween_Control" type="Control" parent="Control"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

@@ -1,0 +1,29 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dfijk5eiowfdi"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_n8m67"]
+color = Color(0.141176, 0.141176, 0.141176, 0.643137)
+thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqkju"]
+bg_color = Color(0.137255, 0.137255, 0.137255, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekk22"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.140447, 0.140447, 0.140447, 0.643137)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ax4n2"]
+color = Color(0.141176, 0.141176, 0.141176, 0.643137)
+thickness = 4
+vertical = true
+
+[resource]
+HSeparator/styles/separator = SubResource("StyleBoxLine_n8m67")
+Label/styles/normal = SubResource("StyleBoxFlat_qqkju")
+MarginContainer/constants/margin_left = 8
+MarginContainer/constants/margin_right = 5
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_ekk22")
+VSeparator/styles/separator = SubResource("StyleBoxLine_ax4n2")

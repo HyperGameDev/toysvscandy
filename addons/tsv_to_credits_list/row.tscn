@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1t48om7i8cw8"]
+
+[ext_resource type="Theme" uid="uid://dfijk5eiowfdi" path="res://addons/tsv_to_credits_list/theme/ui.tres" id="1_mo0af"]
+[ext_resource type="LabelSettings" uid="uid://pprvybouuk5f" path="res://addons/tsv_to_credits_list/theme/cell.tres" id="2_jdc31"]
+
+[node name="Row1" type="PanelContainer"]
+theme = ExtResource("1_mo0af")
+
+[node name="MarginContainer_Credit" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Label_Credit" type="Label" parent="MarginContainer_Credit"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme = ExtResource("1_mo0af")
+text = "Creditee Name/Title"
+label_settings = ExtResource("2_jdc31")
+horizontal_alignment = 1
+autowrap_mode = 2

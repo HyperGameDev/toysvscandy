@@ -16,9 +16,6 @@ var show_credits: bool = false
 @onready var button_play: Button = %Button_Play
 @onready var button_credits: Button = %Button_Credits
 
-@onready var credits_l: MarginContainer = %Container_Credits_L
-@onready var credits_r: MarginContainer = %Container_Credits_R
-
 
 func _init() -> void:
 	ref = self
@@ -47,19 +44,7 @@ func _on_button_play_pressed():
 		
 
 func _on_button_credits_pressed():
-	show_credits = !show_credits
-	
-	if show_credits:
-		credits_r.visible = true
-		credits_l.visible = true
-		credits_r.get_node("animation").play("scroll")
-		credits_l.get_node("animation").play("scroll")
-	else:
-		credits_r.get_node("animation").stop()
-		credits_l.get_node("animation").stop()
-		
-		credits_r.visible = false
-		credits_l.visible = false
+	%CanvasLayer_CreditsList.open_credits_list.emit()
 	
 func _on_button_restart_pressed() -> void:
 	Globals.reload()

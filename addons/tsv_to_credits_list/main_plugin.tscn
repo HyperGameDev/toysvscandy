@@ -1,0 +1,213 @@
+[gd_scene load_steps=9 format=3 uid="uid://c84pa14kfyf67"]
+
+[ext_resource type="Script" uid="uid://d1k87v56tl3bt" path="res://addons/tsv_to_credits_list/main_plugin.gd" id="1_8vrqk"]
+[ext_resource type="Theme" uid="uid://dfijk5eiowfdi" path="res://addons/tsv_to_credits_list/theme/ui.tres" id="2_2blsu"]
+
+[sub_resource type="Theme" id="Theme_h7b3v"]
+
+[sub_resource type="FontVariation" id="FontVariation_fjywm"]
+variation_embolden = -0.45
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n1cch"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i5o2x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ulb4q"]
+bg_color = Color(0.215902, 0.215902, 0.215902, 0.827451)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.140447, 0.140447, 0.140447, 0.643137)
+
+[sub_resource type="FontVariation" id="FontVariation_jfcr7"]
+
+[node name="MainPlugin" type="Control"]
+custom_minimum_size = Vector2(0, 600)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8vrqk")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Label_PluginTitle" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_h7b3v")
+theme_override_font_sizes/font_size = 26
+text = "TSV to Credits List"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="HBox_Upload" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBox_Upload"]
+layout_mode = 2
+theme = ExtResource("2_2blsu")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBox_Upload/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="Label_FileName" type="Label" parent="MarginContainer/VBoxContainer/HBox_Upload/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.733006, 0.733005, 0.733005, 1)
+theme_override_fonts/font = SubResource("FontVariation_fjywm")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_n1cch")
+text = "Upload a file..."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Button_Upload" type="Button" parent="MarginContainer/VBoxContainer/HBox_Upload"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Upload"
+
+[node name="CheckBox_SkipFirst" type="CheckBox" parent="MarginContainer/VBoxContainer/HBox_Upload"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+button_pressed = true
+text = " Skip first row of sheet"
+
+[node name="Button_Reset" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Reset"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_i5o2x")
+
+[node name="Label_Instructions" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(485, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Review the loaded data below.
+To update the data, reset the file and re-upload.
+When you are satisfied, press \"Generate\"."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_i5o2x")
+
+[node name="TSV_Preview" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("2_2blsu")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TSV_Preview"]
+layout_mode = 2
+theme_override_constants/margin_top = 14
+
+[node name="ScrollContainer_TSV_Preview" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TSV_Preview/MarginContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBox_TSV_Preview" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TSV_Preview/MarginContainer/ScrollContainer_TSV_Preview"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer_LoadedTSV" type="PanelContainer" parent="MarginContainer/VBoxContainer/TSV_Preview/MarginContainer/ScrollContainer_TSV_Preview/VBox_TSV_Preview"]
+layout_mode = 2
+theme = ExtResource("2_2blsu")
+
+[node name="VBox_LoadedTSV" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TSV_Preview/MarginContainer/ScrollContainer_TSV_Preview/VBox_TSV_Preview/PanelContainer_LoadedTSV"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Row0" type="PanelContainer" parent="MarginContainer/VBoxContainer/TSV_Preview/MarginContainer/ScrollContainer_TSV_Preview/VBox_TSV_Preview/PanelContainer_LoadedTSV/VBox_LoadedTSV"]
+layout_mode = 2
+theme = ExtResource("2_2blsu")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ulb4q")
+
+[node name="MarginContainer_Credit" type="MarginContainer" parent="MarginContainer/VBoxContainer/TSV_Preview/MarginContainer/ScrollContainer_TSV_Preview/VBox_TSV_Preview/PanelContainer_LoadedTSV/VBox_LoadedTSV/Row0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TSV_Preview/MarginContainer/ScrollContainer_TSV_Preview/VBox_TSV_Preview/PanelContainer_LoadedTSV/VBox_LoadedTSV/Row0/MarginContainer_Credit"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme = ExtResource("2_2blsu")
+text = "Credit Name"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator5" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_i5o2x")
+
+[node name="VBox_Generate" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button_Generate" type="Button" parent="MarginContainer/VBoxContainer/VBox_Generate"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Generate"
+
+[node name="HBox_ERROR" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBox_Generate"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label_ERROR" type="Label" parent="MarginContainer/VBoxContainer/VBox_Generate/HBox_ERROR"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.151344, 0.108333, 1)
+theme_override_colors/font_shadow_color = Color(0.144063, 0.144063, 0.144063, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_jfcr7")
+text = "ERROR:"
+horizontal_alignment = 1
+
+[node name="Label_ERROR_MSG" type="Label" parent="MarginContainer/VBoxContainer/VBox_Generate/HBox_ERROR"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.144063, 0.144063, 0.144063, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_jfcr7")
+text = "You did a bad thing."
+horizontal_alignment = 1
+
+[node name="HSeparator6" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_i5o2x")

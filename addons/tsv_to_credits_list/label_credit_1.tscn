@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dupjitbvvnx8t"]
+
+[node name="Label_Credit1" type="Label"]
+custom_minimum_size = Vector2(700, 0)
+offset_right = 750.0
+offset_bottom = 297.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Creditee Name"
+horizontal_alignment = 1
+autowrap_mode = 3

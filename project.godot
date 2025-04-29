@@ -27,6 +27,10 @@ window/size/viewport_width=1024
 window/size/viewport_height=768
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/tsv_to_credits_list/plugin.cfg")
+
 [gui]
 
 theme/custom_font="uid://bwnc5npiiaoqd"

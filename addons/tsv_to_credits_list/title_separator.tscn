@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfom8l4ub25vq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ajkn"]
+bg_color = Color(0.6, 0.6, 0.6, 0.666667)
+border_width_bottom = 4
+border_color = Color(0.8, 0.8, 0.8, 0.462745)
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Title_Separator" type="Control"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="_HSeparator_32496" type="HSeparator" parent="."]
+custom_minimum_size = Vector2(200, 15)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 4.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_styles/separator = SubResource("StyleBoxFlat_0ajkn")
